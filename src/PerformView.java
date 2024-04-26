@@ -3,6 +3,8 @@ package src;
 import java.io.File;
 import java.io.IOException;
 
+import static src.Section.*;
+
 import static src.SimpleInput.sc;
 import static src.MainView.ROOT_PATH;
 
@@ -20,10 +22,6 @@ public class PerformView {
         int option = sc.nextInt();
         switch (option) {
             case 1:
-                System.out.println("현재 하는 행사");
-
-                break;
-            case 2:
                 System.out.println("카테고리별로 추천");
                 break;
             case 0:
