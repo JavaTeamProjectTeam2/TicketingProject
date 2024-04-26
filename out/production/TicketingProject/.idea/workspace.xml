@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58d513ad-5ed0-46f6-aefc-360c04839e28" name="Changes" comment="" />
+    <list default="true" id="58d513ad-5ed0-46f6-aefc-360c04839e28" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/src/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/Perform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/src/Perform.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/PerformRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AgeRating.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AgeRating.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Perform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Perform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PerformRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerformRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Section.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +24,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -57,11 +68,12 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
+    "project.structure.last.edited": "프로젝트",
+    "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "database.output.results",
-    "vue.rearranger.settings.migration": "true"
+    "settings.editor.selected.configurable": "vcs.Git",
+    "vue.rearranger.settings.migration": "true",
+    "애플리케이션.Main.executor": "Run"
   }
 }]]></component>
   <component name="RunManager">
@@ -104,7 +116,6 @@
       <workItem from="1714030663015" duration="4025000" />
       <workItem from="1714103134713" duration="2900000" />
       <workItem from="1714109044489" duration="443000" />
-      <workItem from="1714112581858" duration="386000" />
     </task>
     <task id="LOCAL-00001" summary="# 초기 세팅 완료">
       <option name="closed" value="true" />
