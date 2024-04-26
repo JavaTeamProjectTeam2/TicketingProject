@@ -21,7 +21,7 @@ public class memberView {
                     break;
                 case 2:
                     System.out.println("공연 예매를 시작합니다");
-                    PerformRepository.getTicket();
+                    PerformView.getTicket();
                     break;
                 case 3:
                     System.out.println("프로그램을 종료합니다");
