@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58d513ad-5ed0-46f6-aefc-360c04839e28" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/TicketingProject/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Perform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Perform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/src/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/Perform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/src/Perform.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/PerformRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/src/PerformRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/SimpleInput.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/src/SimpleInput.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/memberView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/src/memberView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PerformRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerformRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PerformView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerformView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="PerformOngoing" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -44,6 +47,9 @@
     &quot;accountId&quot;: &quot;9b2661fe-23f9-4e9d-8bc8-1af606f3c600&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -51,26 +57,26 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.FileIO.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jeongin/Desktop/javaTicketing/TicketingProject&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.FileIO.executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "PerformList01",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/jeongin/Desktop/javaTicketing/TicketingProject",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.Main" />
@@ -175,6 +181,6 @@
     <MESSAGE value="#FileIO 생성" />
     <MESSAGE value="#FileIO 삭제~" />
     <MESSAGE value="#PerformRepo update" />
-    <option name="LAST_COMMIT_MESSAGE" value="#PerformRepo update" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
