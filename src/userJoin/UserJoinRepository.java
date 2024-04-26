@@ -23,7 +23,7 @@ public class UserJoinRepository {
 
 
     //정보 .txt 세이브 위치 경로
-    public static final String SAVE_PATH = memberView.ROOT_PATH + "/userJoin/userList/userJoinList.txt";
+    //public static final String SAVE_PATH = memberView.ROOT_PATH + "/userJoin/userList/userJoinList.txt";
 
 
 
@@ -51,13 +51,14 @@ public class UserJoinRepository {
 
     //아이디 유효한지 확인
     public boolean emailCheck(String id) {
+
         return Pattern.matches("^[a-z0-9A-Z._-]*@[a-z0-9A-Z]*.[a-zA-Z.]*$", id);
     }
 
     //비번확인
     public boolean passwordCheck(String pw) {
         String message = "^[a-zA-Z0-9.!]*$";
-        if (pw.matches(message)) {
+        if(pw.matches(message)) {
             return true;
         }
         return false;

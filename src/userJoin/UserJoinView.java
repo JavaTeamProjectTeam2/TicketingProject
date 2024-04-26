@@ -18,6 +18,7 @@ public class UserJoinView {
         repository.getUserList().add(new User("서정인", "123456@gmail.com", "1234", 26, "울산"));
 
 
+
         while (true) {
             System.out.println("----------------------------");
             System.out.println("           회원가입");
