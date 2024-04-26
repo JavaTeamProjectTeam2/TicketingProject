@@ -12,7 +12,7 @@ public class UserJoinView {
 
     public void join() {
 
-        repository.getUserList().add(new User("이예진", "123@naver.com", "1234", 21, "포항"));
+        repository.getUserList().add(new User("이예진", "123@naver.com", "1234", 19, "포항"));
         repository.getUserList().add(new User("이지효", "1234@gmail.com", "1234", 22, "서울"));
         repository.getUserList().add(new User("송나래", "12345@naver.com", "1234", 22, "대구"));
         repository.getUserList().add(new User("서정인", "123456@gmail.com", "1234", 26, "울산"));
