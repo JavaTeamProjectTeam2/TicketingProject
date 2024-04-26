@@ -1,8 +1,5 @@
 package src.userJoin;
 
-import src.memberView;
-
-
 import java.util.ArrayList;
 
 import java.util.List;

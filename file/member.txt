@@ -1,4 +1,0 @@
-aaa@gmail.com,1234
-bbb@gmail.com,5678
-ccc@gmail.com,9876
-ddd@gmail.com,5432
