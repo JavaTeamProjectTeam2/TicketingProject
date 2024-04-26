@@ -3,7 +3,7 @@ package src;
 import static src.SimpleInput.sc;
 
 public class memberView {
-    public static final String ROOT_PATH = "/Users/jeongin/Desktop/javaTicketing";
+    public static final String ROOT_PATH = "/Users/yejin/Desktop/backand/miniProject/java/TicketingProject";
     public static void start() {
         System.out.println("공연 관람을 위한 티켓팅입니다~~~");
 
