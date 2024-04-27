@@ -3,8 +3,6 @@ package src;
 import java.io.File;
 import java.io.IOException;
 
-import static src.Section.*;
-
 import static src.SimpleInput.sc;
 import static src.MainView.ROOT_PATH;
 

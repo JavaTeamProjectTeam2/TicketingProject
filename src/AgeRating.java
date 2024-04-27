@@ -1,7 +1,7 @@
 package src;
 
 public enum AgeRating {
-    FOURTEEN(14), SEVEN(7);
+    FOURTEEN(14), SEVEN(7), ALL(0);
 
     private final int age;
 
