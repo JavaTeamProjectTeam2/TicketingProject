@@ -35,9 +35,6 @@ bin/
 .idea/**/dictionaries
 .idea/**/shelf
 
-# AWS User-specific
-.idea/**/aws.xml
-
 # Generated files
 .idea/**/contentModel.xml
 
