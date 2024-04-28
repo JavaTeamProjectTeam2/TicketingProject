@@ -176,7 +176,6 @@ public class MemberRepository {
         for (int i = 0; i < 6; i++) {
             code += "" + (int) (Math.random() * 10);
         }
-        System.out.println("code = " + code);
         return code;
     }
 
@@ -202,7 +201,8 @@ public class MemberRepository {
     //아이디 유효한지 확인
     public boolean emailCheck(String id) {
 
-        return Pattern.matches("^[a-z0-9A-Z._-]*@[a-z0-9A-Z]*.[a-zA-Z.]*$", id);
+//        return Pattern.matches("^[a-z0-9A-Z._-]*@[a-z0-9A-Z]*.[a-zA-Z.]*$", id);
+        return Pattern.matches("^[a-z0-9A-Z._-]*@[a-z0-9A-Z]*\\.[a-zA-Z]+(\\.[a-zA-Z]+)*$", id);
     }
 
     //비번확인
