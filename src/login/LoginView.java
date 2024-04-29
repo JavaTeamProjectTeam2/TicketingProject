@@ -96,7 +96,7 @@ public class LoginView {
                 }
 
                 if(code.equals(inputCode)) {
-                    System.out.printf("\n📢 %s님의 이메일: %s | 비밀번호: %s",member.getName(), member.getEmail(), member.getPw());
+                    System.out.printf("\n📢 %s님의 이메일: %s | 비밀번호: %s\n",member.getName(), member.getEmail(), member.getPw());
                     break code;
                 } else {
                     System.out.println("\n📢 인증 코드가 일치하지 않습니다.");

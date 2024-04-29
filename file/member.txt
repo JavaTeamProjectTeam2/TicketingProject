@@ -1,0 +1,4 @@
+김김김,aaa@gmail.com,1234,12,서울시 마포구
+박박박,bbb@gmail.com,5678,20,서울시 강남구
+이이이,ccc@gmail.com,9876,30,서울시 동작구
+홍홍홍,ddd@gmail.com,5432,40,서울시 종로구
