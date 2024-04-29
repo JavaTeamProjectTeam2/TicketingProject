@@ -1,5 +1,6 @@
 package src;
 import java.util.*;
+import java.util.Date;
 
 // 제목, 장소, 관람시간, 공연시간, 가격, 연령(등급), 좌석등급
 public class Perform {
@@ -7,7 +8,7 @@ public class Perform {
     private Category category;
     private String place;
     private int age;
-    private Date date; // 관람 시간, 공연 시간
+    private Date date;
 
     public Perform(String title, Category category, String place, int age, Date date) {
         this.title = title;
@@ -57,12 +58,11 @@ public class Perform {
         this.date = date;
     }
 
-
     @Override
     public String toString() {
         return "Perform{" +
                 "title='" + title + '\'' +
-                ", category='" + category + '\'' +
+                ", category=" + category +
                 ", place='" + place + '\'' +
                 ", age=" + age +
                 ", date=" + date +
@@ -74,7 +74,7 @@ public class Perform {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Perform perform = (Perform) o;
-        return age == perform.age && Objects.equals(title, perform.title) && Objects.equals(category, perform.category) && Objects.equals(place, perform.place) && Objects.equals(date, perform.date);
+        return age == perform.age && Objects.equals(title, perform.title) && category == perform.category && Objects.equals(place, perform.place) && Objects.equals(date, perform.date);
     }
 
     @Override

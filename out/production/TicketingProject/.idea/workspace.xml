@@ -5,15 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58d513ad-5ed0-46f6-aefc-360c04839e28" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Date.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/src/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/Perform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/src/Perform.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/PerformRepository.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AgeRating.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AgeRating.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Perform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Perform.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PerformRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerformRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Section.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PerformView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerformView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PriceData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PriceData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="PerformOngoing" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,8 +59,9 @@
   "keyToString": {
     "Application.FileIO.executor": "Run",
     "Application.Main.executor": "Run",
+    "Application.PerformRepository.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Rebasing performEnumSet",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/jeongin/Desktop/javaTicketing/TicketingProject",
     "node.js.detected.package.eslint": "true",
@@ -183,6 +184,11 @@
     <MESSAGE value="#FileIO 생성" />
     <MESSAGE value="#FileIO 삭제~" />
     <MESSAGE value="#PerformRepo update" />
-    <option name="LAST_COMMIT_MESSAGE" value="#PerformRepo update" />
+    <MESSAGE value="#Enum Set" />
+    <option name="LAST_COMMIT_MESSAGE" value="#Enum Set" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

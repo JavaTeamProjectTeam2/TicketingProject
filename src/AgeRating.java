@@ -10,6 +10,6 @@ public enum AgeRating {
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
 }
