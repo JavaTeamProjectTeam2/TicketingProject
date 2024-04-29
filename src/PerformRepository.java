@@ -2,16 +2,16 @@ package src;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static src.AgeRating.*;
 import static src.Category.*;
 
 public class PerformRepository {
-
+    static Map<String, Perform> performMap = new HashMap<>();
     static {
-        Map<String, Perform> performMap = new HashMap<>();
-
         performMap.put("SHINee WORLD Ⅵ [PERFECT ILLUMINATION : SHINee’S BACK", new Perform("SHINee WORLD Ⅵ [PERFECT ILLUMINATION : SHINee’S BACK", CONCERT, "인스파이어 아레나", SEVEN.getAge(), new Date()));
         performMap.put("2024 송가인 디너 콘서트 ＂효＂", new Perform("2024 송가인 디너 콘서트 ＂효＂", CONCERT, "서울 그랜드하얏트호텔 그랜드볼룸", SEVEN.getAge(),  new Date()));
         performMap.put("SEVENTEEN TOUR ‘FOLLOW’ AGAIN TO SEOUL", new Perform("SEVENTEEN TOUR ‘FOLLOW’ AGAIN TO SEOUL", CONCERT, "서울월드컵경기장", SEVEN.getAge(),  new Date()));
@@ -31,4 +31,28 @@ public class PerformRepository {
         performMap.put("신비아파트 〈붉은 눈의 저주〉", new Perform("신비아파트 〈붉은 눈의 저주〉", FAMILY, "대전 우송예술회관", ALL.getAge(),  new Date()));
     }
 
+    public static void main(String[] args) {
+        List<String> collect = performMap.entrySet().stream()
+                .filter(t -> t.getValue().getCategory() == MUSICAL || t.getValue().getCategory()==FAMILY)
+                .map(f -> f.getKey())
+                .limit(3)
+                .collect(Collectors.toList());
+
+        System.out.println("collect = " + collect);
+    }
+
+    public static void showByCategory() {
+
+    }
+
+    public static void showContentByCategory(int option) {
+        Category category = getCategoryByOption(option);
+        List<String> titleByCategory = performMap.entrySet().stream()
+                .filter(t -> t.getValue().getCategory() == category)
+                .map(f -> f.getKey())
+                .limit(4)
+                .collect(Collectors.toList());
+
+        System.out.println("titleByCategory = " + titleByCategory);
+    }
 }
