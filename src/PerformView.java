@@ -20,11 +20,8 @@ public class PerformView {
         int option = sc.nextInt();
         switch (option) {
             case 1:
-                System.out.println("현재 하는 행사");
-
-                break;
-            case 2:
                 System.out.println("카테고리별로 추천");
+                showOptions();
                 break;
             case 0:
                 System.out.println("뒤로가기");
@@ -35,9 +32,25 @@ public class PerformView {
         }
     }
 
+    private static void showOptions() {
+        System.out.println("======카테고리 별 추천 파트======");
+        System.out.println("## 뮤지컬, 콘서트, 전시회, 가족컨텐츠 중 선택하세요 ##");
+        System.out.println("# 1. 뮤지컬");
+        System.out.println("# 2. 콘서트");
+        System.out.println("# 3. 전시회");
+        System.out.println("# 4. 가족컨텐츠");
+        System.out.println("# 0. 뒤로가기");
+        System.out.print(">>>>> ");
+        
+        int option = sc.nextInt();
+        if(option == 0){
+            getTicket();
+        }else{
+            PerformRepository.showContentByCategory(option);
+        }
+    }
 
-
-
+    //공연정보 리스트 파일 생성
     private static void makePerformFile(){
         File directory = new File(ROOT_PATH + "/PerformRepository");
 
@@ -46,7 +59,7 @@ public class PerformView {
             directory.mkdir();
         }
         //파일 생성하기
-        File newFile = new File(ROOT_PATH + "/PerformRepository/workout.txt");
+        File newFile = new File(ROOT_PATH + "/PerformRepository/PerformList.txt");
         if(!newFile.exists()){
             try {
                 newFile.createNewFile();
