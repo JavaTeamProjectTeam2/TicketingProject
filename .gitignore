@@ -47,6 +47,10 @@ bin/
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
+<<<<<<< HEAD
 .idea/workspace.xml
 
 .idea/
+=======
+.idea/workspace.xml
+>>>>>>> PerformImplement
