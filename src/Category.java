@@ -5,16 +5,21 @@ public enum Category {
 //    private final double RPRICE = 154000;
 //    private final double SPRICE = 132000;
 //    private final double APRICE = 99000;
-    CONCERT(1), MUSICAL(2),EXHIBIT(3), FAMILY(4);
-
+    CONCERT(1, "콘서트"), MUSICAL(2, "뮤지컬"),EXHIBIT(3, "전시회"), FAMILY(4, "아동/가족");
+    private final String contentName;
     private final int categoryOptionNumber;
 
-    Category(int categoryOptionNumber) {
+    Category(int categoryOptionNumber, String contentName) {
+        this.contentName = contentName;
         this.categoryOptionNumber = categoryOptionNumber;
     }
 
     public int getCategoryOptionNumber() {
         return this.categoryOptionNumber;
+    }
+
+    public String getContentName() {
+        return contentName;
     }
 
     public static Category getCategoryByOption(int option) {
@@ -25,4 +30,5 @@ public enum Category {
         }
         throw new IllegalArgumentException("Invalid option: " + option);
     }
+
 }

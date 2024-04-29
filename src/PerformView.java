@@ -3,6 +3,7 @@ package src;
 import java.io.File;
 import java.io.IOException;
 
+import static src.Category.*;
 import static src.SimpleInput.sc;
 import static src.MainView.ROOT_PATH;
 
@@ -43,10 +44,10 @@ public class PerformView {
     private static void showOptions() {
         System.out.println("======카테고리 별 추천 파트======");
         System.out.println("## 뮤지컬, 콘서트, 전시회, 가족컨텐츠 중 선택하세요 ##");
-        System.out.println("# 1. 뮤지컬");
-        System.out.println("# 2. 콘서트");
-        System.out.println("# 3. 전시회");
-        System.out.println("# 4. 가족컨텐츠");
+        System.out.println("# 1." + CONCERT.getContentName() );
+        System.out.println("# 2." + MUSICAL.getContentName());
+        System.out.println("# 3." + EXHIBIT.getContentName());
+        System.out.println("# 4." + FAMILY.getContentName());
         System.out.println("# 0. 뒤로가기");
         System.out.print(">>>>> ");
         
