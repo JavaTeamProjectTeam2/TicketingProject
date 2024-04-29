@@ -43,7 +43,7 @@ public class PerformRepository {
 //    }
 
 
-    public static void showContentByCategory(int option) {
+    public static List<String> showContentByCategory(int option) {
         Category category = getCategoryByOption(option);
         List<String> titleByCategory = performMap.entrySet().stream()
                 .filter(t -> t.getValue().getCategory() == category)
@@ -52,11 +52,17 @@ public class PerformRepository {
                 .collect(Collectors.toList());
 
         System.out.println("titleByCategory = " + titleByCategory);
+        return titleByCategory;
     }
-
 
     // 최근 하는 행사 보여줌
     public static void theseDaysEvent() {
 
+    }
+
+    
+    // 사용자가 고른 작품을
+    public static List<Perform> returnPerformContent() {
+        return performMap.values().stream().collect(Collectors.toList());
     }
 }

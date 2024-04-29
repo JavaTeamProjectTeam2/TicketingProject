@@ -2,6 +2,7 @@ package src;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import static src.Category.*;
 import static src.SimpleInput.sc;
@@ -55,8 +56,14 @@ public class PerformView {
         if(option == 0){
             getTicket();
         }else{
-            PerformRepository.showContentByCategory(option);
+//            List<String> strings = PerformRepository.showContentByCategory(option);
+            Perform content = PerformRepository.returnPerformContent();
+            booking(content);
         }
+    }
+
+    private static void booking(Perform content) {
+
     }
 
     //공연정보 리스트 파일 생성
