@@ -20,6 +20,10 @@ public class PerformView {
         int option = sc.nextInt();
         switch (option) {
             case 1:
+                System.out.println("현재 진행 중인 행사 보여줘");
+                showTheseDaysEvent();
+                break;
+            case 2:
                 System.out.println("카테고리별로 추천");
                 showOptions();
                 break;
@@ -30,6 +34,10 @@ public class PerformView {
                 System.out.println("잘못 입력했습니다");
                 break;
         }
+    }
+
+    private static void showTheseDaysEvent() {
+        PerformRepository.theseDaysEvent();
     }
 
     private static void showOptions() {

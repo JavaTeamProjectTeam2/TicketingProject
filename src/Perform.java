@@ -8,14 +8,14 @@ public class Perform {
     private Category category;
     private String place;
     private int age;
-    private Date date;
+    private PerformDate date;
 
-    public Perform(String title, Category category, String place, int age, Date date) {
+    public Perform(String title, Category category, String place, int age, String runningTime, String... showTime) {
         this.title = title;
         this.category = category;
         this.place = place;
         this.age = age;
-        this.date = date;
+        this.date = new PerformDate(showTime, runningTime);
     }
 
     public String getTitle() {
@@ -50,11 +50,11 @@ public class Perform {
         this.age = age;
     }
 
-    public Date getDate() {
+    public PerformDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(PerformDate date) {
         this.date = date;
     }
 
