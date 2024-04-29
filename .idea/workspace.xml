@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="58d513ad-5ed0-46f6-aefc-360c04839e28" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Perform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Perform.java" afterDir="false" />
@@ -11,6 +12,7 @@
       <change beforePath="$PROJECT_DIR$/src/PerformRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerformRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PerformView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerformView.java" afterDir="false" />
     </list>
+  
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,6 +57,9 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2fa6GioKLwwIe5GbfkTambMU8Vj" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
@@ -64,7 +69,9 @@
     "Application.Main.executor": "Run",
     "Application.PerformRepository.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+
     "git-widget-placeholder": "PerformImplement",
+
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/jeongin/Desktop/javaTicketing/TicketingProject",
     "node.js.detected.package.eslint": "true",
@@ -154,6 +161,7 @@
       <option name="project" value="LOCAL" />
       <updated>1714031304545</updated>
     </task>
+
     <task id="LOCAL-00005" summary="add Date and Perform Class">
       <option name="closed" value="true" />
       <created>1714366957139</created>
@@ -171,6 +179,7 @@
       <updated>1714368735293</updated>
     </task>
     <option name="localTasksCounter" value="7" />
+
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,10 +214,12 @@
     <MESSAGE value="#FileIO 삭제~" />
     <MESSAGE value="#PerformRepo update" />
     <MESSAGE value="#Enum Set" />
+
     <MESSAGE value="add Date and Perform Class&#10;&#10;# Conflicts:&#10;#&#9;src/Perform.java&#10;" />
     <MESSAGE value="add Date and Perform Class" />
     <MESSAGE value="# perfromdDate update" />
     <option name="LAST_COMMIT_MESSAGE" value="# perfromdDate update" />
+
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
