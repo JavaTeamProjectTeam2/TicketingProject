@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58d513ad-5ed0-46f6-aefc-360c04839e28" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Date.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TicketingProject/src/Perform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TicketingProject/src/Perform.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AgeRating.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AgeRating.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Perform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Perform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PerformRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerformRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PerformView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerformView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PriceData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PriceData.java" afterDir="false" />
-    </list>
+    <list default="true" id="58d513ad-5ed0-46f6-aefc-360c04839e28" name="Changes" comment="#join 최종" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,31 +42,34 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2fa6GioKLwwIe5GbfkTambMU8Vj" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.FileIO.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.PerformRepository.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Rebasing performEnumSet&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jeongin/Desktop/javaTicketing/TicketingProject&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;프로젝트&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;애플리케이션.Main.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.FileIO.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.PerformRepository.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "join",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/jeongin/Desktop/javaTicketing/TicketingProject",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "프로젝트",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "vue.rearranger.settings.migration": "true",
+    "애플리케이션.Main.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
@@ -152,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714031304545</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="#join 최종">
+      <option name="closed" value="true" />
+      <created>1714369626442</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1714369626442</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +187,8 @@
     <MESSAGE value="#FileIO 삭제~" />
     <MESSAGE value="#PerformRepo update" />
     <MESSAGE value="#Enum Set" />
-    <option name="LAST_COMMIT_MESSAGE" value="#Enum Set" />
+    <MESSAGE value="#join 최종" />
+    <option name="LAST_COMMIT_MESSAGE" value="#join 최종" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
