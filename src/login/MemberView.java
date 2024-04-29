@@ -5,7 +5,7 @@ import static src.SimpleInput.input;
 
 public class MemberView {
 
-    MemberRepository repository = new MemberRepository();
+    MemberRepository repository = MemberRepository.getInstance();
     LoginView loginView = new LoginView();
 
     public void showLoginMenu() {
@@ -32,9 +32,9 @@ public class MemberView {
             switch (opt) {
                 case "1":
                     loginView.showLogIn();
-                    Member logMember = loginView.getLogMember();
-                    if(logMember != null) {
-                        MypageView mypageView = new MypageView(logMember);
+                    Member loginMember = MemberRepository.getLoginMember();
+                    if(loginMember != null) {
+                        MypageView mypageView = new MypageView(loginMember);
                     }
                     break;
                 case "2":

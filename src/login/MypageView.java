@@ -9,7 +9,7 @@ import static src.SimpleInput.*;
 public class MypageView {
 
     private Member logMember;
-    private MemberRepository mr = new MemberRepository();
+    private MemberRepository mr = MemberRepository.getInstance();
 
     public MypageView(Member member) {
         this.logMember = member;
@@ -35,34 +35,36 @@ public class MypageView {
         System.out.printf("  * 포인트: %d\n", this.logMember.getPoint());
         System.out.printf("  * 예매내역: %d\n", this.logMember.getPoint());
 
-        System.out.println("\n 1️⃣ 비밀번호 수정 | 2️⃣ 주소 수정 | 3️⃣ 예매내역 취소 | 0️⃣ 뒤로가기");
-        String menuOpt = input(">> ");
-        switch (menuOpt) {
-            case "1":
-                updatePw();
-                break;
-            case "2":
-                break;
-            case "3":
-                cancelTicket();
-                break;
-            case "0":
-                break;
-            default:
-                System.out.println("📢 메뉴 번호만 입력해주세요");
+        myMenu: while (true) {
+            System.out.println("\n 1️⃣ 비밀번호 수정 | 2️⃣ 주소 수정 | 3️⃣ 예매내역 취소 | 0️⃣ 뒤로가기");
+            String menuOpt = input(">> ");
+            switch (menuOpt) {
+                case "1":
+                    updatePw();
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    cancelTicket();
+                    break;
+                case "0":
+                    break myMenu;
+                default:
+                    System.out.println("📢 메뉴 번호만 입력해주세요");
+            }
         }
     }
 
     public void updatePw() {
         while (true) {
-            String oldPw = input(" * 기존 비밀번호 입력 >> ");
+            String oldPw = input("\n * 기존 비밀번호 입력 >> ");
             if(!logMember.getPw().equals(oldPw)) {
                 System.out.println("📢 비밀번호가 일치하지 않습니다.");
             } else break;
         }
         String newPw = null;
         while (true) {
-            newPw = input(" * 새 비밀번호 입력 >> ");
+            newPw = input("\n * 새 비밀번호 입력 >> ");
             if(!mr.passwordCheck(newPw)) {
                 System.out.println("📢 비밀번호는 특수문자 ., ! 사용 가능합니다.");
             } else break;

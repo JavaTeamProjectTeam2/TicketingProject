@@ -5,11 +5,16 @@ import src.login.MemberRepository.LogState;
 import static src.SimpleInput.*;
 
 public class LoginView {
-    private static final MemberRepository mr = new MemberRepository();
+    private static final MemberRepository mr = MemberRepository.getInstance();
     private Member logMember;
 
     public Member getLogMember() {
-        return logMember;
+        return mr.getLoginMember();
+    }
+
+
+    public void setLogMember(Member logMember) {
+        this.logMember = logMember;
     }
 
     public void showLogIn() {
@@ -43,8 +48,10 @@ public class LoginView {
                 Member loggedMember = mr.findMember(email);
                 System.out.printf("\n\t✨ %s님 환영합니다 ✨\n", loggedMember.getName());
 
-                MypageView mv = new MypageView(loggedMember);
+//                MypageView mv = new MypageView(loggedMember);
                 logMember = loggedMember;
+                mr.setLoginMember(loggedMember);
+                break;
 
             } else if (state == LogState.WRONG_ID) {
                 System.out.println("아이디를 찾을 수 없습니다.");
