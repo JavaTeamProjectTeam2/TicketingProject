@@ -1,15 +1,20 @@
 package src;
 
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import java.time.*;
+
+import static java.time.format.DateTimeFormatter.ofPattern;
 import static src.AgeRating.*;
 import static src.Category.*;
+import static src.Category.getCategoryByOption;
 
 public class PerformRepository {
     static Map<String, Perform> performMap = new HashMap<>();
     static {
-        performMap.put("SHINee WORLD Ⅵ [PERFECT ILLUMINATION : SHINee’S BACK", new Perform("SHINee WORLD Ⅵ [PERFECT ILLUMINATION : SHINee’S BACK", CONCERT, "인스파이어 아레나", SEVEN.getAge(), "140분", "2024년 5월 25일(토) 오후 2시", "2024년 5월 25일(토) 오후 2시"));
+        performMap.put("SHINee WORLD Ⅵ [PERFECT ILLUMINATION] : SHINee’S BACK", new Perform("SHINee WORLD Ⅵ [PERFECT ILLUMINATION : SHINee’S BACK", CONCERT, "인스파이어 아레나", SEVEN.getAge(), "140분", "2024년 5월 25일(토) 오후 2시", "2024년 5월 25일(토) 오후 2시"));
         performMap.put("2024 송가인 디너 콘서트 ＂효＂", new Perform("2024 송가인 디너 콘서트 ＂효＂", CONCERT, "서울 그랜드하얏트호텔 그랜드볼룸", SEVEN.getAge(),"120분", "2024년 5월 8일(수) 오후 6시"));
         performMap.put("NCT WISH : SCHOOL of WISH", new Perform("NCT WISH : SCHOOL of WISH", CONCERT, "명화라이브홀", SEVEN.getAge(),"90분", "2024년 5월 25일(토) 오후 2시, 2024년 5월 25일(토) 오후 7시, 2024년 5월 26일(일) 오후 2시, 2024년 5월 26일(일) 오후 7시"));
         performMap.put("2024 RIIZE FAN－CON ‘RIIZING DAY’ in SEOUL", new Perform("2024 RIIZE FAN－CON ‘RIIZING DAY’ in SEOUL", CONCERT, "잠실실내체육관", SEVEN.getAge(),"100분", "2024년 5월 4일(토) 오후 6시, 2024년 5월 5일(일) 오후 4시"));
@@ -27,20 +32,6 @@ public class PerformRepository {
         performMap.put("신비아파트 〈붉은 눈의 저주〉", new Perform("신비아파트 〈붉은 눈의 저주〉", FAMILY, "대전 우송예술회관", ALL.getAge(), "70분", "2024년 5월 25일(토) 오전 11시", "2024년 5월 25일(토) 오후 2시", "2024년 5월 25일(토) 오후 4시 30분", "2024년 5월 26일(일) 오전 11시", "2024년 5월 26일(일) 오후 2시", "2024년 5월 26일(일) 오후 4시 30분"));
     }
 
-//    public static void main(String[] args) {
-//        List<String> collect2 = performMap.entrySet().stream()
-//                .filter(t -> t.getValue().getCategory() == MUSICAL || t.getValue().getCategory()==FAMILY)
-//                .map(f -> f.getKey())
-//                .limit(3)
-//                .collect(Collectors.toList());
-//
-//        System.out.println("collect2 = " + collect2);
-//        List<String> collect = performMap.entrySet().stream()
-//                .map(f -> f.getValue().getDate().getRunningTime())
-//                .collect(Collectors.toList());
-//
-//        System.out.println("collect = " + collect);
-//    }
 
 
     public static void showContentByCategory(int option) {
@@ -48,15 +39,81 @@ public class PerformRepository {
         List<String> titleByCategory = performMap.entrySet().stream()
                 .filter(t -> t.getValue().getCategory() == category)
                 .map(f -> f.getKey())
-                .limit(4)
+                .limit(5)
                 .collect(Collectors.toList());
 
-        System.out.println("titleByCategory = " + titleByCategory);
+
+        int count = 0;
+        for (String title : titleByCategory) {
+            count++;
+            System.out.println("# " + count +". "+ title);
+        }
+
     }
 
 
     // 최근 하는 행사 보여줌
     public static void theseDaysEvent() {
+        // 현재 날짜 가져오기
+        LocalDate nowDate = LocalDate.now();
+
+        // 일주일 후의 날짜 계산
+        LocalDate oneWeekLater = nowDate.plusWeeks(1);
+
+        // 날짜를 원하는 형식으로 포맷
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
+
+        // 현재 날짜부터 일주일 후까지의 날짜를 순회하면서 이벤트 추출
+        for (LocalDate date = nowDate; date.isBefore(oneWeekLater); date = date.plusDays(1)) {
+            String dateString = date.format(formatter);
+            System.out.println(dateString + "의 이벤트:");
+
+            // 해당 날짜의 이벤트 제목 출력
+            performMap.entrySet().stream()
+                    .filter(entry -> entry.getValue().getDate().getShowTime().equals(dateString))
+                    .map(f -> f.getKey())
+                    .collect(Collectors.toList());
+
+        }
+
+
+
+
+
+
+
+
+
+//        List<String> eachContents = new ArrayList<>();
+////        List<String> titleByCategory = performMap.entrySet().stream()
+////                .filter(t -> t.getValue().getCategory() == )
+////                .map(t -> t.getKey())
+////                .limit(1)
+////                .collect(Collectors.toList());
+////        System.out.println("titleByCategory = " + titleByCategory);
+//
+//        for (int i = 1; i < 5; i++) {
+//            Category category = getCategoryByOption(i);
+//
+//            List<Perform> collect = performMap.values().stream()
+//                    .filter(t -> t.getCategory() == category)
+//                    .collect(Collectors.toList());
+//
+//            int rn = (int) (Math.random() * collect.size());
+//
+//            eachContents.add(collect.get(rn).getTitle());
+////
+////            List<Map.Entry<String, Perform>> collect = performMap.entrySet().stream()
+////                    .filter(t -> t.getValue().getCategory() == category)
+////                    .limit(1)
+////                    .collect(Collectors.toList());
+//        }
+//
+//        int count = 0;
+//        for (String eachContent : eachContents) {
+//            count++;
+//            System.out.println("# " + count +". "+ eachContent);
+//        }
 
     }
 }
