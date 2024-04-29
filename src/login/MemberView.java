@@ -60,17 +60,17 @@ public class MemberView {
             System.out.println("           회원가입");
             System.out.println("---------------------------- *");
             String name = input("# 이름: ");
-            if (name.equals("")) {
+            if (name.isEmpty()) {
                 System.out.println("이름 입력 부탁드립니다.");
                 continue;
             } else if (!(name.matches("^[a-zA-Z가-힣]*$"))) {
                 System.out.println("올바른 이름 입력 부탁드립니다.");
                 continue;
             }
-            String id = null;
+            String id;
             while (true) {
                 id = input("# 이메일 : ");
-                if (id.equals("")) {
+                if (id.isEmpty()) {
                     System.out.println("이메일 입력 부탁드립니다.");
                     continue;
                 }
@@ -80,10 +80,10 @@ public class MemberView {
                     System.out.println("유효한 이메일이 아닙니다. 다시 입력 바랍니다");
                 } else break;
             }
-            String pw = null;
+            String pw;
             while (true) {
                 pw = input("# 비밀번호 (영문 숫자 . !)\n: ");
-                if (pw.equals("")) {
+                if (pw.isEmpty()) {
                     System.out.println("비밀번호 입력 부탁드립니다.");
                     continue;
                 }
@@ -93,10 +93,10 @@ public class MemberView {
             }
             Integer age = Integer.valueOf(input("# 나이: "));
 
-            String adderss = input("# 주소: ");
+            String adderess = input("# 주소: ");
 
 
-            repository.saveUser(name, id, pw, age, adderss);
+            repository.addNewMember(new Member(name, id, pw, age, adderess));
 
             System.out.printf("** %s님 회원가입이 완료되었습니다 **\n", name);
 
