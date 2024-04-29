@@ -180,9 +180,9 @@ public class MemberRepository {
     }
 
     //회원 로그인
-    public void saveUser(String name, String id, String pw, Integer age, String adderss) {
+    public void saveUser(String name, String id, String pw, Integer age, String address) {
         if (!containsId(id)) {
-            members.add(new Member(name, id, pw, age, adderss));
+            members.add(new Member(name, id, pw, age, address));
             //System.out.println(userList);
         }
     }
@@ -212,5 +212,16 @@ public class MemberRepository {
             return true;
         }
         return false;
+    }
+    public boolean ageCheck(Integer age) {
+        if (300 > age && age > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addressCheck(String address){
+        String addressInputCheck = "^[가-힣\\s]+(시|군|구|읍|면|동|리)\\s?[0-9가-힣\\s]+$";
+        return address.matches(addressInputCheck);
     }
 }

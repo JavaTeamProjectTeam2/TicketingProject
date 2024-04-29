@@ -7,7 +7,7 @@ import static src.SimpleInput.*;
 public class LoginView {
     private static final MemberRepository mr = new MemberRepository();
 
-    public void showLogIn() {
+    public Member showLogIn() {
 
         MemberRepository.loadFile();
 
@@ -37,7 +37,10 @@ public class LoginView {
             if (state == LogState.LOG_IN) {
                 Member loggedMember = mr.findMember(email);
                 System.out.printf("\n\t✨ %s님 환영합니다 ✨\n", loggedMember.getName());
-                break;
+
+                MypageView mv = new MypageView(loggedMember);
+                return mv.getLogMember();
+
             } else if (state == LogState.WRONG_ID) {
                 System.out.println("아이디를 찾을 수 없습니다.");
                 loginCount++;
@@ -49,7 +52,9 @@ public class LoginView {
                 System.out.println("📢 로그인 시도 횟수를 초과했습니다. 다음에 시도해주세요.");
                 break;
             }
+
         }
+        return null;
     }
     public void showFindPwView() {
 
@@ -108,7 +113,7 @@ public class LoginView {
                         else if(inputOpt.equals("2")) {
                             continue code;
                         } else if(inputOpt.equals("0")) {
-                            // 로그인, 비번찾기....메뉴로
+                            //
                         } else {
                             System.out.println("\n📢 메뉴 숫자만 입력해주세요. (1, 2, 0 중 하나)");
                         }
