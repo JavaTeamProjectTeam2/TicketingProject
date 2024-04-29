@@ -4,8 +4,7 @@ import src.SimpleInput;
 
 import java.util.List;
 
-import static src.SimpleInput.input;
-import static src.SimpleInput.stopInput;
+import static src.SimpleInput.*;
 
 public class MypageView {
 

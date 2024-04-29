@@ -23,10 +23,10 @@ public class MemberRepository {
         saveFile(this.members);
     }
 
-    static enum LogState {
+    enum LogState {
         LOG_IN, WRONG_PW, WRONG_ID
     }
-    static enum PATH {
+    enum PATH {
         MEMBER(System.getProperty("user.dir") + "/file/member.txt"),
         TICKET(System.getProperty("user.dir") + "/file/ticket.txt");
 
@@ -56,6 +56,7 @@ public class MemberRepository {
             String newMemberInfo = String.format("%s,%s,%s,%d,%s\n"
                     , newMember.getName(), newMember.getEmail(), newMember.getPw()
                     , newMember.getAge(), newMember.getAddress());
+            fw.write(newMemberInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -109,7 +110,7 @@ public class MemberRepository {
 
     /**
      * List<Ticket> 파일로 저장
-     * @param tickets
+     * @param tickets - ticket 리스트
      */
     public void saveListFile(List<Ticket> tickets) {
         try (FileOutputStream fos = new FileOutputStream(PATH.TICKET.getDesc())) {
@@ -125,9 +126,8 @@ public class MemberRepository {
         try (FileInputStream fis = new FileInputStream(PATH.TICKET.getDesc())) {
 
             ObjectInputStream ois = new ObjectInputStream(fis);
-            List<Ticket> ticketList = (List<Ticket>) ois.readObject();
 
-            return ticketList;
+            return (List<Ticket>) ois.readObject();
 
         } catch (Exception e) {
             e.printStackTrace();

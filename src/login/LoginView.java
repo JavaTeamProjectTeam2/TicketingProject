@@ -6,8 +6,13 @@ import static src.SimpleInput.*;
 
 public class LoginView {
     private static final MemberRepository mr = new MemberRepository();
+    private Member logMember;
 
-    public Member showLogIn() {
+    public Member getLogMember() {
+        return logMember;
+    }
+
+    public void showLogIn() {
 
         MemberRepository.loadFile();
 
@@ -39,7 +44,7 @@ public class LoginView {
                 System.out.printf("\n\t✨ %s님 환영합니다 ✨\n", loggedMember.getName());
 
                 MypageView mv = new MypageView(loggedMember);
-                return mv.getLogMember();
+                logMember = loggedMember;
 
             } else if (state == LogState.WRONG_ID) {
                 System.out.println("아이디를 찾을 수 없습니다.");
@@ -54,7 +59,6 @@ public class LoginView {
             }
 
         }
-        return null;
     }
     public void showFindPwView() {
 

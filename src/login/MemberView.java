@@ -31,7 +31,8 @@ public class MemberView {
 
             switch (opt) {
                 case "1":
-                    Member logMember = loginView.showLogIn();
+                    loginView.showLogIn();
+                    Member logMember = loginView.getLogMember();
                     if(logMember != null) {
                         MypageView mypageView = new MypageView(logMember);
                     }
