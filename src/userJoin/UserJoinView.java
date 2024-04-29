@@ -14,8 +14,8 @@ public class UserJoinView {
 
         repository.getUserList().add(new User("이예진", "123@naver.com", "1234", 19, "포항"));
         repository.getUserList().add(new User("이지효", "1234@gmail.com", "1234", 22, "서울"));
-        repository.getUserList().add(new User("송나래", "12345@naver.com", "1234", 22, "대구"));
-        repository.getUserList().add(new User("서정인", "123456@gmail.com", "1234", 26, "울산"));
+        repository.getUserList().add(new User("송나래", "12345@naver.com", "1234", 25, "대구"));
+        repository.getUserList().add(new User("서정인", "123456@gmail.com", "1234", 27, "울산"));
 
 
 
@@ -55,9 +55,25 @@ public class UserJoinView {
                     System.out.println("영문 숫자 . ! 만 가능합니다. 다시 입력 바랍니다");
                 } else break;
             }
-            Integer age = Integer.valueOf(input("# 나이: "));
+            Integer age = null;
+            while (true) {
+                try {
+                    age = Integer.valueOf(input("# 나이: "));
+                    if (!repository.ageCheck(age)){
+                        System.out.println("올바른 나이를 입력하세요");
+                    } else break;
+                } catch (NumberFormatException e) {
+                    System.out.println("숫자로 입력 부탁드립니다.");
+                }
+            }
 
-            String adderss = input("# 주소: ");
+            String adderss = null;
+            while (true) {
+                adderss = input("# 주소: ");
+                if (!repository.addressCheck(adderss)){
+                    System.out.println("주소를 잘 못 입력하셨습니다.\nex)서울특별시 마포구 공덕동");
+                } else break;
+            }
 
 
             repository.saveUser(name, id, pw, age, adderss);
