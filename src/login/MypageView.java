@@ -26,36 +26,38 @@ public class MypageView {
     public void showMemberInfo() {
         myMenu:
         while (true) {
-        System.out.println("\n----------------------------");
-        System.out.println("         마이 페이지");
-        System.out.println("---------------------------- *");
-        System.out.printf("  * 이름: %s\n", this.logMember.getName());
-        System.out.printf("  * 이메일: %s\n", this.logMember.getEmail());
-        System.out.printf("  * 나이: %d\n", this.logMember.getAge());
-        System.out.printf("  * 주소: %s\n", this.logMember.getAddress());
-        System.out.printf("  * 포인트: %d\n", this.logMember.getPoint());
-        System.out.printf("  * 예매내역: %d\n", this.logMember.getPoint());
+            System.out.println("\n----------------------------");
+            System.out.println("         마이 페이지");
+            System.out.println("---------------------------- *");
+            System.out.printf("  * 이름: %s\n", this.logMember.getName());
+            System.out.printf("  * 이메일: %s\n", this.logMember.getEmail());
+            System.out.printf("  * 나이: %d\n", this.logMember.getAge());
+            System.out.printf("  * 주소: %s\n", this.logMember.getAddress());
+            System.out.printf("  * 포인트: %d\n", this.logMember.getPoint());
+            System.out.printf("  * 예매내역: %d\n", this.logMember.getPoint());
 
-        myMenu: while (true) {
-            System.out.println("\n 1️⃣ 비밀번호 수정 | 2️⃣ 주소 수정 | 3️⃣ 예매내역 취소 | 4️⃣ 로그아웃 | 0️⃣ 뒤로가기");
-            String menuOpt = input(">> ");
-            switch (menuOpt) {
-                case "1":
-                    updatePw();
-                    break;
-                case "2":
-                    updateAddress();
-                    break;
-                case "3":
-                    cancelTicket();
-                    break;
-                case "4":
-                    logOut();
-                    break;
-                case "0":
-                    break myMenu;
-                default:
-                    System.out.println("📢 메뉴 번호만 입력해주세요");
+
+            while (true) {
+                System.out.println("\n 1️⃣ 비밀번호 수정 | 2️⃣ 주소 수정 | 3️⃣ 예매내역 취소 | 4️⃣ 로그아웃 | 0️⃣ 뒤로가기");
+                String menuOpt = input(">> ");
+                switch (menuOpt) {
+                    case "1":
+                        updatePw();
+                        break;
+                    case "2":
+                        updateAddress();
+                        break;
+                    case "3":
+                        cancelTicket();
+                        break;
+                    case "4":
+                        logOut();
+                        break;
+                    case "0":
+                        break myMenu;
+                    default:
+                        System.out.println("📢 메뉴 번호만 입력해주세요");
+                }
             }
         }
     }
