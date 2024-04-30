@@ -65,25 +65,19 @@ public class PerformRepository {
                         LocalDateTime.of(2024, 6, 8, 18, 30, 0),
                         LocalDateTime.of(2024, 6, 9, 14, 0, 0),
                         LocalDateTime.of(2024, 6, 9, 15, 0, 0)));
-
         performMap.put("스웨덴국립미술관 컬렉션",
                 new Perform("스웨덴국립미술관 컬렉션", EXHIBIT, "마이아트뮤지엄(자세히)", ALL.getAge(), "120분",
                         LocalDateTime.of(2024, 5, 10, 20, 0, 0)));
-
         performMap.put("반 고흐 인사이드: 러브, 빈센트",
                 new Perform("반 고흐 인사이드: 러브, 빈센트", EXHIBIT, "그라운드시소 명동", ALL.getAge(), "50분",
                         LocalDateTime.of(2024, 5, 10, 0, 0, 0),
                         LocalDateTime.of(2024, 5, 11, 0, 0, 0),
                         LocalDateTime.of(2024, 5, 12, 0, 0, 0)));
-
-// 에드바르 뭉크: 비욘드 더 스크림
         performMap.put("에드바르 뭉크: 비욘드 더 스크림",
                 new Perform("에드바르 뭉크: 비욘드 더 스크림", EXHIBIT, "예술의전당 한가람미술관 1층", ALL.getAge(), "60분",
                         LocalDateTime.of(2024, 5, 24, 0, 0, 0),
                         LocalDateTime.of(2024, 5, 25, 0, 0, 0),
                         LocalDateTime.of(2024, 5, 26, 0, 0, 0)));
-
-// 캐리tv 러브콘서트 2024 타임캡슐
         performMap.put("캐리tv 러브콘서트 2024 타임캡슐",
                 new Perform("캐리tv 러브콘서트 2024 타임캡슐", FAMILY, "연세대학교 백주년기념관 콘서트홀", ALL.getAge(), "70분",
                         LocalDateTime.of(2024, 5, 25, 11, 0, 0),
@@ -92,8 +86,6 @@ public class PerformRepository {
                         LocalDateTime.of(2024, 5, 26, 11, 0, 0),
                         LocalDateTime.of(2024, 5, 26, 14, 0, 0),
                         LocalDateTime.of(2024, 5, 26, 16, 30, 0)));
-
-// 캐치! 티니핑 〈두근두근 싱어롱 콘서트!〉
         performMap.put("캐치! 티니핑 〈두근두근 싱어롱 콘서트!〉",
                 new Perform("캐치! 티니핑 〈두근두근 싱어롱 콘서트!〉", FAMILY, "광주 예술의전당 대극장", ALL.getAge(), "",
                         LocalDateTime.of(2024, 5, 25, 11, 0, 0),
@@ -102,8 +94,6 @@ public class PerformRepository {
                         LocalDateTime.of(2024, 5, 26, 11, 0, 0),
                         LocalDateTime.of(2024, 5, 26, 14, 0, 0),
                         LocalDateTime.of(2024, 5, 26, 16, 30, 0)));
-
-// 가족뮤지컬 〈뽀로로와 친구들의 드림콘서트 - 잃어버린 꿈을 찾아서〉
         performMap.put("가족뮤지컬 〈뽀로로와 친구들의 드림콘서트 - 잃어버린 꿈을 찾아서〉",
                 new Perform("가족뮤지컬 〈뽀로로와 친구들의 드림콘서트 - 잃어버린 꿈을 찾아서〉", FAMILY, "한국잡월드 나래울극장", ALL.getAge(), "70분",
                         LocalDateTime.of(2024, 5, 25, 11, 0, 0),
@@ -112,8 +102,6 @@ public class PerformRepository {
                         LocalDateTime.of(2024, 5, 26, 11, 0, 0),
                         LocalDateTime.of(2024, 5, 26, 14, 0, 0),
                         LocalDateTime.of(2024, 5, 26, 16, 30, 0)));
-
-// 신비아파트 〈붉은 눈의 저주〉
         performMap.put("신비아파트 〈붉은 눈의 저주〉",
                 new Perform("신비아파트 〈붉은 눈의 저주〉", FAMILY, "대전 우송예술회관", ALL.getAge(), "70분",
                         LocalDateTime.of(2024, 5, 25, 11, 0, 0),
@@ -122,7 +110,6 @@ public class PerformRepository {
                         LocalDateTime.of(2024, 5, 26, 11, 0, 0),
                         LocalDateTime.of(2024, 5, 26, 14, 0, 0),
                         LocalDateTime.of(2024, 5, 26, 16, 30, 0)));
-
     }
 
 
@@ -151,7 +138,7 @@ public class PerformRepository {
         LocalDate nowDate = LocalDate.now();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 (E)", Locale.KOREAN); // 요일 포함
         String formattedNowDate = nowDate.format(dateFormatter);
-        System.out.println("오늘 날짜는 " + formattedNowDate + "입니다.");
+        System.out.println("오늘 날짜는 " + formattedNowDate + "입니다." + "\n이 주의 공연/전시 목록입니다.");
 
         // 일주일 후의 날짜 계산
         LocalDate oneWeekLater = nowDate.plusWeeks(1);
@@ -163,11 +150,11 @@ public class PerformRepository {
         for (LocalDate currentDate = nowDate; currentDate.isBefore(oneWeekLater); currentDate = currentDate.plusDays(1)) {
             final LocalDate date = currentDate; // 최종 변수로 만들기
 
-            String dateString = date.format(formatter);
+            String dateString = date.format(formatter); // "yyyy년 MM월 dd일 (E)"
 
             // 해당 날짜의 이벤트 제목 출력
             List<String> collected = performMap.entrySet().stream()
-                    .filter(entry -> entry.getValue().getDate().getShowTime().stream() //
+                    .filter(entry -> entry.getValue().getDate().getShowTime().stream() //ㅋ
                     .anyMatch(showDateTime -> showDateTime.toLocalDate().equals(date)))
                     .map(stringPerformEntry -> stringPerformEntry.getKey())
                     .collect(Collectors.toList());
@@ -175,7 +162,7 @@ public class PerformRepository {
             // 이벤트가 있는 경우에만 출력
             if (!collected.isEmpty()) {
                 // 개별 이벤트 출력
-                System.out.println(dateString + "의 이벤트:");
+                System.out.println(dateString + "의 공연/전시:");
                 for (String event : collected) {
                     System.out.println("- " + event);
                 }
