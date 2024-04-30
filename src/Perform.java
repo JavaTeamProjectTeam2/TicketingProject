@@ -1,4 +1,5 @@
 package src;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.Date;
 
@@ -10,12 +11,12 @@ public class Perform {
     private int age;
     private PerformDate date;
 
-    public Perform(String title, Category category, String place, int age, String runningTime, String... showTime) {
+    public Perform(String title, Category category, String place, int age, String runningTime, LocalDateTime... showTime) {
         this.title = title;
         this.category = category;
         this.place = place;
         this.age = age;
-        this.date = new PerformDate(showTime, runningTime);
+        this.date = new PerformDate(List.of(showTime), runningTime);
     }
 
     public String getTitle() {
