@@ -57,8 +57,8 @@ public class PerformView {
             getTicket();
         }else{
 //            List<String> strings = PerformRepository.showContentByCategory(option);
-            Perform content = PerformRepository.returnPerformContent();
-            booking(content);
+//            Perform content = PerformRepository.returnPerformContent();
+//            booking(content);
         }
     }
 

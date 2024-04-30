@@ -1,16 +1,14 @@
 package src.login;
 
 import src.MainView;
-import src.SimpleInput;
-
 import java.util.List;
-
 import static src.SimpleInput.*;
 
 public class MypageView {
 
     private Member logMember;
     private MemberRepository mr = MemberRepository.getInstance();
+    private LoginManager loginManager = new LoginManager();
 
     public MypageView(Member member) {
         this.logMember = member;
@@ -60,28 +58,34 @@ public class MypageView {
     }
 
     public void updatePw() {
-        int count = 0;
-        while (true) {
-            String oldPw = input("\n * 기존 비밀번호 입력 >> ");
-            if(!logMember.getPw().equals(oldPw)) {
-                count++;
-                System.out.printf("📢 비밀번호가 일치하지 않습니다. (%d회 오류)\n", count);
-                if(count == 3) {
-                    System.out.println("📢 비밀번호를 3회 이상 틀리셨습니다. 다음에 시도해주세요.");
-                    showMemberInfo();
-                }
-            } else break;
+        if(!loginManager.isLoginEnabled(logMember)) {
+            loginManager.leftTime(logMember);
+        } else {
+            int count = 0;
+            while (true) {
+                String oldPw = input("\n * 기존 비밀번호 입력 >> ");
+                if(!logMember.getPw().equals(oldPw)) {
+                    count++;
+                    System.out.printf("📢 비밀번호가 일치하지 않습니다. (%d회 오류)\n", count);
+                    if(count == 3) {
+                        System.out.println("📢 비밀번호를 3회 이상 틀리셨습니다. 다음에 시도해주세요.");
+                        loginManager.disableLogin(logMember);
+                        showMemberInfo();
+                    }
+                } else break;
+            }
+            String newPw = null;
+            while (true) {
+                newPw = input("\n * 새 비밀번호 입력 >> ");
+                if(!mr.passwordCheck(newPw)) {
+                    System.out.println("📢 비밀번호는 특수문자 ., ! 사용 가능합니다.");
+                } else break;
+            }
+            logMember.setPw(newPw);
+            MemberRepository.saveFile();
+            System.out.println("📢 비밀번호가 변경되었습니다.");
+
         }
-        String newPw = null;
-        while (true) {
-            newPw = input("\n * 새 비밀번호 입력 >> ");
-            if(!mr.passwordCheck(newPw)) {
-                System.out.println("📢 비밀번호는 특수문자 ., ! 사용 가능합니다.");
-            } else break;
-        }
-        logMember.setPw(newPw);
-        MemberRepository.saveFile();
-        System.out.println("📢 비밀번호가 변경되었습니다.");
     }
     public void showTicketList(List<Ticket> tList) {
         System.out.println("----------------------------");
