@@ -2,7 +2,7 @@ package src.login;
 
 
 public class LoginManager {
-    private boolean loginEnabled = true; // 로그인 가능 여부
+//    private boolean loginEnabled = true; // 로그인 가능 여부
     private long disableDuration = 30 * 1000; // 로그인 불가능 기간 (2분)
     private long lastDisableTime = 0; // 마지막으로 로그인이 불가능해진 시간
     private MemberRepository mr = MemberRepository.getInstance();
