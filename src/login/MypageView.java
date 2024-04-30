@@ -24,7 +24,9 @@ public class MypageView {
     }
 
     public void showMemberInfo() {
-        System.out.println("----------------------------");
+        myMenu:
+        while (true) {
+        System.out.println("\n----------------------------");
         System.out.println("         마이 페이지");
         System.out.println("---------------------------- *");
         System.out.printf("  * 이름: %s\n", this.logMember.getName());
@@ -42,6 +44,7 @@ public class MypageView {
                     updatePw();
                     break;
                 case "2":
+                    updateAddress();
                     break;
                 case "3":
                     cancelTicket();
@@ -87,12 +90,30 @@ public class MypageView {
 
         }
     }
+
+    public void updateAddress() {
+        String newAddress;
+        while (true) {
+
+            newAddress = input("\n * 새 주소를 입력하세요. >>");
+            if (!mr.addressCheck(newAddress)) {
+                System.out.println("주소를 잘 못 입력하셨습니다.\nex)서울특별시 마포구 공덕동");
+            } else {
+                logMember.setAddress(newAddress);
+                MemberRepository.saveFile();
+                break;
+            }
+        }
+        System.out.printf("\n📢 [주소: %s]가 변경되었습니다.\n", newAddress);
+
+    }
+
     public void showTicketList(List<Ticket> tList) {
         System.out.println("----------------------------");
         System.out.printf("      %s님의 예매 내역\n", logMember.getName());
         System.out.println("---------------------------- *");
 
-        if(tList.isEmpty()) {
+        if (tList.isEmpty()) {
             System.out.println("\t  예매내역이 없습니다.");
         } else {
             for (int i = 0; i < tList.size(); i++) {
@@ -102,23 +123,24 @@ public class MypageView {
         }
 
     }
+
     public void cancelTicket() {
         List<Ticket> myTicketList = logMember.getTicketList();
 
         showTicketList(myTicketList);
 
-        if(!myTicketList.isEmpty()) {
+        if (!myTicketList.isEmpty()) {
             String tNum = null;
             while (true) {
                 tNum = input("취소할 티켓 번호 >> ");
-                if(!(Integer.parseInt(tNum) > 0 && Integer.parseInt(tNum) < myTicketList.size())) {
+                if (!(Integer.parseInt(tNum) > 0 && Integer.parseInt(tNum) < myTicketList.size())) {
                     System.out.println("📢 티켓 번호만 입력하세요.");
                 } else {
-                    if(tNum.equals("0")) showMemberInfo();
+                    if (tNum.equals("0")) showMemberInfo();
                     break;
                 }
             }
-            Ticket removed = myTicketList.remove(Integer.parseInt(tNum) -1);
+            Ticket removed = myTicketList.remove(Integer.parseInt(tNum) - 1);
             logMember.setTicketList(myTicketList);
             MemberRepository.saveFile();
         } else {
@@ -126,6 +148,7 @@ public class MypageView {
         }
 
     }
+
     public void logOut() {
         System.out.printf("\n📢 %s님이 로그아웃 하셨습니다.\n", logMember.getName());
         setLogMember(null);
