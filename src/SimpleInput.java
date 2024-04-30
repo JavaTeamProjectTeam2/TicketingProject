@@ -14,7 +14,7 @@ public class SimpleInput {
             return sc.nextLine();
         }
 
-        public void stopInput(){
+        public static void stopInput(){
             System.out.println("\n===========엔터를 누르면 계속…==============");
             sc.nextLine();
         }

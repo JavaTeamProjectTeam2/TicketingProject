@@ -5,7 +5,17 @@ import src.login.MemberRepository.LogState;
 import static src.SimpleInput.*;
 
 public class LoginView {
-    private static final MemberRepository mr = new MemberRepository();
+    private static final MemberRepository mr = MemberRepository.getInstance();
+    private Member logMember;
+
+    public Member getLogMember() {
+        return mr.getLoginMember();
+    }
+
+
+    public void setLogMember(Member logMember) {
+        this.logMember = logMember;
+    }
 
     public void showLogIn() {
 
@@ -19,10 +29,11 @@ public class LoginView {
 
         while (loginCount < 4) {
             if(loginCount > 0) {
-                System.out.printf("📢 로그인 시도 %d회 (총 3회)\n", loginCount);
+                System.out.printf("\n📢 로그인 시도 %d회 (총 3회)\n", loginCount);
             }
-            String email = null;
+            String email;
             while (true) {
+                System.out.println("📢 이메일 전부 입력해주세요. (ex. xxx@xxx)");
                 email = input("이메일 >> ");
                 if(!mr.emailCheck(email)) {
                     System.out.println("📢 이메일 전부 입력해주세요. (ex. xxx@xxx)");
@@ -36,8 +47,13 @@ public class LoginView {
 
             if (state == LogState.LOG_IN) {
                 Member loggedMember = mr.findMember(email);
-                System.out.printf("\n\t✨ %s님 환영합니다 ✨\n", loggedMember.getName());
+                System.out.printf("\n\t✨ %s님 환영합니다 ✨\n\n", loggedMember.getName());
+
+//                MypageView mv = new MypageView(loggedMember);
+                logMember = loggedMember;
+                mr.setLoginMember(loggedMember);
                 break;
+
             } else if (state == LogState.WRONG_ID) {
                 System.out.println("아이디를 찾을 수 없습니다.");
                 loginCount++;
@@ -49,6 +65,7 @@ public class LoginView {
                 System.out.println("📢 로그인 시도 횟수를 초과했습니다. 다음에 시도해주세요.");
                 break;
             }
+
         }
     }
     public void showFindPwView() {
@@ -108,7 +125,7 @@ public class LoginView {
                         else if(inputOpt.equals("2")) {
                             continue code;
                         } else if(inputOpt.equals("0")) {
-                            // 로그인, 비번찾기....메뉴로
+                            //
                         } else {
                             System.out.println("\n📢 메뉴 숫자만 입력해주세요. (1, 2, 0 중 하나)");
                         }

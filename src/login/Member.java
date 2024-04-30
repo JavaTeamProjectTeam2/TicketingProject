@@ -1,12 +1,11 @@
 package src.login;
 
-import src.userJoin.User;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Member {
+public class Member implements Serializable {
     private String name;
     private String email;
     private String pw;

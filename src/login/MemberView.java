@@ -5,7 +5,7 @@ import static src.SimpleInput.input;
 
 public class MemberView {
 
-    MemberRepository repository = new MemberRepository();
+    MemberRepository repository = MemberRepository.getInstance();
     LoginView loginView = new LoginView();
 
     public void showLoginMenu() {
@@ -32,6 +32,10 @@ public class MemberView {
             switch (opt) {
                 case "1":
                     loginView.showLogIn();
+                    Member loginMember = MemberRepository.getLoginMember();
+                    if(loginMember != null) {
+                        MypageView mypageView = new MypageView(loginMember);
+                    }
                     break;
                 case "2":
                     join();
@@ -91,12 +95,28 @@ public class MemberView {
                     System.out.println("영문 숫자 . ! 만 가능합니다. 다시 입력 바랍니다");
                 } else break;
             }
-            Integer age = Integer.valueOf(input("# 나이: "));
+            Integer age;
+            while (true) {
+                try {
+                    age = Integer.valueOf(input("# 나이: "));
+                    if (!repository.ageCheck(age)){
+                        System.out.println("올바른 나이를 입력하세요");
+                    } else break;
+                } catch (NumberFormatException e) {
+                    System.out.println("숫자로 입력 부탁드립니다.");
+                }
+            }
 
-            String adderess = input("# 주소: ");
+            String address = null;
+            while (true) {
+                address = input("# 주소: ");
+                if (!repository.addressCheck(address)){
+                    System.out.println("주소를 잘 못 입력하셨습니다.\nex)서울특별시 마포구 공덕동");
+                } else break;
+            }
 
 
-            repository.addNewMember(new Member(name, id, pw, age, adderess));
+            repository.addNewMember(new Member(name, id, pw, age, address));
 
             System.out.printf("** %s님 회원가입이 완료되었습니다 **\n", name);
 
