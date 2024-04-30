@@ -29,10 +29,11 @@ public class LoginView {
 
         while (loginCount < 4) {
             if(loginCount > 0) {
-                System.out.printf("📢 로그인 시도 %d회 (총 3회)\n", loginCount);
+                System.out.printf("\n📢 로그인 시도 %d회 (총 3회)\n", loginCount);
             }
-            String email = null;
+            String email;
             while (true) {
+                System.out.println("📢 이메일 전부 입력해주세요. (ex. xxx@xxx)");
                 email = input("이메일 >> ");
                 if(!mr.emailCheck(email)) {
                     System.out.println("📢 이메일 전부 입력해주세요. (ex. xxx@xxx)");
@@ -46,7 +47,7 @@ public class LoginView {
 
             if (state == LogState.LOG_IN) {
                 Member loggedMember = mr.findMember(email);
-                System.out.printf("\n\t✨ %s님 환영합니다 ✨\n", loggedMember.getName());
+                System.out.printf("\n\t✨ %s님 환영합니다 ✨\n\n", loggedMember.getName());
 
 //                MypageView mv = new MypageView(loggedMember);
                 logMember = loggedMember;

@@ -1,5 +1,10 @@
 package src;
 
+import src.login.LoginView;
+import src.login.MemberRepository;
+import src.login.MypageView;
+
+import static src.SimpleInput.input;
 import static src.SimpleInput.sc;
 
 public class MainView {
@@ -9,15 +14,25 @@ public class MainView {
 
         while (true){
             System.out.println("===========티켓팅============");
-            System.out.println(" #1. 로그인");
+            if(MemberRepository.getLoginMember() != null) {
+                System.out.println(" #1. 마이페이지");
+            } else {
+                System.out.println(" #1. 로그인");
+            }
             System.out.println(" #2. 공연 조회 및 예매");
             System.out.println(" #3. 프로그램 종료");
-            System.out.print(">> ");
-            int option = sc.nextInt();
+            String input = input(">> ");
+            int option = Integer.parseInt(input);
 
             switch (option){
                 case 1:
-                    System.out.println("로그인을 시작합니다.");
+                    if(MemberRepository.getLoginMember() != null) {
+                        MypageView mv = new MypageView(MemberRepository.getLoginMember());
+                    } else {
+                        System.out.println("로그인을 시작합니다.");
+                        LoginView lv = new LoginView();
+                        lv.showLogIn();
+                    }
                     break;
                 case 2:
                     System.out.println("공연 예매를 시작합니다");

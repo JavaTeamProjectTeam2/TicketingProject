@@ -95,7 +95,7 @@ public class MemberView {
                     System.out.println("영문 숫자 . ! 만 가능합니다. 다시 입력 바랍니다");
                 } else break;
             }
-            Integer age = null;
+            Integer age;
             while (true) {
                 try {
                     age = Integer.valueOf(input("# 나이: "));

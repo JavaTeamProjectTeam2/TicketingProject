@@ -47,8 +47,8 @@ public class MemberRepository {
         LOG_IN, WRONG_PW, WRONG_ID
     }
     enum PATH {
-        MEMBER(System.getProperty("user.dir") + "/file/member.dat"),
-        TICKET(System.getProperty("user.dir") + "/file/ticket.dat");
+        MEMBER(System.getProperty("user.dir") + "/file/member.dat");
+//        TICKET(System.getProperty("user.dir") + "/file/ticket.dat");
 
         private String desc;
 
@@ -65,7 +65,7 @@ public class MemberRepository {
     public void addNewMember(Member newMember) {
 
         members.add(newMember);
-
+        saveFile();
     }
 
     // 멤버 리스트를 파일에 저장

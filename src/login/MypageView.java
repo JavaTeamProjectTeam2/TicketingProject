@@ -1,5 +1,6 @@
 package src.login;
 
+import src.MainView;
 import src.SimpleInput;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class MypageView {
         System.out.printf("  * 예매내역: %d\n", this.logMember.getPoint());
 
         myMenu: while (true) {
-            System.out.println("\n 1️⃣ 비밀번호 수정 | 2️⃣ 주소 수정 | 3️⃣ 예매내역 취소 | 0️⃣ 뒤로가기");
+            System.out.println("\n 1️⃣ 비밀번호 수정 | 2️⃣ 주소 수정 | 3️⃣ 예매내역 취소 | 4️⃣ 로그아웃 | 0️⃣ 뒤로가기");
             String menuOpt = input(">> ");
             switch (menuOpt) {
                 case "1":
@@ -47,6 +48,9 @@ public class MypageView {
                 case "3":
                     cancelTicket();
                     break;
+                case "4":
+                    logOut();
+                    break;
                 case "0":
                     break myMenu;
                 default:
@@ -56,10 +60,16 @@ public class MypageView {
     }
 
     public void updatePw() {
+        int count = 0;
         while (true) {
             String oldPw = input("\n * 기존 비밀번호 입력 >> ");
             if(!logMember.getPw().equals(oldPw)) {
-                System.out.println("📢 비밀번호가 일치하지 않습니다.");
+                count++;
+                System.out.printf("📢 비밀번호가 일치하지 않습니다. (%d회 오류)\n", count);
+                if(count == 3) {
+                    System.out.println("📢 비밀번호를 3회 이상 틀리셨습니다. 다음에 시도해주세요.");
+                    showMemberInfo();
+                }
             } else break;
         }
         String newPw = null;
@@ -70,6 +80,7 @@ public class MypageView {
             } else break;
         }
         logMember.setPw(newPw);
+        MemberRepository.saveFile();
         System.out.println("📢 비밀번호가 변경되었습니다.");
     }
     public void showTicketList(List<Ticket> tList) {
@@ -98,13 +109,24 @@ public class MypageView {
                 tNum = input("취소할 티켓 번호 >> ");
                 if(!(Integer.parseInt(tNum) > 0 && Integer.parseInt(tNum) < myTicketList.size())) {
                     System.out.println("📢 티켓 번호만 입력하세요.");
-                } else break;
+                } else {
+                    if(tNum.equals("0")) showMemberInfo();
+                    break;
+                }
             }
             Ticket removed = myTicketList.remove(Integer.parseInt(tNum) -1);
             logMember.setTicketList(myTicketList);
+            MemberRepository.saveFile();
         } else {
             stopInput();
         }
 
+    }
+    public void logOut() {
+        System.out.printf("\n📢 %s님이 로그아웃 하셨습니다.\n", logMember.getName());
+        setLogMember(null);
+        MemberRepository.setLoginMember(null);
+        MainView main = new MainView();
+        main.start();
     }
 }
