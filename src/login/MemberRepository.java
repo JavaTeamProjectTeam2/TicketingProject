@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static src.SimpleInput.input;
+import static src.SimpleInput.stopInput;
+
 public class MemberRepository {
 
     private static MemberRepository instance;
@@ -33,6 +36,10 @@ public class MemberRepository {
 
     public static void setMembers(List<Member> members) {
         MemberRepository.members = members;
+        System.out.println("MR setMembers 내부 테스트");
+        for(Member mem : MemberRepository.members) {
+            System.out.println(mem);
+        }
     }
 
     public static Member getLoginMember() {
@@ -92,18 +99,20 @@ public class MemberRepository {
 
     protected LogState checkLogIn(String email, String password) {
 
+        boolean idFlag = false;
         for(Member m : members) {
             if(m.getEmail().equals(email)) {
+                idFlag = true;
                 if(m.getPw().equals(password)) {
                     return LogState.LOG_IN;
-                } else {
-                    return LogState.WRONG_PW;
                 }
-            } else {
-                return LogState.WRONG_ID;
             }
         }
-        return LogState.WRONG_ID;
+        if(idFlag) {
+            return LogState.WRONG_PW;
+        } else {
+            return LogState.WRONG_ID;
+        }
     }
 
     /**
@@ -120,7 +129,6 @@ public class MemberRepository {
             return null;
         }
         return loggedMember.get(0);
-        // 만약 없는 멤버일 때 어떻게 할 지 생각해보자....
     }
 
     public String makeRandomCode() {
@@ -176,5 +184,20 @@ public class MemberRepository {
     public boolean addressCheck(String address){
         String addressInputCheck = "^[가-힣\\s]+(시|군|구|읍|면|동|리)\\s?[0-9가-힣\\s]+$";
         return address.matches(addressInputCheck);
+    }
+
+    public void addTicket(Ticket ticket, Member member) {
+        List<Ticket> ticketList = member.getTicketList();
+        ticketList.add(ticket);
+        member.setTicketList(ticketList);
+        saveFile();
+    }
+    public void removeTicket(Member member, int index) {
+
+        List<Ticket> ticketList = member.getTicketList();
+        Ticket removed = ticketList.remove(index - 1);
+            member.setTicketList(ticketList);
+            MemberRepository.saveFile();
+
     }
 }

@@ -12,10 +12,12 @@ public class PerformView {
     public static void getTicket() {
 //        makePerformFile();
 
-        System.out.println("<=== 공연 조회 및 예매 ===>");
-        System.out.println("# 1. 이 주의 공연/전시 목록");
-        System.out.println("# 2. 카테고리 별 공연/전시 목록");
-        System.out.println("# 0. 뒤로가기");
+        System.out.println("----------------------------");
+        System.out.println("       공연 조회 및 예매");
+        System.out.println("---------------------------- *");
+        System.out.println("1️⃣ 이 주의 공연/전시 목록");
+        System.out.println("2️⃣ 카테고리 별 공연/전시 목록");
+        System.out.println("0️⃣ 뒤로가기");
         System.out.println("======================");
         System.out.print(">>> ");
 
@@ -43,7 +45,9 @@ public class PerformView {
     }
 
     private static void showOptions() {
-        System.out.println("======카테고리 별 추천 파트======");
+        System.out.println("----------------------------");
+        System.out.println("     카테고리 별 추천 파트");
+        System.out.println("---------------------------- *");
         System.out.println("## 뮤지컬, 콘서트, 전시회, 가족컨텐츠 중 선택하세요 ##");
         System.out.println("# 1." + CONCERT.getContentName() );
         System.out.println("# 2." + MUSICAL.getContentName());

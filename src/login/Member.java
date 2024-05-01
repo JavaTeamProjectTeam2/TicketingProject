@@ -13,6 +13,10 @@ public class Member implements Serializable {
     private String address;
     private int point;
     private List<Ticket> ticketList;
+    private boolean loginEnabled;
+    private long lastDisabledTime;
+
+    private static final long serialVersionUID = -1015539578574649162L;
 
 
     public Member(String name, String email, String pw, Integer age, String address) {
@@ -22,6 +26,7 @@ public class Member implements Serializable {
         this.age = age;
         this.address = address;
         this.ticketList = new ArrayList<>();
+        this.loginEnabled = true;
     }
 
     public Member(String name, String email, String pw, Integer age, String address, List<Ticket> ticketList) {
@@ -31,6 +36,7 @@ public class Member implements Serializable {
         this.age = age;
         this.address = address;
         this.ticketList = ticketList;
+        this.loginEnabled = true;
     }
 
     public String getName() {
@@ -88,6 +94,23 @@ public class Member implements Serializable {
     public void setTicketList(List<Ticket> ticketList) {
         this.ticketList = ticketList;
     }
+
+    public boolean isLoginEnabled() {
+        return loginEnabled;
+    }
+
+    public void setLoginEnabled(boolean loginEnabled) {
+        this.loginEnabled = loginEnabled;
+    }
+
+    public long getLastDisabledTime() {
+        return lastDisabledTime;
+    }
+
+    public void setLastDisabledTime(long lastDisabledTime) {
+        this.lastDisabledTime = lastDisabledTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,7 +120,7 @@ public class Member implements Serializable {
     }
     @Override
     public String toString() {
-        return "=== Member ===" +
+        return "=== Member ===\n" +
                 "이름: " + name + '\n' +
                 "주소: " + email + '\n' +
                 "비밀번호: " + pw + '\n' +
