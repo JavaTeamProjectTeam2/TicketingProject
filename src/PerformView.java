@@ -56,14 +56,29 @@ public class PerformView {
         if(option == 0){
             getTicket();
         }else{
-//            List<String> strings = PerformRepository.showContentByCategory(option);
-//            Perform content = PerformRepository.returnPerformContent();
-//            booking(content);
+            List<String> titleByCategory = PerformRepository.ContentByCategory(option);
+            String selectedTitle = showContentByCategory(titleByCategory);
+            Perform selectedPerform = PerformRepository.getSelectedTitle(selectedTitle);
+
+            BookingView.booking(selectedPerform);
         }
     }
 
-    private static void booking(Perform content) {
-
+    private static String showContentByCategory(List<String> titleByCategory) {
+        System.out.println("----------------------------");
+        System.out.println("     카테고리 별 추천           ");
+        System.out.println("----------------------------");
+        int count = 0;
+        for (String title : titleByCategory) {
+            count++;
+            System.out.println("# " + count +". "+ title);
+        }
+        System.out.println("-----------------------------------------");
+        System.out.println("## 예매하고싶은 공연/전시의 번호를 입력해주세요");
+        System.out.print(">> ");
+        int option = Integer.parseInt(sc.next());
+        String selectedTitle = titleByCategory.get(option-1);
+        return selectedTitle;
     }
 
     //공연정보 리스트 파일 생성

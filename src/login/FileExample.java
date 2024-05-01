@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class FileExample {
     //파일을 저장할 기본 경로
-    public static final String ROOT_PATH = "C:/Users/user/Desktop/File";
+    public static final String ROOT_PATH = "/Users/jeongin/Desktop/newJavaTeam/TicketingProject/File";
     public static void main(String[] args) {
         // 폴더 생성 명령
         // 파일 정보 객체 생성

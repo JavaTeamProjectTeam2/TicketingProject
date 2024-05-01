@@ -114,7 +114,7 @@ public class PerformRepository {
 
 
 
-    public static void showContentByCategory(int option) {
+    public static List<String> ContentByCategory(int option) {
         Category category = getCategoryByOption(option);
         List<String> titleByCategory = performMap.entrySet().stream()
                 .filter(t -> t.getValue().getCategory() == category)
@@ -122,13 +122,7 @@ public class PerformRepository {
                 .limit(5)
                 .collect(Collectors.toList());
 
-
-        int count = 0;
-        for (String title : titleByCategory) {
-            count++;
-            System.out.println("# " + count +". "+ title);
-        }
-
+        return titleByCategory;
     }
 
 
@@ -211,6 +205,12 @@ public class PerformRepository {
 
 
 
-//    public static Perform returnPerformContent() {
-//    }
+    public static Perform getSelectedTitle(String selectedTitle) {
+        for (Perform value : performMap.values()) {
+            if (value.getTitle().equals(selectedTitle)) {
+                return value;
+            }
+        }
+        return null;
+    }
 }

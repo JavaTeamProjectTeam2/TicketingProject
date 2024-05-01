@@ -5,6 +5,7 @@ import src.login.MemberRepository;
 import src.login.MypageView;
 
 import java.sql.SQLOutput;
+import java.util.InputMismatchException;
 
 import static src.SimpleInput.input;
 import static src.SimpleInput.sc;
@@ -25,6 +26,7 @@ public class MainView {
             System.out.println(" #3. 프로그램 종료");
             System.out.print(">> ");
             int option = sc.nextInt();
+
 
             switch (option){
                 case 1:
