@@ -37,8 +37,9 @@ public class LoginView {
             }
             String email;
             while (true) {
-                if(loginCount == 0)
-                System.out.println("📢 이메일 전부 입력해주세요. (ex. xxx@xxx)");
+                if(loginCount == 0) {
+                    System.out.println("📢 이메일 전부 입력해주세요. (ex. xxx@xxx)");
+                }
                 email = input("이메일 >> ");
                 if(!mr.emailCheck(email)) {
                     System.out.println("📢 이메일 형식이 아닙니다. 다시 입력해주세요. (ex. xxx@xxx)");

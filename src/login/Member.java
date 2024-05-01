@@ -36,6 +36,7 @@ public class Member implements Serializable {
         this.age = age;
         this.address = address;
         this.ticketList = ticketList;
+        this.loginEnabled = true;
     }
 
     public String getName() {
@@ -119,7 +120,7 @@ public class Member implements Serializable {
     }
     @Override
     public String toString() {
-        return "=== Member ===" +
+        return "=== Member ===\n" +
                 "이름: " + name + '\n' +
                 "주소: " + email + '\n' +
                 "비밀번호: " + pw + '\n' +
