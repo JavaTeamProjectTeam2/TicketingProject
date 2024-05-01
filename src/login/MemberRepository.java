@@ -210,7 +210,7 @@ public class MemberRepository {
     }
 
     public boolean phoneCheck(String phone) {
-        String phoneInputCheck = "^^01(?:0|1|[6-9])\\d{7,8}$";
+        String phoneInputCheck = "^(01[016789])-?[0-9]{3,4}-?[0-9]{4}$";
         return phone.matches(phoneInputCheck);
     }
 
