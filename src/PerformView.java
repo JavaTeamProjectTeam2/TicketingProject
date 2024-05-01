@@ -2,23 +2,19 @@ package src;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
-import src.userJoin.UserJoinRepository;
-
 import static src.Category.*;
-import static src.MainView.start;
 import static src.SimpleInput.sc;
 import static src.MainView.ROOT_PATH;
 
 public class PerformView {
     public static void getTicket() {
-        makePerformFile();
+//        makePerformFile();
 
         System.out.println("<=== 공연 조회 및 예매 ===>");
-        System.out.println("# 1. 현재 하는 행사 보여줘");
-        System.out.println("# 2. 카테고리 별로 보여줘");
+        System.out.println("# 1. 이 주의 공연/전시 목록");
+        System.out.println("# 2. 카테고리 별 공연/전시 목록");
         System.out.println("# 0. 뒤로가기");
         System.out.println("======================");
         System.out.print(">>> ");
@@ -26,7 +22,7 @@ public class PerformView {
         int option = sc.nextInt();
         switch (option) {
             case 1:
-                System.out.println("현재 진행 중인 행사 보여줘");
+//                System.out.println("현재 진행 중인 행사 보여줘");
                 showTheseDaysEvent();
                 break;
             case 2:
@@ -55,37 +51,37 @@ public class PerformView {
         System.out.println("# 4." + FAMILY.getContentName());
         System.out.println("# 0. 뒤로가기");
         System.out.print(">>>>> ");
-        
+
         int option = sc.nextInt();
         if(option == 0){
             getTicket();
         }else{
-             PerformRepository.showContentByCategory(option);
-            System.out.println("# 어떤 공연을 예매하시겠습니까? (번호로 입력)");
-            System.out.print(">>>>> ");
-             bookingView.booking();
+//            List<String> strings = PerformRepository.showContentByCategory(option);
 //            Perform content = PerformRepository.returnPerformContent();
+//            booking(content);
         }
     }
 
+    private static void booking(Perform content) {
 
+    }
 
     //공연정보 리스트 파일 생성
-    private static void makePerformFile(){
-        File directory = new File(ROOT_PATH + "/PerformRepository");
-
-        // 폴더 생성
-        if(!directory.exists()){
-            directory.mkdir();
-        }
-        //파일 생성하기
-        File newFile = new File(ROOT_PATH + "/PerformRepository/PerformList.txt");
-        if(!newFile.exists()){
-            try {
-                newFile.createNewFile();
-            } catch (IOException e) {
-                System.out.println("파일 생성에 실패했습니다.");
-            }
-        }
-    }
+//    private static void makePerformFile(){
+//        File directory = new File(ROOT_PATH + "/PerformRepository");
+//
+//        // 폴더 생성
+//        if(!directory.exists()){
+//            directory.mkdir();
+//        }
+//        //파일 생성하기
+//        File newFile = new File(ROOT_PATH + "/PerformRepository/PerformList.txt");
+//        if(!newFile.exists()){
+//            try {
+//                newFile.createNewFile();
+//            } catch (IOException e) {
+//                System.out.println("파일 생성에 실패했습니다.");
+//            }
+//        }
+//    }
 }

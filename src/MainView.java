@@ -4,6 +4,8 @@ import src.login.LoginView;
 import src.login.MemberRepository;
 import src.login.MypageView;
 
+import java.sql.SQLOutput;
+
 import static src.SimpleInput.input;
 import static src.SimpleInput.sc;
 
@@ -21,8 +23,8 @@ public class MainView {
             }
             System.out.println(" #2. 공연 조회 및 예매");
             System.out.println(" #3. 프로그램 종료");
-            String input = input(">> ");
-            int option = Integer.parseInt(input);
+            System.out.print(">> ");
+            int option = sc.nextInt();
 
             switch (option){
                 case 1:
