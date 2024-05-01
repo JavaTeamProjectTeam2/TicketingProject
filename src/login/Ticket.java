@@ -1,11 +1,19 @@
 package src.login;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Ticket {
 
     private String title;
     private String date;
     private String seat;
     private int price;
+    private SHOWSTATE state;
+
+    enum SHOWSTATE {
+        SOON, PAST
+    }
 
     public Ticket(String title, String date, String seat, int price) {
         this.title = title;
@@ -44,6 +52,16 @@ public class Ticket {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+    public SHOWSTATE getState() {
+        return this.state;
+    }
+    public void setState() {
+        LocalDateTime targetDate = LocalDateTime.parse(this.getDate());
+        LocalDateTime currDate = LocalDateTime.now();
+
+        int diff = targetDate.compareTo(currDate);
+        this.state = diff > 0 ? SHOWSTATE.SOON:SHOWSTATE.PAST;
     }
 
     @Override

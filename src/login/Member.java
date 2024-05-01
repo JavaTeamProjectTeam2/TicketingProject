@@ -11,6 +11,7 @@ public class Member implements Serializable {
     private String pw;
     private Integer age;
     private String address;
+    private String phone;
     private int point;
     private List<Ticket> ticketList;
     private boolean loginEnabled;
@@ -19,12 +20,13 @@ public class Member implements Serializable {
     private static final long serialVersionUID = -1015539578574649162L;
 
 
-    public Member(String name, String email, String pw, Integer age, String address) {
+    public Member(String name, String email, String pw, Integer age, String address, String phone) {
         this.name = name;
         this.email = email;
         this.pw = pw;
         this.age = age;
         this.address = address;
+        this.phone = phone;
         this.ticketList = new ArrayList<>();
         this.loginEnabled = true;
     }
@@ -79,6 +81,10 @@ public class Member implements Serializable {
         this.address = address;
     }
 
+    public String getPhone() { return phone; }
+
+    public void setPhone(String phone) { this.phone = phone; }
+
     public int getPoint() {
         return point;
     }
@@ -125,6 +131,7 @@ public class Member implements Serializable {
                 "주소: " + email + '\n' +
                 "비밀번호: " + pw + '\n' +
                 "나이: " + age + '\n' +
+                "연락처: " + phone + '\n' +
                 "주소: " + address + '\n' +
                 "포인트: " + point + '\n' +
                 "예매내역" + ticketList + '\n';
