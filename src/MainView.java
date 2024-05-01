@@ -16,14 +16,16 @@ public class MainView {
         System.out.println("공연 관람을 위한 티켓팅입니다~~~");
 
         while (true){
-            System.out.println("===========티켓팅============");
+            System.out.println("----------------------------");
+            System.out.println("           티켓팅");
+            System.out.println("---------------------------- *");
             if(MemberRepository.getLoginMember() != null) {
-                System.out.println(" #1. 마이페이지");
+                System.out.println("1️⃣ 마이페이지");
             } else {
-                System.out.println(" #1. 회원 정보");
+                System.out.println("1️⃣ 회원 정보");
             }
-            System.out.println(" #2. 공연 조회 및 예매");
-            System.out.println(" #3. 프로그램 종료");
+            System.out.println("2️⃣ 공연 조회 및 예매");
+            System.out.println("3️⃣ 프로그램 종료");
             System.out.print(">> ");
             int option = Integer.parseInt(sc.nextLine());
 
