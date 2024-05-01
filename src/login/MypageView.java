@@ -54,6 +54,7 @@ public class MypageView {
                         logOut();
                         break;
                     case "0":
+                        MainView mainView = new MainView();
                         break myMenu;
                     default:
                         System.out.println("📢 메뉴 번호만 입력해주세요");
@@ -132,23 +133,21 @@ public class MypageView {
         showTicketList(myTicketList);
 
         if (!myTicketList.isEmpty()) {
-            String tNum = null;
+            int tNum;
             while (true) {
-                tNum = input("취소할 티켓 번호 >> ");
-                if (!(Integer.parseInt(tNum) > 0 && Integer.parseInt(tNum) < myTicketList.size())) {
+                tNum = Integer.parseInt(input("취소할 티켓 번호 (0: 뒤로가기) >> "));
+
+                if (!(tNum > 0 && tNum < myTicketList.size())) {
                     System.out.println("📢 티켓 번호만 입력하세요.");
                 } else {
-                    if (tNum.equals("0")) showMemberInfo();
+                    if (tNum == 0) showMemberInfo();
                     break;
                 }
             }
-            Ticket removed = myTicketList.remove(Integer.parseInt(tNum) - 1);
-            logMember.setTicketList(myTicketList);
-            MemberRepository.saveFile();
+            mr.removeTicket(logMember, tNum);
         } else {
             stopInput();
         }
-
     }
 
     public void logOut() {
