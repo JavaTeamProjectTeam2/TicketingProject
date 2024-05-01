@@ -2,9 +2,13 @@ package src;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
+import src.userJoin.UserJoinRepository;
+
 import static src.Category.*;
+import static src.MainView.start;
 import static src.SimpleInput.sc;
 import static src.MainView.ROOT_PATH;
 
@@ -56,15 +60,15 @@ public class PerformView {
         if(option == 0){
             getTicket();
         }else{
-//            List<String> strings = PerformRepository.showContentByCategory(option);
-            Perform content = PerformRepository.returnPerformContent();
-            booking(content);
+             PerformRepository.showContentByCategory(option);
+            System.out.println("# 어떤 공연을 예매하시겠습니까? (번호로 입력)");
+            System.out.print(">>>>> ");
+             bookingView.booking();
+//            Perform content = PerformRepository.returnPerformContent();
         }
     }
 
-    private static void booking(Perform content) {
 
-    }
 
     //공연정보 리스트 파일 생성
     private static void makePerformFile(){
