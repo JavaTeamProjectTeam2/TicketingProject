@@ -120,7 +120,6 @@ public class MemberRepository {
             return null;
         }
         return loggedMember.get(0);
-        // 만약 없는 멤버일 때 어떻게 할 지 생각해보자....
     }
 
     public String makeRandomCode() {
