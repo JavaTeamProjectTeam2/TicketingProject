@@ -24,9 +24,9 @@ public class LoginView {
 
         MemberRepository.loadFile();
 
-        System.out.println("----------------------------");
+        System.out.println("----------------------------------------");
         System.out.println("           로그인");
-        System.out.println("---------------------------- *");
+        System.out.println("---------------------------------------- *");
 
 
         int loginCount = 0;
@@ -91,9 +91,9 @@ public class LoginView {
     }
 
     public void showFindIdView() {
-        System.out.println("----------------------------");
+        System.out.println("----------------------------------------");
         System.out.println("      가입한 이메일 찾기");
-        System.out.println("---------------------------- *");
+        System.out.println("---------------------------------------- *");
 
         while (true) {
             String inputPhone = null;
@@ -120,9 +120,9 @@ public class LoginView {
 
         // 아이디 찾기
         // 비번 찾기
-        System.out.println("----------------------------");
+        System.out.println("----------------------------------------");
         System.out.println("        비밀번호 찾기");
-        System.out.println("---------------------------- *");
+        System.out.println("---------------------------------------- *");
 
         while (true) {
             String inputEmail = null;

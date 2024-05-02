@@ -1,5 +1,6 @@
 package src.login;
 
+import src.BookingView;
 import src.MainView;
 import java.util.Comparator;
 import java.util.List;
@@ -32,9 +33,9 @@ public class MypageView {
     public void showMemberInfo() {
         myMenu:
         while (true) {
-            System.out.println("\n----------------------------");
+            System.out.println("\n----------------------------------------");
             System.out.println("         마이 페이지");
-            System.out.println("---------------------------- *");
+            System.out.println("---------------------------------------- *");
             System.out.printf("  * 이름: %s\n", this.logMember.getName());
             System.out.printf("  * 이메일: %s\n", this.logMember.getEmail());
             System.out.printf("  * 나이: %d\n", this.logMember.getAge());
@@ -119,9 +120,9 @@ public class MypageView {
     }
 
     public void showTicketList(List<Ticket> tList) {
-        System.out.println("----------------------------");
+        System.out.println("----------------------------------------");
         System.out.printf("      %s님의 예매 내역\n", logMember.getName());
-        System.out.println("---------------------------- *");
+        System.out.println("---------------------------------------- *");
 
         if (tList.isEmpty()) {
             System.out.println("\t  예매내역이 없습니다.");
@@ -135,7 +136,7 @@ public class MypageView {
                 System.out.printf("  %d. %s\t| %s\t| %s\t| %s\n", i + 1,
                         t.getTitle(), t.getDate(), t.getSeat(), t.getPrice() );
             }
-            System.out.println("\n----------------------");
+            System.out.println("\n----------------------------------------");
         }
 
     }

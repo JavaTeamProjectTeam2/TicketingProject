@@ -1,6 +1,7 @@
 package src.login;
 
 
+import static src.MainView.start;
 import static src.SimpleInput.input;
 
 public class MemberView {
@@ -13,19 +14,19 @@ public class MemberView {
         while (true) {
 
             // 현재 디렉토리
-            System.out.println(System.getProperty("user.dir"));
-            //E:\backend\java-project\TicketingProject
+//            System.out.println(System.getProperty("user.dir"));
+
 
             MemberRepository.loadFile();
 
-            System.out.println("----------------------------");
+            System.out.println("----------------------------------------");
             System.out.println("\t1️⃣ 로그인");
             System.out.println("\t2️⃣ 회원 가입");
             System.out.println("\t3️️⃣ 아이디 찾기");
             System.out.println("\t4️⃣ 비번 찾기");
             System.out.println("\t9️⃣ 프로그램 종료");
             System.out.println("\t0️⃣ 뒤로 가기");
-            System.out.println("---------------------------- *");
+            System.out.println("---------------------------------------- *");
 
             String opt = input(">> ");
 
@@ -49,6 +50,8 @@ public class MemberView {
                 case "9":
                     System.out.println("프로그램을 종료합니다.");
                     System.exit(0);
+                case "0":
+                    start();
                 default:
                     System.out.println("숫자만 입력해주세요.");
             }
@@ -61,9 +64,9 @@ public class MemberView {
     public void join() {
 
         while (true) {
-            System.out.println("----------------------------");
+            System.out.println("----------------------------------------");
             System.out.println("           회원가입");
-            System.out.println("---------------------------- *");
+            System.out.println("---------------------------------------- *");
             String name = input("# 이름: ");
             if (name.isEmpty()) {
                 System.out.println("이름 입력 부탁드립니다.");
@@ -113,7 +116,7 @@ public class MemberView {
                 phone = input("# 휴대폰(ex. 01012349876): ");
                 if(!repository.phoneCheck(phone)) {
                     System.out.println("휴대폰 번호가 유효하지 않습니다.\nex) 01012349876, '-' 제외한 숫자만 입력");
-                } else if(!repository.containsPhone(phone)) {
+                } else if(repository.containsPhone(phone)) {
                     System.out.println("중복되는 휴대폰 번호입니다. 다시 입력 바랍니다.");
                 } else break;
             }
@@ -122,7 +125,7 @@ public class MemberView {
             while (true) {
                 address = input("# 주소: ");
                 if (!repository.addressCheck(address)){
-                    System.out.println("주소를 잘 못 입력하셨습니다.\nex)서울특별시 마포구 공덕동");
+                    System.out.println("주소를 잘못 입력하셨습니다.\nex)서울특별시 마포구 공덕동");
                 } else break;
             }
 
