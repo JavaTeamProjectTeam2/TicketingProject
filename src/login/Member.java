@@ -17,7 +17,7 @@ public class Member implements Serializable {
     private boolean loginEnabled;
     private long lastDisabledTime;
 
-    private static final long serialVersionUID = -1015539578574649162L;
+    private static final long serialVersionUID = 1L;
 
 
     public Member(String name, String email, String pw, Integer age, String address, String phone) {

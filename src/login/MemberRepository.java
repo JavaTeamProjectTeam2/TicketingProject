@@ -16,12 +16,12 @@ public class MemberRepository {
     private static Member loginMember;
 
     private MemberRepository() {
-//        members = new ArrayList<>();
-//        members.add(new Member("김김김","aaa@gmail.com", "1234", 12, "서울시 마포구", "01012340001"));
-//        members.add(new Member("박박박","bbb@gmail.com", "5678", 20, "서울시 강남구", "01012340002"));
-//        members.add(new Member("이이이","ccc@gmail.com","9876", 30, "서울시 동작구", "01012340003"));
-//        members.add(new Member("홍홍홍","ddd@gmail.com", "5432", 40, "서울시 종로구", "01012340004"));
-//        saveFile();
+        members = new ArrayList<>();
+        members.add(new Member("김김김","aaa@gmail.com", "1234", 12, "서울시 마포구", "01012340001"));
+        members.add(new Member("박박박","bbb@gmail.com", "5678", 20, "서울시 강남구", "01012340002"));
+        members.add(new Member("이이이","ccc@gmail.com","9876", 30, "서울시 동작구", "01012340003"));
+        members.add(new Member("홍홍홍","ddd@gmail.com", "5432", 40, "서울시 종로구", "01012340004"));
+        saveFile();
     }
     public static MemberRepository getInstance() {
         if(instance == null) {
