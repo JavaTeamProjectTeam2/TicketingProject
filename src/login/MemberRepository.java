@@ -17,10 +17,10 @@ public class MemberRepository {
 
     private MemberRepository() {
 //        members = new ArrayList<>();
-//        members.add(new Member("김김김","aaa@gmail.com", "1234", 12, "서울시 마포구"));
-//        members.add(new Member("박박박","bbb@gmail.com", "5678", 20, "서울시 강남구"));
-//        members.add(new Member("이이이","ccc@gmail.com","9876", 30, "서울시 동작구"));
-//        members.add(new Member("홍홍홍","ddd@gmail.com", "5432", 40, "서울시 종로구"));
+//        members.add(new Member("김김김","aaa@gmail.com", "1234", 12, "서울시 마포구", "01012340001"));
+//        members.add(new Member("박박박","bbb@gmail.com", "5678", 20, "서울시 강남구", "01012340002"));
+//        members.add(new Member("이이이","ccc@gmail.com","9876", 30, "서울시 동작구", "01012340003"));
+//        members.add(new Member("홍홍홍","ddd@gmail.com", "5432", 40, "서울시 종로구", "01012340004"));
 //        saveFile();
     }
     public static MemberRepository getInstance() {
@@ -49,6 +49,7 @@ public class MemberRepository {
     public static void setLoginMember(Member loginMember) {
         MemberRepository.loginMember = loginMember;
     }
+
 
     enum LogState {
         LOG_IN, WRONG_PW, WRONG_ID
@@ -131,6 +132,18 @@ public class MemberRepository {
         return loggedMember.get(0);
     }
 
+    public Member findMemberByPhone(String inputPhone) {
+
+        List<Member> loggedMember = members.stream()
+                .filter(m -> m.getPhone().equals(inputPhone))
+                .collect(Collectors.toList());
+        if(loggedMember.isEmpty()) {
+            return null;
+        }
+        return loggedMember.get(0);
+    }
+
+
     public String makeRandomCode() {
 
         String code ="";
@@ -140,10 +153,12 @@ public class MemberRepository {
         return code;
     }
 
+
+
     //회원 로그인
-    public void saveUser(String name, String id, String pw, Integer age, String address) {
+    public void saveUser(String name, String id, String pw, Integer age, String address, String phone) {
         if (!containsId(id)) {
-            members.add(new Member(name, id, pw, age, address));
+            members.add(new Member(name, id, pw, age, address, phone));
             //System.out.println(userList);
         }
     }
@@ -152,6 +167,14 @@ public class MemberRepository {
     public boolean containsId(String id) {
         for (Member m : members) {
             if (m.getEmail().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean containsPhone(String phone) {
+        for (Member m : members) {
+            if (m.getPhone().equals(phone)) {
                 return true;
             }
         }
@@ -186,18 +209,23 @@ public class MemberRepository {
         return address.matches(addressInputCheck);
     }
 
-    public void addTicket(Ticket ticket, Member member) {
+    public boolean phoneCheck(String phone) {
+        String phoneInputCheck = "^(01[016789])-?[0-9]{3,4}-?[0-9]{4}$";
+        return phone.matches(phoneInputCheck);
+    }
+
+    public void addTicket(Member member, Ticket ticket) {
         List<Ticket> ticketList = member.getTicketList();
         ticketList.add(ticket);
         member.setTicketList(ticketList);
         saveFile();
     }
-    public void removeTicket(Member member, int index) {
+    public Ticket removeTicket(Member member, int index) {
 
         List<Ticket> ticketList = member.getTicketList();
         Ticket removed = ticketList.remove(index - 1);
-            member.setTicketList(ticketList);
-            MemberRepository.saveFile();
-
+        member.setTicketList(ticketList);
+        saveFile();
+        return removed;
     }
 }

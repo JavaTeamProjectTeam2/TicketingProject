@@ -41,6 +41,7 @@ public class MemberView {
                     join();
                     break;
                 case "3":
+                    loginView.showFindIdView();
                     break;
                 case "4":
                     loginView.showFindPwView();
@@ -107,6 +108,16 @@ public class MemberView {
                 }
             }
 
+            String phone = null;
+            while(true) {
+                phone = input("# 휴대폰(ex. 01012349876): ");
+                if(!repository.phoneCheck(phone)) {
+                    System.out.println("휴대폰 번호가 유효하지 않습니다.\nex) 01012349876, '-' 제외한 숫자만 입력");
+                } else if(!repository.containsPhone(phone)) {
+                    System.out.println("중복되는 휴대폰 번호입니다. 다시 입력 바랍니다.");
+                } else break;
+            }
+
             String address = null;
             while (true) {
                 address = input("# 주소: ");
@@ -116,7 +127,7 @@ public class MemberView {
             }
 
 
-            repository.addNewMember(new Member(name, id, pw, age, address));
+            repository.addNewMember(new Member(name, id, pw, age, address, phone));
 
             System.out.printf("** %s님 회원가입이 완료되었습니다 **\n", name);
 

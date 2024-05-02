@@ -89,6 +89,33 @@ public class LoginView {
 
         }
     }
+
+    public void showFindIdView() {
+        System.out.println("----------------------------");
+        System.out.println("      가입한 이메일 찾기");
+        System.out.println("---------------------------- *");
+
+        while (true) {
+            String inputPhone = null;
+            while (true) {
+                inputPhone = input("휴대폰 번호 >> ");
+                if(!mr.phoneCheck(inputPhone)) {
+                    System.out.println("휴대폰 번호가 유효하지 않습니다.\nex) 01012349876, '-' 제외한 숫자만 입력");
+                } else break;
+            }
+
+            Member foundMember = mr.findMemberByPhone(inputPhone);
+            if(foundMember != null) {
+                if(checkCodeView(foundMember)) {
+                    System.out.printf("\n📢 %s님의 이메일: %s \n", foundMember.getName(), foundMember.getEmail());
+                };
+                break;
+            } else {
+                System.out.println("존재하지 않는 휴대폰 번호입니다.");
+            }
+        }
+    }
+
     public void showFindPwView() {
 
         // 아이디 찾기
@@ -98,29 +125,49 @@ public class LoginView {
         System.out.println("---------------------------- *");
 
         while (true) {
-            String inputEmail = input("이메일 >> ");
+            String inputEmail = null;
+            while (true) {
+                inputEmail = input("이메일 >> ");
+                if(!mr.emailCheck(inputEmail)) {
+                    System.out.println("유효한 이메일이 아닙니다. 다시 입력 바랍니다");
+                } else break;
+            }
+            String inputPhone = null;
+            while (true) {
+                inputPhone = input("휴대폰 번호 >> ");
+                if(!mr.phoneCheck(inputPhone)) {
+                    System.out.println("휴대폰 번호가 유효하지 않습니다.\nex) 01012349876, '-' 제외한 숫자만 입력");
+                } else break;
+            }
 
             Member foundMember = mr.findMember(inputEmail);
             if(foundMember != null) {
-                checkCodeView(foundMember);
-                break;
+                if(foundMember.getPhone().equals(inputPhone)) {
+                    if(checkCodeView(foundMember)) {
+                        System.out.printf("\n📢 %s님의 비밀번호: %s \n", foundMember.getName(), foundMember.getPhone());
+                        break;
+                    }
+                }
+                else {
+                    System.out.println("존재하지 않는 휴대폰 번호입니다.");
+                }
             } else {
                 System.out.println("존재하지 않는 이메일입니다.");
             }
         }
 
     }
-    public void checkCodeView(Member member) {
+    public boolean checkCodeView(Member member) {
 
         code: while (true) {
             System.out.println("\n\t loading ...\n");
-            System.out.println("📢 이메일로 인증코드를 보냈습니다");
-            String input = input("이메일로 이동(Enter) >> ");
+            System.out.println("📢 가입한 휴대폰 번호로 인증코드를 보냈습니다");
+            String input = input(" 내 폰으로 이동(Enter) >> ");
 
             String code = mr.makeRandomCode();
             System.out.println("----------------------------");
-            System.out.println("\t📧" + member.getEmail());
-            System.out.println("\t인증코드 [ " + code +" ]");
+            System.out.println("\t\t📲" + member.getPhone());
+            System.out.println("\t[Web발신] " + code +" 인증코드");
             System.out.println("---------------------------- *");
 
             check: while (true) {
@@ -134,8 +181,7 @@ public class LoginView {
                 }
 
                 if(code.equals(inputCode)) {
-                    System.out.printf("\n📢 %s님의 이메일: %s | 비밀번호: %s\n",member.getName(), member.getEmail(), member.getPw());
-                    break code;
+                    return true;
                 } else {
                     System.out.println("\n📢 인증 코드가 일치하지 않습니다.");
 
