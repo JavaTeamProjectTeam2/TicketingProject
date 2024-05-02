@@ -31,8 +31,8 @@ public class BookingView {
         //logMember 받아와서 실행
 
         //로그인 안되어있다면
-        System.out.println("# 예매를 위해 로그인이 필요합니다");
-        System.out.println("# 비회원예매를 원하신다면 '비회원'을 입력해주세요");
+        System.out.println("📢 예매를 위해 로그인이 필요합니다");
+        System.out.println("📢 비회원예매를 원하신다면 '비회원'을 입력해주세요");
 
         String input = input(">> ");
 
@@ -68,7 +68,7 @@ public class BookingView {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("==== 비회원 예매를 시작합니다. ====");
+            System.out.println("====== 비회원 예매를 시작합니다. =======");
             System.out.println("--------------------------------");
             // 이름 입력
             System.out.print("# 이름을 입력해주세요: ");
@@ -99,10 +99,10 @@ public class BookingView {
             }
 
             // 입력된 정보 출력
-            System.out.println("\n==== 입력된 정보 ====");
-            System.out.println("이름: " + name);
-            System.out.println("나이: " + age);
-            System.out.println("전화번호: " + phoneNumber);
+            System.out.println("\n======== 입력한 정보 =========");
+            System.out.println(" * 이름: " + name);
+            System.out.println(" * 나이: " + age);
+            System.out.println(" * 전화번호: " + phoneNumber);
 
             if (!name.isEmpty() && !phoneNumber.isEmpty() && flag) {
                 ArrayList<String> nonMember = new ArrayList<>();
@@ -125,7 +125,7 @@ public class BookingView {
 
     public static void waitForEnter() {
         System.out.println(" ");
-        System.out.println("==========엔터치면 계속 ...=========");
+        System.out.println("========= 엔터를 누르면 계속… ==========");
         try {
             System.in.read(); // 사용자 입력을 기다림
         } catch (IOException e) {
@@ -149,7 +149,7 @@ public class BookingView {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.printf("안녕하세요 %s님, 예매하고자 하는 공연이 <%s> 맞습니까?\n", member.getName(), perform.getTitle());
+        System.out.printf("📢 안녕하세요 %s님, 예매하고자 하는 공연이 <%s> 맞습니까?\n", member.getName(), perform.getTitle());
         System.out.println("예 / 아니오");
         String input = input(">> ");
 
@@ -163,9 +163,9 @@ public class BookingView {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("------------------------");
-            System.out.println("## 회차를 선택해주세요 ##");
-            System.out.println("------------------------");
+            System.out.println("----------------------------------------");
+            System.out.println(" 🎵 공연 회차를 선택해주세요 🎵");
+            System.out.println("----------------------------------------");
             int count = 1;
 
             for (LocalDateTime localDateTime : perform.getDate().getShowTime()) {
@@ -173,7 +173,7 @@ public class BookingView {
                 String timeString = convertFormatDate(time); // "yyyy년 MM월 dd일 (E) HH:mm"
                 System.out.printf("# %d. %s\n", count++, timeString);
             }
-            System.out.println("------------------------");
+            System.out.println("----------------------------------------");
             System.out.print(">> ");
             int option = Integer.parseInt(sc.nextLine());
             LocalDateTime selectedShowTime = perform.getDate().getShowTime().get(option - 1);
@@ -186,16 +186,16 @@ public class BookingView {
                 section = null;
             } else {
 
-                System.out.println("==========================");
-                System.out.println("# 좌석 등급을 선택해주세요");
-                System.out.println("----------------------");
+                System.out.println("==================================");
+                System.out.println(" 🎵 좌석 등급을 선택해주세요 🎵");
+                System.out.println("----------------------------------");
 
                 int cnt = 1;
                 for (Section value : Section.values()) {
                     System.out.printf("# %d. %s\n", cnt, value.toString());
                     cnt++;
                 }
-                System.out.println("-----------------------");
+                System.out.println("----------------------------------------");
                 System.out.print(">> ");
 
                 int option2 = Integer.parseInt(sc.nextLine());
@@ -228,11 +228,11 @@ public class BookingView {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("=== # 관람 인원을 선택해주세요 ===");
-        System.out.printf("# %s (만 14세 이상): ", FOURTEEN.getAgeOption());
+        System.out.println("====== 관람 인원을 선택해주세요 ======");
+        System.out.printf("🧑 %s (만 14세 이상): ", FOURTEEN.getAgeOption());
         Integer adult = Integer.parseInt(sc.nextLine());
         party.put(FOURTEEN.getAgeOption(), adult);
-        System.out.printf("# %s (만 7세 이하): ", SEVEN.getAgeOption());
+        System.out.printf("👶 %s (만 7세 이하): ", SEVEN.getAgeOption());
         Integer child = Integer.parseInt(sc.nextLine());
         party.put(SEVEN.getAgeOption(), child);
 

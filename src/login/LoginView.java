@@ -24,9 +24,9 @@ public class LoginView {
 
         MemberRepository.loadFile();
 
-        System.out.println("----------------------------");
-        System.out.println("           로그인");
-        System.out.println("---------------------------- *");
+        System.out.println("----------------------------------------");
+        System.out.println("             🙋‍♂️ 로그인  ");
+        System.out.println("---------------------------------------- *");
 
 
         int loginCount = 0;
@@ -38,11 +38,11 @@ public class LoginView {
             String email;
             while (true) {
                 if(loginCount == 0) {
-                    System.out.println("📢 이메일 전부 입력해주세요. (ex. xxx@xxx)");
+                    System.out.println("📢 이메일 전부 입력해주세요. (ex. xxx@xxx.com)");
                 }
                 email = input("이메일 >> ");
                 if(!mr.emailCheck(email)) {
-                    System.out.println("📢 이메일 형식이 아닙니다. 다시 입력해주세요. (ex. xxx@xxx)");
+                    System.out.println("📢 이메일 형식이 아닙니다. 다시 입력해주세요. (ex. xxx@xxx.com)");
                 } else {
                     // 이메일 형식은 일치한 상태
                     if(mr.findMember(email) == null) {
@@ -91,9 +91,9 @@ public class LoginView {
     }
 
     public void showFindIdView() {
-        System.out.println("----------------------------");
+        System.out.println("----------------------------------------");
         System.out.println("      가입한 이메일 찾기");
-        System.out.println("---------------------------- *");
+        System.out.println("---------------------------------------- *");
 
         while (true) {
             String inputPhone = null;
@@ -120,9 +120,9 @@ public class LoginView {
 
         // 아이디 찾기
         // 비번 찾기
-        System.out.println("----------------------------");
+        System.out.println("----------------------------------------");
         System.out.println("        비밀번호 찾기");
-        System.out.println("---------------------------- *");
+        System.out.println("---------------------------------------- *");
 
         while (true) {
             String inputEmail = null;
