@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static src.BookingView.*;
+import static src.BookingView.booking;
+import static src.BookingView.thread;
 import static src.Category.*;
 import static src.SimpleInput.sc;
 import static src.MainView.ROOT_PATH;
@@ -41,7 +44,34 @@ public class PerformView {
     }
 
     private static void showTheseDaysEvent() {
-        PerformRepository.theseDaysEvent();
+//        PerformRepository.theseDaysEvent();
+        List<String> recentTitles = PerformRepository.theseDaysEvent();
+        System.out.println("-------------------------");
+        System.out.println("# 예매하고 싶으신 공연/전시의 번호를 입력해주세요");
+        System.out.print(">> ");
+        int option = Integer.parseInt(sc.next());
+
+        String selectedTitle = "";
+        switch (option) {
+            case 1:
+                selectedTitle = recentTitles.get(0);
+                break;
+            case 2:
+                selectedTitle = recentTitles.get(1);
+                break;
+            case 3:
+                selectedTitle = recentTitles.get(2);
+                break;
+            default:
+                System.out.println("error");
+                break;
+        }
+
+        Perform selectedPerform = PerformRepository.getSelectedTitle(selectedTitle);
+        // 예매 시작
+        booking(selectedPerform);
+        waitForEnter();
+        MainView.start();
     }
 
     private static void showOptions() {
@@ -49,12 +79,12 @@ public class PerformView {
         System.out.println("     카테고리 별 추천 파트");
         System.out.println("---------------------------- *");
         System.out.println("## 뮤지컬, 콘서트, 전시회, 가족컨텐츠 중 선택하세요 ##");
-        System.out.println("# 1." + CONCERT.getContentName() );
-        System.out.println("# 2." + MUSICAL.getContentName());
-        System.out.println("# 3." + EXHIBIT.getContentName());
-        System.out.println("# 4." + FAMILY.getContentName());
-        System.out.println("# 0. 뒤로가기");
-        System.out.print(">>>>> ");
+        System.out.println("1️⃣ " + CONCERT.getContentName() );
+        System.out.println("2️⃣ " + MUSICAL.getContentName());
+        System.out.println("3️⃣ " + EXHIBIT.getContentName());
+        System.out.println("4️⃣ " + FAMILY.getContentName());
+        System.out.println("0️⃣ 뒤로가기");
+        System.out.print(">>> ");
 
         int option = sc.nextInt();
         if(option == 0){
@@ -64,13 +94,22 @@ public class PerformView {
             String selectedTitle = showContentByCategory(titleByCategory);
             Perform selectedPerform = PerformRepository.getSelectedTitle(selectedTitle);
 
-            BookingView.booking(selectedPerform);
+            booking(selectedPerform);
         }
     }
 
     private static String showContentByCategory(List<String> titleByCategory) {
+        if (!thread.isAlive()) {
+            thread = new MyThread(); // 새로운 스레드 객체 생성
+            thread.start(); // 스레드 시작
+        }
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println("----------------------------");
-        System.out.println("     카테고리 별 추천           ");
+        System.out.printf("     카테고리 별 추천           \n");
         System.out.println("----------------------------");
         int count = 0;
         for (String title : titleByCategory) {
@@ -84,23 +123,4 @@ public class PerformView {
         String selectedTitle = titleByCategory.get(option-1);
         return selectedTitle;
     }
-
-    //공연정보 리스트 파일 생성
-//    private static void makePerformFile(){
-//        File directory = new File(ROOT_PATH + "/PerformRepository");
-//
-//        // 폴더 생성
-//        if(!directory.exists()){
-//            directory.mkdir();
-//        }
-//        //파일 생성하기
-//        File newFile = new File(ROOT_PATH + "/PerformRepository/PerformList.txt");
-//        if(!newFile.exists()){
-//            try {
-//                newFile.createNewFile();
-//            } catch (IOException e) {
-//                System.out.println("파일 생성에 실패했습니다.");
-//            }
-//        }
-//    }
 }

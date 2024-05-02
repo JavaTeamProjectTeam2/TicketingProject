@@ -5,6 +5,7 @@ import src.login.MemberRepository;
 import src.userJoin.UserJoinRepository;
 import src.login.LoginView;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -14,17 +15,18 @@ import static src.SimpleInput.sc;
 //import static src.bookingRepository;
 
 public class BookingView {
+    static MyThread thread = new MyThread(); // 스레드 객체 생성
 
     public static void booking(Perform performContent) {
         UserJoinRepository ur = new UserJoinRepository();
-        System.out.printf("#======= <%s> 예약을 시작합니다 =======# \n", makeTitleShort(performContent.getTitle()));
+        System.out.printf("🎪======= <%s> 예약을 시작합니다 =======🎪\n", makeTitleShort(performContent.getTitle()));
         System.out.println("# 예매를 위해 로그인이 필요합니다");
         System.out.println("# 비회원예매를 원하신다면 '비회원'을 입력해주세요");
         System.out.print(">>> ");
 
         String input = sc.next();
 
-        if(input.equals("비회원")) {
+        if(input.equals("비회원") || input.equalsIgnoreCase("nonMember")) {
             nonMemberBooking(performContent);
         } else {
                 LoginView lv = new LoginView();
@@ -46,9 +48,15 @@ public class BookingView {
     private static void nonMemberBooking(Perform performContent) {
         boolean flag = false;
         while (true) {
-            System.out.println(".");
-            System.out.println(".");
-            System.out.println(".");
+            if (!thread.isAlive()) {
+                thread = new MyThread(); // 새로운 스레드 객체 생성
+                thread.start(); // 스레드 시작
+            }
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("==== 비회원 예매를 시작합니다. ====");
             System.out.println("--------------------------------");
             // 이름 입력
@@ -62,7 +70,7 @@ public class BookingView {
                 return;
             }
             // 나이 입력
-            System.out.println("# 나이를 입력해주세요: ");
+            System.out.print("# 나이를 입력해주세요: ");
             int age = Integer.parseInt(sc.next());
             try {
                 if(age<1 || age > 150) System.out.println("비회원 예약 시작");
@@ -98,23 +106,47 @@ public class BookingView {
     }
 
     private static void nonMemberBookingStart(Perform perform,  ArrayList<String> nonMember) {
-
+        System.out.println("============================");
+        BookingRepository.nonMemberBooking(perform, nonMember);
+        waitForEnter();
+        PerformView.getTicket();
+    }
+    public static void waitForEnter() {
+        System.out.println(" ");
+        System.out.println("==========엔터치면 계속 ...=========");
+        try {
+            System.in.read(); // 사용자 입력을 기다림
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void memberBooking(Member member, Perform perform) {
-        System.out.println(".");
-        System.out.println(".");
-        System.out.println(".");
+        if (!thread.isAlive()) {
+            thread = new MyThread(); // 새로운 스레드 객체 생성
+            thread.start(); // 스레드 시작
+        }
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.printf("안녕하세요 %s님, 예매하고자 하는 공연이 %s 맞습니까?\n", member.getName(), perform.getTitle());
         System.out.println("예 / 아니오");
         String input = input(">> ");
 
         if (input.equals("예")||input.equalsIgnoreCase("Y")|| input.equals("yes")) {
-            System.out.println(".");
-            System.out.println(".");
-            System.out.println(".");
+            if (!thread.isAlive()) {
+                thread = new MyThread(); // 새로운 스레드 객체 생성
+                thread.start(); // 스레드 시작
+            }
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("------------------------");
-            System.out.println("회차를 선택해주세요");
+            System.out.println("## 회차를 선택해주세요 ##");
             System.out.println("------------------------");
             int count = 1;
             for (LocalDateTime localDateTime : perform.getDate().getShowTime()) {
@@ -124,17 +156,15 @@ public class BookingView {
             System.out.print(">> ");
             int option = Integer.parseInt(sc.next());
             LocalDateTime selectedShowTime = perform.getDate().getShowTime().get(option - 1);
-
             System.out.println(selectedShowTime + " 해당일 "+perform.getCategory().getContentName()+"을/를 예매하겠습니다.");
-            System.out.println(".");
-            System.out.println(".");
-            System.out.println(".");
+
             Map<String,Integer> party = getParty();
 //            int totalPrice = BookingRepository.getPerformPrice();
             String section = "";
             if(!(perform.getCategory().equals(Category.MUSICAL))){
                 section = null;
             }else{
+
                 System.out.println("==========================");
                 System.out.println("# 좌석 등급을 선택해주세요");
                 System.out.println("----------------------");
@@ -148,16 +178,33 @@ public class BookingView {
                 System.out.print(">> ");
                 int option2 = Integer.parseInt(sc.next());
                 section = Section.values()[option2-1].toString();
-                System.out.println(section);
+//                System.out.println(section);
+                if (!thread.isAlive()) {
+                    thread = new MyThread(); // 새로운 스레드 객체 생성
+                    thread.start(); // 스레드 시작
+                }
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
-            BookingRepository.allSelectedBooking(perform, member, party, section);
+            BookingRepository.allSelectedBooking(perform, member, party, section, selectedShowTime);
         }
     }
 
     private static Map<String, Integer> getParty() {
         Map<String, Integer> party = new HashMap<>();
-
+        if (!thread.isAlive()) {
+            thread = new MyThread(); // 새로운 스레드 객체 생성
+            thread.start(); // 스레드 시작
+        }
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println("=== # 관람 인원을 선택해주세요 ===");
         System.out.printf("# %s (만 14세 이상): ", FOURTEEN.getAgeOption());
         Integer adult = Integer.parseInt(sc.next());

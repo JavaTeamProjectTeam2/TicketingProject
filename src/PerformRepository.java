@@ -127,7 +127,7 @@ public class PerformRepository {
 
 
     // 최근 하는 행사 보여줌
-    public static void theseDaysEvent() {
+    public static List<String> theseDaysEvent() {
         // 오늘 날짜 가져오기
         LocalDate nowDate = LocalDate.now();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 (E)", Locale.KOREAN); // 요일 포함
@@ -140,7 +140,10 @@ public class PerformRepository {
         // 날짜를 원하는 형식으로 포맷
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 (E)", Locale.KOREAN); // 요일 포함
 
+        // 결과를 저장할 리스트 생성
+        List<String> eventList = new ArrayList<>();
         // 현재 날짜부터 일주일 후까지의 날짜를 순회하면서 이벤트 추출
+        int count  = 0;
         for (LocalDate currentDate = nowDate; currentDate.isBefore(oneWeekLater); currentDate = currentDate.plusDays(1)) {
             final LocalDate date = currentDate; // 최종 변수로 만들기
 
@@ -156,14 +159,16 @@ public class PerformRepository {
             // 이벤트가 있는 경우에만 출력
             if (!collected.isEmpty()) {
                 // 개별 이벤트 출력
-                System.out.println(dateString + "의 공연/전시:");
+                System.out.printf("# %d. %s\n", ++count, dateString);
                 for (String event : collected) {
                     System.out.println("- " + event);
+                    eventList.add(event);
                 }
             }
         }
-
+        return eventList;
     }
+
 
 
 
@@ -213,4 +218,5 @@ public class PerformRepository {
         }
         return null;
     }
+
 }

@@ -28,7 +28,19 @@ public class MainView {
             System.out.println("2️⃣ 공연 조회 및 예매");
             System.out.println("3️⃣ 프로그램 종료");
             System.out.print(">> ");
-            int option = Integer.parseInt(sc.nextLine());
+//            int option = Integer.parseInt(sc.nextLine());
+            int option = 0; // option 변수 초기화
+
+            String input = sc.next();
+            if (!input.isEmpty()) {
+                try {
+                    option = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    System.out.println("비정상 입력");
+                }
+            } else {
+                System.out.println("입력값이 비어 있습니다.");
+            }
 
 
             switch (option){
@@ -48,7 +60,7 @@ public class MainView {
                     System.out.println("프로그램을 종료합니다");
                     System.exit(0);
                 default:
-                    System.out.println("제대로 입력하세요");
+                    System.out.println("🚨 옵션의 번호를 입력하세요 🚨");
                     break;
             }
         }

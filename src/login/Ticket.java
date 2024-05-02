@@ -46,8 +46,18 @@ public class Ticket {
         this.price = price;
     }
 
+//    @Override
+//    public String toString() {
+////        return "티켓 예약 내역";
+//    }
+
     @Override
     public String toString() {
-        return "티켓 예약 내역";
+        return "Ticket{" +
+                "title='" + title + '\'' +
+                ", date='" + date + '\'' +
+                ", seat='" + seat + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
