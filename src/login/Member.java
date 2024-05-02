@@ -89,8 +89,8 @@ public class Member implements Serializable {
         return point;
     }
 
-    public void setPoint(int point) {
-        this.point = point;
+    public void setPoint(int price) {
+        this.point = (int) Math.floor(price * 0.01);
     }
 
     public List<Ticket> getTicketList() {
@@ -134,7 +134,7 @@ public class Member implements Serializable {
                 "연락처: " + phone + '\n' +
                 "주소: " + address + '\n' +
                 "포인트: " + point + '\n' +
-                "예매내역" + ticketList + '\n';
+                "예매내역: " + ticketList.size() + '\n';
     }
 
 

@@ -22,9 +22,7 @@ public class BookingView {
         System.out.printf("🎪======= <%s> 예약을 시작합니다 =======🎪\n", makeTitleShort(performContent.getTitle()));
         System.out.println("# 예매를 위해 로그인이 필요합니다");
         System.out.println("# 비회원예매를 원하신다면 '비회원'을 입력해주세요");
-        System.out.print(">>> ");
-
-        String input = sc.next();
+        String input = input(">>> ");
 
         if(input.equals("비회원") || input.equalsIgnoreCase("nonMember")) {
             nonMemberBooking(performContent);

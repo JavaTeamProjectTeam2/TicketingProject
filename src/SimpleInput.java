@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class SimpleInput {
         //문자열 입력을 처리
-        static Scanner sc;
+        public static Scanner sc;
 
         static {
             sc = new Scanner(System.in);

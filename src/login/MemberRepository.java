@@ -36,10 +36,10 @@ public class MemberRepository {
 
     public static void setMembers(List<Member> members) {
         MemberRepository.members = members;
-        System.out.println("MR setMembers 내부 테스트");
-        for(Member mem : MemberRepository.members) {
-            System.out.println(mem);
-        }
+//        System.out.println("MR setMembers 내부 테스트");
+//        for(Member mem : MemberRepository.members) {
+//            System.out.println(mem);
+//        }
     }
 
     public static Member getLoginMember() {
@@ -214,7 +214,9 @@ public class MemberRepository {
         return phone.matches(phoneInputCheck);
     }
 
-    public void addTicket(Member member, Ticket ticket) {
+
+    public static void addTicket(Member member, Ticket ticket) {
+
         List<Ticket> ticketList = member.getTicketList();
         ticketList.add(ticket);
         member.setTicketList(ticketList);
