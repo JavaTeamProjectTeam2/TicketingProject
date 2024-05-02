@@ -1,13 +1,12 @@
 package src.login;
 
-import src.BookingView;
 import src.MainView;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static src.MainView.start;
-import java.util.stream.Collectors;
-
 import static src.SimpleInput.*;
 
 public class MypageView {
@@ -31,14 +30,15 @@ public class MypageView {
     }
 
     public void showMemberInfo() {
-        myMenu:
+
         while (true) {
             System.out.println("\n----------------------------------------");
-            System.out.println("         마이 페이지");
+            System.out.println("            😉 마이 페이지");
             System.out.println("---------------------------------------- *");
             System.out.printf("  * 이름: %s\n", this.logMember.getName());
             System.out.printf("  * 이메일: %s\n", this.logMember.getEmail());
             System.out.printf("  * 나이: %d\n", this.logMember.getAge());
+            System.out.printf("  * 전화번호: %s\n", this.logMember.getPhone());
             System.out.printf("  * 주소: %s\n", this.logMember.getAddress());
             System.out.printf("  * 포인트: %d\n", this.logMember.getPoint());
             System.out.printf("  * 예매내역: %d건\n", this.logMember.getTicketList().size());
@@ -88,7 +88,7 @@ public class MypageView {
                     }
                 } else break;
             }
-            String newPw = null;
+            String newPw;
             while (true) {
                 newPw = input("\n * 새 비밀번호 입력 >> ");
                 if(!mr.passwordCheck(newPw)) {
@@ -128,12 +128,13 @@ public class MypageView {
             System.out.println("\t  예매내역이 없습니다.");
         } else {
 
-            tList.stream()
-                    .sorted(Comparator.comparing((Ticket t) -> t.getDate()).reversed());
+            List<Ticket> sortedList = tList.stream()
+                    .sorted(Comparator.comparing((Ticket t) -> t.getDate()).reversed())
+                    .collect(Collectors.toList());
 
-            for (int i = 0; i < tList.size(); i++) {
-                Ticket t = tList.get(i);
-                System.out.printf("  %d. %s\t| %s\t| %s\t| %s\n", i + 1,
+            for (int i = 0; i < sortedList.size(); i++) {
+                Ticket t = sortedList.get(i);
+                System.out.printf(" %d. %s\t| %s\t| %s\t| %s\n", i + 1,
                         t.getTitle(), t.getDate(), t.getSeat(), t.getPrice() );
             }
             System.out.println("\n----------------------------------------");
@@ -159,6 +160,7 @@ public class MypageView {
                 }
             }
             Ticket removedTicket = mr.removeTicket(logMember, tNum);
+            System.out.printf("\n [%s] 티켓을 취소했습니다.\n", ellipsisString(removedTicket.getTitle()));
             System.out.println();
         } else {
             stopInput();
@@ -169,15 +171,14 @@ public class MypageView {
         System.out.printf("\n📢 %s님이 로그아웃 하셨습니다.\n", logMember.getName());
         setLogMember(null);
         MemberRepository.setLoginMember(null);
-        MainView main = new MainView();
         start();
     }
 
     // 공연명 말줄임표
     public String ellipsisString(String text) {
 
-        if(text.length() > 6) {
-            text = text.substring(0, 5) + "...";
+        if(text.length() > 10) {
+            text = text.substring(0, 9) + "...";
         }
         return text;
     }
