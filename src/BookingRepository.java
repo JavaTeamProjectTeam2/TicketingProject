@@ -98,9 +98,11 @@ public class BookingRepository {
         switch (choice){
             case 1:
                 System.out.println("💳 카드결제");
-                System.out.println("💳 카드번호를 입력해주세요: ");
+                System.out.print("💳 카드번호를 입력해주세요: ");
                 String cardNo = sc.next();
-                if(cardNo.length() > 12){
+                System.out.print("💳 CVC (카드 뒷면 숫자 3자리): ");
+                String cvc = sc.next();
+                if(cardNo.length() > 12 && cvc.length() == 3){
                     if (!thread.isAlive()) {
                         thread = new MyThread(); // 새로운 스레드 객체 생성
                         thread.start(); // 스레드 시작
@@ -108,12 +110,27 @@ public class BookingRepository {
                     try {
                         thread.join();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        System.out.println("👮 카드 정보 입력 오류 🚨");
+                        System.out.println("👮 처음 화면으로 이동합니다. ");
+                        System.out.println(" ");
+                        MainView.start();
                     }
                     System.out.println("👍 결제 완료되었습니다.");
                     return true;
                 }else{
-                    System.out.println("🚨 잘못된 카드번호입니다.");
+                    try{
+                        if (!(cardNo.length()>12 || cvc.length()==3)){
+                            System.out.println("🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓");
+                            System.out.println("🚨 잘못된 카드번호입니다.");
+                            System.out.println("👮 카드 정보 입력 오류 🚨");
+                            System.out.println("👮 처음 화면으로 이동합니다. ");
+                            System.out.println(" ");
+                            return false;
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    MainView.start();
                     return false;
                 }
 
