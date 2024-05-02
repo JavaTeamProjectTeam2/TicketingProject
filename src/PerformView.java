@@ -8,6 +8,7 @@ import static src.BookingView.*;
 import static src.BookingView.booking;
 import static src.BookingView.thread;
 import static src.Category.*;
+import static src.SimpleInput.input;
 import static src.SimpleInput.sc;
 import static src.MainView.ROOT_PATH;
 
@@ -22,19 +23,18 @@ public class PerformView {
         System.out.println("2️⃣ 카테고리 별 공연/전시 목록");
         System.out.println("0️⃣ 뒤로가기");
         System.out.println("======================");
-        System.out.print(">>> ");
 
-        int option = sc.nextInt();
+        String option = input(">> ");
         switch (option) {
-            case 1:
+            case "1":
 //                System.out.println("현재 진행 중인 행사 보여줘");
                 showTheseDaysEvent();
                 break;
-            case 2:
+            case "2":
                 System.out.println("카테고리별로 추천");
                 showOptions();
                 break;
-            case 0:
+            case "0":
                 System.out.println("뒤로가기");
                 break;
             default:
@@ -48,18 +48,18 @@ public class PerformView {
         List<String> recentTitles = PerformRepository.theseDaysEvent();
         System.out.println("-------------------------");
         System.out.println("# 예매하고 싶으신 공연/전시의 번호를 입력해주세요");
-        System.out.print(">> ");
-        int option = Integer.parseInt(sc.next());
+//        System.out.print(">> ");
+        String option =input(">> ");
 
         String selectedTitle = "";
         switch (option) {
-            case 1:
+            case "1":
                 selectedTitle = recentTitles.get(0);
                 break;
-            case 2:
+            case "2":
                 selectedTitle = recentTitles.get(1);
                 break;
-            case 3:
+            case "3":
                 selectedTitle = recentTitles.get(2);
                 break;
             default:
@@ -119,7 +119,11 @@ public class PerformView {
         System.out.println("-----------------------------------------");
         System.out.println("## 예매하고싶은 공연/전시의 번호를 입력해주세요");
         System.out.print(">> ");
-        int option = Integer.parseInt(sc.next());
+//        int option = Integer.parseInt(sc.nextLine());
+//        String sOption = (input(">> "));
+//        int option = Integer.parseInt(sOption);
+        int option = sc.nextInt();
+        sc.nextLine();
         String selectedTitle = titleByCategory.get(option-1);
         return selectedTitle;
     }

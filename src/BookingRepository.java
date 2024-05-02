@@ -77,7 +77,8 @@ public class BookingRepository {
         boolean goThrough = payTicket(totalPrice, member.getName());
         if(goThrough){
             ticket = new Ticket(perform.getTitle(), selectedShowTime.toString() , section, totalPrice.get("totalPrice"));
-            System.out.printf("🎟️ %s님 <%s> %d매 예매되었습니다.",member.getName(), perform.getTitle(), totalPrice.get("ticketCount"));
+            System.out.printf("🎟️ %s님 <%s> %d매 예매되었습니다.\n",member.getName(), perform.getTitle(), totalPrice.get("ticketCount"));
+            System.out.println("🎟 예매내역은 마이페이지에서 조회 가능합니다.");
         }else{
             System.out.printf("❌ %s님 결제 미진행으로 예매 실패했습니다.",member.getName());
             ticket = null;
@@ -94,14 +95,14 @@ public class BookingRepository {
         System.out.println("1️⃣ 카드\n2️⃣ 무통장입금\n3️⃣ 현장결제");
         System.out.println("====================================");
         System.out.print(">> ");
-        int choice =Integer.parseInt(sc.next());
+        int choice =Integer.parseInt(sc.nextLine());
         switch (choice){
             case 1:
                 System.out.println("💳 카드결제");
                 System.out.print("💳 카드번호를 입력해주세요: ");
-                String cardNo = sc.next();
+                String cardNo = sc.nextLine();
                 System.out.print("💳 CVC (카드 뒷면 숫자 3자리): ");
-                String cvc = sc.next();
+                String cvc = sc.nextLine();
                 if(cardNo.length() > 12 && cvc.length() == 3){
                     if (!thread.isAlive()) {
                         thread = new MyThread(); // 새로운 스레드 객체 생성
@@ -141,9 +142,9 @@ public class BookingRepository {
                 System.out.printf("☑️ 입금완료시 '%s' 구매자 이름과 '%d' 입금 금액을 적어주세요.\n", name, totalPrice.get("totalPrice"));
                 System.out.print("🏧 1002888000000 (예금주: (주)컴퍼니) \n");
                 System.out.print("🧑 송금인: ");
-                String accountNo = sc.next();
-                System.out.println("💸 입금한 금액: ");
-                int price = Integer.parseInt(sc.next());
+                String accountNo = sc.nextLine();
+                System.out.print("💸 입금한 금액: ");
+                int price = Integer.parseInt(sc.nextLine());
 
                 if(accountNo.equals(name) && price == totalPrice.get("totalPrice")){
                     if (!thread.isAlive()) {
@@ -169,7 +170,7 @@ public class BookingRepository {
                 System.out.println("☑️ 공연 시작 1시간 전까지 결제되지 않을 시 예매가 취소될 수 있습니다.");
                 System.out.println("✅ 동의한다면 '동의'라고 작성해주세요.");
                 System.out.print(">> ");
-                String agree = sc.next();
+                String agree = sc.nextLine();
                 if(agree.equals("동의") || agree.equalsIgnoreCase("agree")){
                     if (!thread.isAlive()) {
                         thread = new MyThread(); // 새로운 스레드 객체 생성
@@ -255,7 +256,7 @@ public class BookingRepository {
 
         System.out.println("## 입력 형식: 2, 3");
         System.out.print(">> ");
-        String input = sc.next();
+        String input = sc.nextLine();
         if (!thread.isAlive()) {
             thread = new MyThread(); // 새로운 스레드 객체 생성
             thread.start(); // 스레드 시작
@@ -289,7 +290,9 @@ public class BookingRepository {
             if(goThrough){
                 ticket = new Ticket(perform.getTitle(), selectedShowTime.toString() , "( "+selectedRow+ ", " + selectedCol+" )", totalPrice.get("totalPrice")) ;
                 updateTicket(ticket);
-                System.out.printf("🎟️ %s님 <%s> %d매 예매되었습니다.",member.getName(), perform.getTitle(), totalPrice.get("ticketCount"));
+                System.out.printf("🎟️ %s님 <%s> %d매 예매되었습니다.\n",member.getName(), perform.getTitle(), totalPrice.get("ticketCount"));
+                System.out.println("🎟 예매내역은 마이페이지에서 조회 가능합니다.");
+
             } else{
                 System.out.printf("❌ %s님 결제 미진행으로 예매 실패했습니다.",member.getName());
                 ticket = null;
