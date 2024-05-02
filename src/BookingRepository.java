@@ -120,7 +120,7 @@ public class BookingRepository {
                 }else{
                     try{
                         if (!(cardNo.length()>12 || cvc.length()==3)){
-                            
+
                             System.out.println("🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓");
                             System.out.println("🚨 잘못된 카드번호입니다.");
                             System.out.println("👮 카드 정보 입력 오류 🚨");
