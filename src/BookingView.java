@@ -21,25 +21,37 @@ public class BookingView {
     public static void booking(Perform performContent) {
         UserJoinRepository ur = new UserJoinRepository();
         System.out.printf("🎪======= <%s> 예약을 시작합니다 =======🎪\n", makeTitleShort(performContent.getTitle()));
+        //로그인이 되어있었다면
+        // Check if a member is logged in
+        Member loginMember = MemberRepository.getLoginMember();
+        if (loginMember != null) {
+            memberBooking(loginMember, performContent);
+            return;
+        }
+        //logMember 받아와서 실행
+
+        //로그인 안되어있다면
         System.out.println("# 예매를 위해 로그인이 필요합니다");
         System.out.println("# 비회원예매를 원하신다면 '비회원'을 입력해주세요");
+
         String input = input(">> ");
 
         if (input.equals("비회원") || input.equalsIgnoreCase("nonMember")) {
             nonMemberBooking(performContent);
         } else {
-            LoginView lv = new LoginView();
-            lv.showLogIn();
+                LoginView lv = new LoginView();
+                lv.showLogIn();
 
-            MemberRepository mr = MemberRepository.getInstance();
-            // Check if login is successful
-            Member loginMember = MemberRepository.getLoginMember();
-            if ((loginMember) != null) {
-                memberBooking(loginMember, performContent);
-            } else {
-                // Handle unsuccessful login
-                nonMemberBooking(performContent);
-            }
+                MemberRepository mr = MemberRepository.getInstance();
+                // Check if login is successful
+                Member logMember = MemberRepository.getLoginMember();
+                if ((logMember) != null) {
+                    memberBooking(logMember, performContent);
+                } else {
+                    // Handle unsuccessful login
+                    nonMemberBooking(performContent);
+                }
+
         }
 
     }
@@ -60,7 +72,7 @@ public class BookingView {
             System.out.println("--------------------------------");
             // 이름 입력
             System.out.print("# 이름을 입력해주세요: ");
-            String name = sc.next();
+            String name = sc.nextLine();
             // 이름이 비어있는지 확인
             if (name.isEmpty()) {
                 System.out.print("# 이름을 정확히 입력해주세요.");
@@ -70,7 +82,7 @@ public class BookingView {
             }
             // 나이 입력
             System.out.print("# 나이를 입력해주세요: ");
-            int age = Integer.parseInt(sc.next());
+            int age = Integer.parseInt(sc.nextLine());
             try {
                 if (age < 1 || age > 150) System.out.println("비회원 예약 시작");
                 flag = true;
@@ -81,7 +93,7 @@ public class BookingView {
 
             // 전화번호 입력
             System.out.print("# 전화번호를 입력해주세요: ");
-            String phoneNumber = sc.next();
+            String phoneNumber = sc.nextLine();
             if (phoneNumber.isEmpty()) {
                 System.out.println("올바른 번호를 입력해주세요!!");
             }
@@ -137,7 +149,7 @@ public class BookingView {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.printf("안녕하세요 %s님, 예매하고자 하는 공연이 %s 맞습니까?\n", member.getName(), perform.getTitle());
+        System.out.printf("안녕하세요 %s님, 예매하고자 하는 공연이 <%s> 맞습니까?\n", member.getName(), perform.getTitle());
         System.out.println("예 / 아니오");
         String input = input(">> ");
 
@@ -163,7 +175,7 @@ public class BookingView {
             }
             System.out.println("------------------------");
             System.out.print(">> ");
-            int option = Integer.parseInt(sc.next());
+            int option = Integer.parseInt(sc.nextLine());
             LocalDateTime selectedShowTime = perform.getDate().getShowTime().get(option - 1);
             System.out.println(convertFormatDate(selectedShowTime) + " 해당일 " + perform.getCategory().getContentName() + "을/를 예매하겠습니다.");
 
@@ -185,8 +197,10 @@ public class BookingView {
                 }
                 System.out.println("-----------------------");
                 System.out.print(">> ");
-                int option2 = Integer.parseInt(sc.next());
-                section = Section.values()[option2 - 1].toString();
+
+                int option2 = Integer.parseInt(sc.nextLine());
+                section = Section.values()[option2-1].toString();
+
 //                System.out.println(section);
                 if (!thread.isAlive()) {
                     thread = new MyThread(); // 새로운 스레드 객체 생성
@@ -216,10 +230,10 @@ public class BookingView {
         }
         System.out.println("=== # 관람 인원을 선택해주세요 ===");
         System.out.printf("# %s (만 14세 이상): ", FOURTEEN.getAgeOption());
-        Integer adult = Integer.parseInt(sc.next());
+        Integer adult = Integer.parseInt(sc.nextLine());
         party.put(FOURTEEN.getAgeOption(), adult);
         System.out.printf("# %s (만 7세 이하): ", SEVEN.getAgeOption());
-        Integer child = Integer.parseInt(sc.next());
+        Integer child = Integer.parseInt(sc.nextLine());
         party.put(SEVEN.getAgeOption(), child);
 
         return party;
