@@ -1,9 +1,13 @@
 package src.login;
 
 import src.MainView;
+
+import java.util.Comparator;
 import java.util.List;
 
 import static src.MainView.start;
+import java.util.stream.Collectors;
+
 import static src.SimpleInput.*;
 
 public class MypageView {
@@ -122,9 +126,14 @@ public class MypageView {
         if (tList.isEmpty()) {
             System.out.println("\t  예매내역이 없습니다.");
         } else {
+
+            tList.stream()
+                    .sorted(Comparator.comparing((Ticket t) -> t.getDate()).reversed())
+                    .collect(Collectors.toList());
             for (int i = 0; i < tList.size(); i++) {
                 Ticket t = tList.get(i);
-                System.out.printf("  %d. %s", i + 1, t.toString());
+                System.out.printf("  %d. %s\t| %s\t| %s\t| %s", i + 1,
+                        t.getTitle(), t.getDate(), t.getSeat(), t.getPrice() );
             }
         }
 
@@ -141,13 +150,14 @@ public class MypageView {
                 tNum = Integer.parseInt(input("취소할 티켓 번호 (0: 뒤로가기) >> "));
 
                 if (!(tNum > 0 && tNum < myTicketList.size())) {
+                    if (tNum == 0) showMemberInfo();
                     System.out.println("📢 티켓 번호만 입력하세요.");
                 } else {
-                    if (tNum == 0) showMemberInfo();
                     break;
                 }
             }
-            mr.removeTicket(logMember, tNum);
+            Ticket removedTicket = mr.removeTicket(logMember, tNum);
+            System.out.println();
         } else {
             stopInput();
         }
@@ -160,4 +170,16 @@ public class MypageView {
         MainView main = new MainView();
         start();
     }
+
+    // 공연명 말줄임표
+    public String ellipsisString(String text) {
+
+        if(text.length() > 6) {
+            text = text.substring(0, 5) + "...";
+        }
+        return text;
+    }
+
+
+
 }
