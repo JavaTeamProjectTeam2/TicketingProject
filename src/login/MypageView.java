@@ -4,6 +4,8 @@ import src.MainView;
 
 import java.util.Comparator;
 import java.util.List;
+
+import static src.MainView.start;
 import java.util.stream.Collectors;
 
 import static src.SimpleInput.*;
@@ -13,6 +15,7 @@ public class MypageView {
     private Member logMember;
     private MemberRepository mr = MemberRepository.getInstance();
     private LoginManager loginManager = new LoginManager();
+
 
     public MypageView(Member member) {
         this.logMember = member;
@@ -58,9 +61,8 @@ public class MypageView {
                         logOut();
                         break;
                     case "0":
-                        MainView mainView = new MainView();
-                        mainView.start();
-                        break myMenu;
+                        start();
+                        break;
                     default:
                         System.out.println("📢 메뉴 번호만 입력해주세요");
                 }
@@ -166,7 +168,7 @@ public class MypageView {
         setLogMember(null);
         MemberRepository.setLoginMember(null);
         MainView main = new MainView();
-        main.start();
+        start();
     }
 
     // 공연명 말줄임표
