@@ -27,24 +27,24 @@ public class MainView {
             }
             System.out.println("2️⃣ 공연 조회 및 예매");
             System.out.println("3️⃣ 프로그램 종료");
-            System.out.print(">> ");
+//            System.out.print(">> ");
 //            int option = Integer.parseInt(sc.nextLine());
-            int option = 0; // option 변수 초기화
-
-            String input = sc.next();
-            if (!input.isEmpty()) {
-                try {
-                    option = Integer.parseInt(input);
-                } catch (NumberFormatException e) {
-                    System.out.println("비정상 입력");
-                }
-            } else {
-                System.out.println("입력값이 비어 있습니다.");
-            }
+//            int option = 0; // option 변수 초기화
+            String option = input(">> ");
+//            String input = sc.next();
+//            if (!input.isEmpty()) {
+//                try {
+//                    option = Integer.parseInt(input);
+//                } catch (NumberFormatException e) {
+//                    System.out.println("비정상 입력");
+//                }
+//            } else {
+//                System.out.println("입력값이 비어 있습니다.");
+//            }
 
 
             switch (option){
-                case 1:
+                case "1":
                     if(MemberRepository.getLoginMember() != null) {
                         MypageView mv = new MypageView(MemberRepository.getLoginMember());
                     } else {
@@ -52,11 +52,11 @@ public class MainView {
                         memberView.showLoginMenu();
                     }
                     break;
-                case 2:
+                case "2":
                     System.out.println("공연 예매를 시작합니다");
                     PerformView.getTicket();
                     break;
-                case 3:
+                case "3":
                     System.out.println("프로그램을 종료합니다");
                     System.exit(0);
                 default:
