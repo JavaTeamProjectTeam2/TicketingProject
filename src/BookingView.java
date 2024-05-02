@@ -7,6 +7,7 @@ import src.login.LoginView;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static src.AgeRating.*;
@@ -22,25 +23,23 @@ public class BookingView {
         System.out.printf("🎪======= <%s> 예약을 시작합니다 =======🎪\n", makeTitleShort(performContent.getTitle()));
         System.out.println("# 예매를 위해 로그인이 필요합니다");
         System.out.println("# 비회원예매를 원하신다면 '비회원'을 입력해주세요");
-        System.out.print(">>> ");
+        String input = input(">> ");
 
-        String input = sc.next();
-
-        if(input.equals("비회원") || input.equalsIgnoreCase("nonMember")) {
+        if (input.equals("비회원") || input.equalsIgnoreCase("nonMember")) {
             nonMemberBooking(performContent);
         } else {
-                LoginView lv = new LoginView();
-                lv.showLogIn();
+            LoginView lv = new LoginView();
+            lv.showLogIn();
 
-                MemberRepository mr = MemberRepository.getInstance();
-                // Check if login is successful
-                Member loginMember = MemberRepository.getLoginMember();
-                if ((loginMember) != null) {
-                    memberBooking(loginMember, performContent);
-                } else {
-                    // Handle unsuccessful login
-                    nonMemberBooking(performContent);
-                }
+            MemberRepository mr = MemberRepository.getInstance();
+            // Check if login is successful
+            Member loginMember = MemberRepository.getLoginMember();
+            if ((loginMember) != null) {
+                memberBooking(loginMember, performContent);
+            } else {
+                // Handle unsuccessful login
+                nonMemberBooking(performContent);
+            }
         }
 
     }
@@ -73,7 +72,7 @@ public class BookingView {
             System.out.print("# 나이를 입력해주세요: ");
             int age = Integer.parseInt(sc.next());
             try {
-                if(age<1 || age > 150) System.out.println("비회원 예약 시작");
+                if (age < 1 || age > 150) System.out.println("비회원 예약 시작");
                 flag = true;
             } catch (NumberFormatException e) {
                 System.out.println("# 올바른 나이를 입력해주세요.");
@@ -93,7 +92,7 @@ public class BookingView {
             System.out.println("나이: " + age);
             System.out.println("전화번호: " + phoneNumber);
 
-            if(!name.isEmpty() && !phoneNumber.isEmpty() && flag) {
+            if (!name.isEmpty() && !phoneNumber.isEmpty() && flag) {
                 ArrayList<String> nonMember = new ArrayList<>();
                 nonMember.add(name);
                 nonMember.add(phoneNumber);
@@ -105,12 +104,13 @@ public class BookingView {
         }
     }
 
-    private static void nonMemberBookingStart(Perform perform,  ArrayList<String> nonMember) {
+    private static void nonMemberBookingStart(Perform perform, ArrayList<String> nonMember) {
         System.out.println("============================");
         BookingRepository.nonMemberBooking(perform, nonMember);
         waitForEnter();
         PerformView.getTicket();
     }
+
     public static void waitForEnter() {
         System.out.println(" ");
         System.out.println("==========엔터치면 계속 ...=========");
@@ -119,6 +119,12 @@ public class BookingView {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // 공연 시간 함수
+    public static String convertFormatDate(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 (E) HH:mm", Locale.KOREAN);
+        return dateTime.format(formatter);
     }
 
     private static void memberBooking(Member member, Perform perform) {
@@ -135,7 +141,7 @@ public class BookingView {
         System.out.println("예 / 아니오");
         String input = input(">> ");
 
-        if (input.equals("예")||input.equalsIgnoreCase("Y")|| input.equals("yes")) {
+        if (input.equals("예") || input.equalsIgnoreCase("Y") || input.equals("yes")) {
             if (!thread.isAlive()) {
                 thread = new MyThread(); // 새로운 스레드 객체 생성
                 thread.start(); // 스레드 시작
@@ -149,21 +155,24 @@ public class BookingView {
             System.out.println("## 회차를 선택해주세요 ##");
             System.out.println("------------------------");
             int count = 1;
+
             for (LocalDateTime localDateTime : perform.getDate().getShowTime()) {
-                System.out.printf("# %d. %s\n", count++, localDateTime);
+                final LocalDateTime time = localDateTime; // 최종 변수로 만들기
+                String timeString = convertFormatDate(time); // "yyyy년 MM월 dd일 (E) HH:mm"
+                System.out.printf("# %d. %s\n", count++, timeString);
             }
             System.out.println("------------------------");
             System.out.print(">> ");
             int option = Integer.parseInt(sc.next());
             LocalDateTime selectedShowTime = perform.getDate().getShowTime().get(option - 1);
-            System.out.println(selectedShowTime + " 해당일 "+perform.getCategory().getContentName()+"을/를 예매하겠습니다.");
+            System.out.println(convertFormatDate(selectedShowTime) + " 해당일 " + perform.getCategory().getContentName() + "을/를 예매하겠습니다.");
 
-            Map<String,Integer> party = getParty();
+            Map<String, Integer> party = getParty();
 //            int totalPrice = BookingRepository.getPerformPrice();
             String section = "";
-            if(!(perform.getCategory().equals(Category.MUSICAL))){
+            if (!(perform.getCategory().equals(Category.MUSICAL))) {
                 section = null;
-            }else{
+            } else {
 
                 System.out.println("==========================");
                 System.out.println("# 좌석 등급을 선택해주세요");
@@ -171,13 +180,13 @@ public class BookingView {
 
                 int cnt = 1;
                 for (Section value : Section.values()) {
-                    System.out.printf("# %d. %s\n",cnt,value.toString());
+                    System.out.printf("# %d. %s\n", cnt, value.toString());
                     cnt++;
                 }
                 System.out.println("-----------------------");
                 System.out.print(">> ");
                 int option2 = Integer.parseInt(sc.next());
-                section = Section.values()[option2-1].toString();
+                section = Section.values()[option2 - 1].toString();
 //                System.out.println(section);
                 if (!thread.isAlive()) {
                     thread = new MyThread(); // 새로운 스레드 객체 생성
@@ -217,9 +226,9 @@ public class BookingView {
     }
 
     public static String makeTitleShort(String title) {
-        if(title.length() > 10){
-            return title.substring(0, 10)+" ...";
-        }else{
+        if (title.length() > 10) {
+            return title.substring(0, 10) + " ...";
+        } else {
             return title;
         }
     }

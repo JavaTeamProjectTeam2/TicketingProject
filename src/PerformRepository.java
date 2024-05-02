@@ -152,7 +152,7 @@ public class PerformRepository {
             // 해당 날짜의 이벤트 제목 출력
             List<String> collected = performMap.entrySet().stream()
                     .filter(entry -> entry.getValue().getDate().getShowTime().stream() //ㅋ
-                            .anyMatch(showDateTime -> showDateTime.toLocalDate().equals(date)))
+                    .anyMatch(showDateTime -> showDateTime.toLocalDate().equals(date)))
                     .map(stringPerformEntry -> stringPerformEntry.getKey())
                     .collect(Collectors.toList());
 
