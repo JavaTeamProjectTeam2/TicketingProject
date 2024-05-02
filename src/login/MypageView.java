@@ -1,7 +1,6 @@
 package src.login;
 
 import src.MainView;
-
 import java.util.Comparator;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class MypageView {
             System.out.printf("  * 나이: %d\n", this.logMember.getAge());
             System.out.printf("  * 주소: %s\n", this.logMember.getAddress());
             System.out.printf("  * 포인트: %d\n", this.logMember.getPoint());
-            System.out.printf("  * 예매내역: %d\n", this.logMember.getPoint());
+            System.out.printf("  * 예매내역: %d건\n", this.logMember.getTicketList().size());
 
 
             while (true) {
@@ -76,10 +75,11 @@ public class MypageView {
         } else {
             int count = 0;
             while (true) {
+                System.out.println();
                 String oldPw = input("\n * 기존 비밀번호 입력 >> ");
                 if(!logMember.getPw().equals(oldPw)) {
                     count++;
-                    System.out.printf("📢 비밀번호가 일치하지 않습니다. (%d회 오류)\n", count);
+                    System.out.printf("\n📢 비밀번호가 일치하지 않습니다. (%d회 오류)\n", count);
                     if(count == 3) {
                         System.out.println("📢 비밀번호를 3회 이상 틀리셨습니다. 다음에 시도해주세요.");
                         loginManager.disableLogin(logMember);
@@ -128,13 +128,14 @@ public class MypageView {
         } else {
 
             tList.stream()
-                    .sorted(Comparator.comparing((Ticket t) -> t.getDate()).reversed())
-                    .collect(Collectors.toList());
+                    .sorted(Comparator.comparing((Ticket t) -> t.getDate()).reversed());
+
             for (int i = 0; i < tList.size(); i++) {
                 Ticket t = tList.get(i);
-                System.out.printf("  %d. %s\t| %s\t| %s\t| %s", i + 1,
+                System.out.printf("  %d. %s\t| %s\t| %s\t| %s\n", i + 1,
                         t.getTitle(), t.getDate(), t.getSeat(), t.getPrice() );
             }
+            System.out.println("\n----------------------");
         }
 
     }
@@ -147,9 +148,9 @@ public class MypageView {
         if (!myTicketList.isEmpty()) {
             int tNum;
             while (true) {
-                tNum = Integer.parseInt(input("취소할 티켓 번호 (0: 뒤로가기) >> "));
+                tNum = Integer.parseInt(input("\n취소할 티켓 번호 (0: 뒤로가기) >> "));
 
-                if (!(tNum > 0 && tNum < myTicketList.size())) {
+                if (!(tNum > 0 && tNum <= myTicketList.size())) {
                     if (tNum == 0) showMemberInfo();
                     System.out.println("📢 티켓 번호만 입력하세요.");
                 } else {

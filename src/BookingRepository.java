@@ -1,6 +1,7 @@
 package src;
 
 import src.login.Member;
+import src.login.MemberRepository;
 import src.login.Ticket;
 
 import java.time.LocalDateTime;
@@ -290,6 +291,8 @@ public class BookingRepository {
             if(goThrough){
                 ticket = new Ticket(perform.getTitle(), selectedShowTime.toString() , "( "+selectedRow+ ", " + selectedCol+" )", totalPrice.get("totalPrice")) ;
                 updateTicket(ticket);
+                MemberRepository.addTicket(member, ticket);
+                member.setPoint(totalPrice.get("totalPrice"));
                 System.out.printf("🎟️ %s님 <%s> %d매 예매되었습니다.\n",member.getName(), perform.getTitle(), totalPrice.get("ticketCount"));
                 System.out.println("🎟 예매내역은 마이페이지에서 조회 가능합니다.");
 
