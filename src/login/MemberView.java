@@ -113,7 +113,7 @@ public class MemberView {
                 phone = input("# 휴대폰(ex. 01012349876): ");
                 if(!repository.phoneCheck(phone)) {
                     System.out.println("휴대폰 번호가 유효하지 않습니다.\nex) 01012349876, '-' 제외한 숫자만 입력");
-                } else if(!repository.containsPhone(phone)) {
+                } else if(repository.containsPhone(phone)) {
                     System.out.println("중복되는 휴대폰 번호입니다. 다시 입력 바랍니다.");
                 } else break;
             }

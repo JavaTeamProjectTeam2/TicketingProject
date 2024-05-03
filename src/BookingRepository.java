@@ -139,9 +139,9 @@ public class BookingRepository {
 
             case 2:
                 System.out.println("🏧 무통장입금");
-                System.out.printf("🏧 1002888000000 (예금주: (주)컴퍼니)로 ₩%d 입금해주세요.\n", totalPrice.get("totalPrice"));
+                System.out.printf("🏧 1002-888-000-123 (예금주: (주)2조짱짱)로 ₩%d 입금해주세요.\n", totalPrice.get("totalPrice"));
                 System.out.printf("☑️ 입금완료시 '%s' 구매자 이름과 '%d' 입금 금액을 적어주세요.\n", name, totalPrice.get("totalPrice"));
-                System.out.print("🏧 1002888000000 (예금주: (주)컴퍼니) \n");
+//                System.out.print("🏧 1002888000000 (예금주: (주)컴퍼니) \n");
                 System.out.print("🧑 송금인: ");
                 String accountNo = sc.nextLine();
                 System.out.print("💸 입금한 금액: ");
@@ -235,6 +235,7 @@ public class BookingRepository {
         System.out.println("====================================================================================");
 
         //시간 받기 localTime1
+        long localTime1 = System.currentTimeMillis();
         int row1 = (int) (Math.random() * 6) + 1;
         int col1 = (int) (Math.random() * 5) +1;
         int row2 = (int) (Math.random() * 4) + 6; // row2는 6부터 9까지
@@ -267,15 +268,16 @@ public class BookingRepository {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        long localTime1 = System.currentTimeMillis();
 
         // 사용자 입력 처리
-        int selectedRow = Integer.parseInt(input.split(",")[0]); // 입력에서 행 추출
-        int selectedCol = Integer.parseInt(input.split(",")[1]); // 입력에서 열 추출
+        String[] parts = input.split(",");
+        int selectedRow = Integer.parseInt(parts[0].trim()); // 입력에서 행 추출
+        int selectedCol = Integer.parseInt(parts[1].trim()); // 입력에서 열 추출
+
 
         // 시간 받기
         long localTime2 = System.currentTimeMillis();
-
+//        System.out.printf("시작 시간: %d, 끝난 시간: %d \n", localTime1, localTime2);
         // 시간 제한 10초 설정
         if (localTime2 - localTime1 < 10000 && (isValidSeat(row1, col1, selectedRow, selectedCol) || isValidSeat(row2, col2, selectedRow, selectedCol)))  {
             System.out.println("🎉🎉 축하합니다 🎉🎉");
@@ -286,7 +288,6 @@ public class BookingRepository {
 //            ticket = new Ticket(perform.getTitle(), selectedShowTime.toString() , "( "+selectedRow+ ", " + selectedCol+" )", totalPrice.get("totalPrice")) ;
 //            System.out.println(ticket);
 
-
             boolean goThrough = payTicket(totalPrice, member.getName());
             if(goThrough){
                 ticket = new Ticket(perform.getTitle(), selectedShowTime.toString() , "( "+selectedRow+ ", " + selectedCol+" )", totalPrice.get("totalPrice")) ;
@@ -295,8 +296,8 @@ public class BookingRepository {
                 member.setPoint(totalPrice.get("totalPrice"));
                 System.out.printf("🎟️ %s님 <%s> %d매 예매되었습니다.\n",member.getName(), perform.getTitle(), totalPrice.get("ticketCount"));
                 System.out.println("🎟 예매내역은 마이페이지에서 조회 가능합니다.");
-
             } else{
+                //결제 미진행
                 System.out.printf("❌ %s님 결제 미진행으로 예매 실패했습니다.",member.getName());
                 ticket = null;
             }
@@ -309,7 +310,6 @@ public class BookingRepository {
             updateTicket(ticket);
         }
 
-            waitForEnter();
             MainView.start();
     }
 
