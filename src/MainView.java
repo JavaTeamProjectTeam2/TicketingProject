@@ -18,7 +18,7 @@ public class MainView {
 
         while (true){
             System.out.println("----------------------------------------");
-            System.out.println("          🎫  티켓팅 자바조  🎫");
+            System.out.println("         🎫  티켓팅 자바조  🎫");
             System.out.println("---------------------------------------- *");
             if(MemberRepository.getLoginMember() != null) {
                 System.out.println("\t1️⃣ 마이페이지");
