@@ -90,7 +90,7 @@ public class MemberView {
             }
             String pw;
             while (true) {
-                pw = input("# 비밀번호 (영문 숫자 . !)\n: ");
+                pw = input("# 비밀번호 (4글자 이상, 영문 숫자 . !)\n: ");
                 if (pw.isEmpty()) {
                     System.out.println("비밀번호 입력 부탁드립니다.");
                     continue;
