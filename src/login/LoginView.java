@@ -145,7 +145,7 @@ public class LoginView {
             if(foundMember != null) {
                 if(foundMember.getPhone().equals(inputPhone)) {
                     if(checkCodeView(foundMember)) {
-                        System.out.printf("\n📢 %s님의 비밀번호: %s \n", foundMember.getName(), foundMember.getPhone());
+                        System.out.printf("\n📢 %s님의 비밀번호: %s \n", foundMember.getName(), foundMember.getPw());
                         break;
                     }
                 }
