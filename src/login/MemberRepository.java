@@ -225,7 +225,7 @@ public class MemberRepository {
     public Ticket removeTicket(Member member, int index) {
 
         List<Ticket> ticketList = member.getTicketList();
-        Ticket removed = ticketList.remove(index - 1);
+        Ticket removed = ticketList.remove(index);
         member.setTicketList(ticketList);
         saveFile();
         return removed;

@@ -130,14 +130,14 @@ public class LoginView {
             while (true) {
                 inputEmail = input("이메일 >> ");
                 if(!mr.emailCheck(inputEmail)) {
-                    System.out.println("유효한 이메일이 아닙니다. 다시 입력 바랍니다");
+                    System.out.println("📢 유효한 이메일이 아닙니다. 다시 입력 바랍니다");
                 } else break;
             }
             String inputPhone = null;
             while (true) {
                 inputPhone = input("휴대폰 번호 >> ");
                 if(!mr.phoneCheck(inputPhone)) {
-                    System.out.println("휴대폰 번호가 유효하지 않습니다.\nex) 01012349876, '-' 제외한 숫자만 입력");
+                    System.out.println("📢 휴대폰 번호가 유효하지 않습니다.\nex) 01012349876, '-' 제외한 숫자만 입력");
                 } else break;
             }
 

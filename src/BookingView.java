@@ -92,7 +92,7 @@ public class BookingView {
             }
 
             // 전화번호 입력
-            System.out.print("# 전화번호를 입력해주세요: ");
+            System.out.print("# 휴대폰 번호를 입력해주세요: ");
             String phoneNumber = sc.nextLine();
             if (phoneNumber.isEmpty()) {
                 System.out.println("올바른 번호를 입력해주세요!!");
