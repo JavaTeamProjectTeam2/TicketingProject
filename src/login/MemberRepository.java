@@ -191,7 +191,8 @@ public class MemberRepository {
 
     //비번확인
     public boolean passwordCheck(String pw) {
-        String message = "^[a-zA-Z0-9.!]*$";
+//        String message = "^[a-zA-Z0-9.!]*$";
+        String message = "^[a-zA-Z0-9.!]{4,}$";
         if(pw.matches(message)) {
             return true;
         }

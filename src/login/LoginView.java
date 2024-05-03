@@ -67,7 +67,7 @@ public class LoginView {
 
                 if (state == LogState.LOG_IN) {
                     Member loggedMember = mr.findMember(email);
-                    System.out.printf("\n   ✨ %s님 환영합니다 ✨\n\n", loggedMember.getName());
+                    System.out.printf("\n   ✨ %s님 환영합니다 ✨\n", loggedMember.getName());
 
                     logMember = loggedMember;
                     MemberRepository.setLoginMember(loggedMember);

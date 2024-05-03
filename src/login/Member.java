@@ -31,16 +31,6 @@ public class Member implements Serializable {
         this.loginEnabled = true;
     }
 
-    public Member(String name, String email, String pw, Integer age, String address, List<Ticket> ticketList) {
-        this.name = name;
-        this.email = email;
-        this.pw = pw;
-        this.age = age;
-        this.address = address;
-        this.ticketList = ticketList;
-        this.loginEnabled = true;
-    }
-
     public String getName() {
         return name;
     }
