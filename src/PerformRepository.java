@@ -172,14 +172,6 @@ public class PerformRepository {
         return eventList;
     }
 
-
-
-
-
-
-
-
-
 //        List<String> eachContents = new ArrayList<>();
 ////        List<String> titleByCategory = performMap.entrySet().stream()
 ////                .filter(t -> t.getValue().getCategory() == )
