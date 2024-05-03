@@ -30,12 +30,12 @@ public class PerformRepository {
                         LocalDateTime.of(2024, 5, 26, 19, 0, 0)));
         performMap.put("2024 RIIZE FAN－CON ‘RIIZING DAY’ in SEOUL",
                 new Perform("2024 RIIZE FAN－CON ‘RIIZING DAY’ in SEOUL", CONCERT, "잠실실내체육관", SEVEN.getAge(), "100분",
-                        LocalDateTime.of(2024, 5, 10, 18, 0, 0),
-                        LocalDateTime.of(2024, 5, 11, 16, 0, 0)));
+                        LocalDateTime.of(2024, 5, 4, 18, 0, 0),
+                        LocalDateTime.of(2024, 5, 5, 16, 0, 0)));
         performMap.put("LE SSERAFIM FAN MEETING ‘FEARNADA’ 2024 S/S - SEOUL",
                 new Perform("LE SSERAFIM FAN MEETING ‘FEARNADA’ 2024 S/S - SEOUL", CONCERT, "잠실실내체육관", SEVEN.getAge(), "100분",
-                        LocalDateTime.of(2024, 5, 12, 18, 0, 0),
-                        LocalDateTime.of(2024, 5, 13, 17, 0, 0)));
+                        LocalDateTime.of(2024, 5, 11, 18, 0, 0),
+                        LocalDateTime.of(2024, 5, 12, 17, 0, 0)));
         performMap.put("시카고",
                 new Perform("시카고", MUSICAL, "디큐브 링크아트센터", FOURTEEN.getAge(), "145분",
                         LocalDateTime.of(2024, 6, 7, 19, 30, 0),
@@ -52,11 +52,11 @@ public class PerformRepository {
                         LocalDateTime.of(2024, 5, 12, 18, 30, 0)));
         performMap.put("마리 앙투아네트",
                 new Perform("마리 앙투아네트", MUSICAL, "디큐브 링크아트센터", SEVEN.getAge(), "180분",
-                        LocalDateTime.of(2024, 5, 18, 14, 30, 0),
-                        LocalDateTime.of(2024, 5, 18, 19, 30, 0),
-                        LocalDateTime.of(2024, 5, 19, 14, 0, 0),
-                        LocalDateTime.of(2024, 5, 19, 19, 0, 0),
-                        LocalDateTime.of(2024, 5, 20, 15, 0, 0)));
+                        LocalDateTime.of(2024, 5, 10, 14, 30, 0),
+                        LocalDateTime.of(2024, 5, 10, 19, 30, 0),
+                        LocalDateTime.of(2024, 5, 11, 14, 0, 0),
+                        LocalDateTime.of(2024, 5, 11, 19, 0, 0),
+                        LocalDateTime.of(2024, 5, 12, 15, 0, 0)));
         performMap.put("프랑켄슈타인",
                 new Perform("프랑켄슈타인", MUSICAL, "블루스퀘어 신한카드홀", SEVEN.getAge(), "170분",
                         LocalDateTime.of(2024, 6, 7, 14, 30, 0),

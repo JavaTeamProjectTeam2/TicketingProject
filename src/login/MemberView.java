@@ -48,12 +48,12 @@ public class MemberView {
                     loginView.showFindPwView();
                     break;
                 case "9":
-                    System.out.println("프로그램을 종료합니다.");
+                    System.out.println("📢 프로그램을 종료합니다.");
                     System.exit(0);
                 case "0":
                     start();
                 default:
-                    System.out.println("메뉴에 있는 숫자만 입력해주세요.");
+                    System.out.println("📢 메뉴에 있는 숫자만 입력해주세요.");
             }
         }
 
@@ -65,7 +65,7 @@ public class MemberView {
 
         while (true) {
             System.out.println("----------------------------------------");
-            System.out.println("           회원가입");
+            System.out.println("             🎈 회원가입");
             System.out.println("---------------------------------------- *");
             String name = input("# 이름: ");
             if (name.isEmpty()) {
