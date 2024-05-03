@@ -19,7 +19,7 @@ public class MemberView {
 
             MemberRepository.loadFile();
 
-            System.out.println("----------------------------------------");
+            System.out.println("\n----------------------------------------");
             System.out.println("\t1️⃣ 로그인");
             System.out.println("\t2️⃣ 회원 가입");
             System.out.println("\t3️️⃣ 아이디 찾기");
@@ -53,7 +53,7 @@ public class MemberView {
                 case "0":
                     start();
                 default:
-                    System.out.println("숫자만 입력해주세요.");
+                    System.out.println("메뉴에 있는 숫자만 입력해주세요.");
             }
         }
 
