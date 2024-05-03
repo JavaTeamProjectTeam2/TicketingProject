@@ -17,9 +17,9 @@ public class MainView {
         System.out.println("공연 관람을 위한 티켓팅입니다~~~");
 
         while (true){
-            System.out.println("----------------------------");
-            System.out.println("           티켓팅");
-            System.out.println("---------------------------- *");
+            System.out.println("----------------------------------------");
+            System.out.println("           🎫  티켓팅  🎫");
+            System.out.println("---------------------------------------- *");
             if(MemberRepository.getLoginMember() != null) {
                 System.out.println("1️⃣ 마이페이지");
             } else {

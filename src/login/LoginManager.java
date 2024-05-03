@@ -13,7 +13,7 @@ public class LoginManager {
         lastDisableTime = System.currentTimeMillis(); // 현재 시간 설정
         member.setLastDisabledTime(lastDisableTime);
 
-        System.out.printf("📢 로그인이 %d초 동안 불가능합니다. 잠시 후 다시 시도해주세요.\n", disableDuration/1000);
+        System.out.printf("\n📢 로그인이 %d초 동안 불가능합니다. 잠시 후 다시 시도해주세요.\n", disableDuration/1000);
         MemberRepository.saveFile();
     }
 

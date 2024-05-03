@@ -290,7 +290,7 @@ public class BookingRepository {
 
             boolean goThrough = payTicket(totalPrice, member.getName());
             if(goThrough){
-                ticket = new Ticket(perform.getTitle(), selectedShowTime.toString() , "( "+selectedRow+ ", " + selectedCol+" )", totalPrice.get("totalPrice")) ;
+                ticket = new Ticket(perform.getTitle(), convertFormatDate(selectedShowTime) , "( "+selectedRow+ ", " + selectedCol+" )", totalPrice.get("totalPrice")) ;
                 updateTicket(ticket);
                 MemberRepository.addTicket(member, ticket);
                 member.setPoint(totalPrice.get("totalPrice"));

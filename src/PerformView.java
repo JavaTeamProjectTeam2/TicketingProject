@@ -16,13 +16,13 @@ public class PerformView {
     public static void getTicket() {
 //        makePerformFile();
 
-        System.out.println("----------------------------");
+        System.out.println("----------------------------------------");
         System.out.println("       공연 조회 및 예매");
-        System.out.println("---------------------------- *");
+        System.out.println("---------------------------------------- *");
         System.out.println("1️⃣ 이 주의 공연/전시 목록");
         System.out.println("2️⃣ 카테고리 별 공연/전시 목록");
         System.out.println("0️⃣ 뒤로가기");
-        System.out.println("======================");
+        System.out.println("----------------------------------------");
 
         String option = input(">> ");
         switch (option) {
@@ -46,8 +46,8 @@ public class PerformView {
     private static void showTheseDaysEvent() {
 //        PerformRepository.theseDaysEvent();
         List<String> recentTitles = PerformRepository.theseDaysEvent();
-        System.out.println("-------------------------");
-        System.out.println("# 예매하고 싶으신 공연/전시의 번호를 입력해주세요");
+        System.out.println("----------------------------------------");
+        System.out.println("📢 예매하고 싶으신 공연/전시의 번호를 입력해주세요");
 //        System.out.print(">> ");
         String option =input(">> ");
 
@@ -75,10 +75,10 @@ public class PerformView {
     }
 
     private static void showOptions() {
-        System.out.println("----------------------------");
+        System.out.println("----------------------------------------");
         System.out.println("     카테고리 별 추천 파트");
-        System.out.println("---------------------------- *");
-        System.out.println("## 뮤지컬, 콘서트, 전시회, 가족컨텐츠 중 선택하세요 ##");
+        System.out.println("---------------------------------------- *");
+        System.out.println("📢 뮤지컬, 콘서트, 전시회, 가족컨텐츠 중 선택하세요");
         System.out.println("1️⃣ " + CONCERT.getContentName() );
         System.out.println("2️⃣ " + MUSICAL.getContentName());
         System.out.println("3️⃣ " + EXHIBIT.getContentName());
@@ -108,16 +108,16 @@ public class PerformView {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("----------------------------");
+        System.out.println("----------------------------------------");
         System.out.printf("     카테고리 별 추천           \n");
-        System.out.println("----------------------------");
+        System.out.println("---------------------------------------- *");
         int count = 0;
         for (String title : titleByCategory) {
             count++;
             System.out.println("# " + count +". "+ title);
         }
         System.out.println("-----------------------------------------");
-        System.out.println("## 예매하고싶은 공연/전시의 번호를 입력해주세요");
+        System.out.println("📢 예매하고싶은 공연/전시의 번호를 입력해주세요");
         System.out.print(">> ");
 //        int option = Integer.parseInt(sc.nextLine());
 //        String sOption = (input(">> "));
