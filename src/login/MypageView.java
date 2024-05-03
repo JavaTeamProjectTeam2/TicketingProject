@@ -92,7 +92,7 @@ public class MypageView {
             while (true) {
                 newPw = input("\n * 새 비밀번호 입력 >> ");
                 if(!mr.passwordCheck(newPw)) {
-                    System.out.println("📢 비밀번호는 특수문자 ., ! 사용 가능합니다.");
+                    System.out.println("📢 비밀번호는 특수문자 . ! 사용 가능합니다.");
                 } else break;
             }
             logMember.setPw(newPw);
