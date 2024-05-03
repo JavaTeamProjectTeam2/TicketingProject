@@ -43,6 +43,7 @@ public class MainView {
 //            }
 
 
+
             switch (option){
                 case "1":
                     if(MemberRepository.getLoginMember() != null) {
