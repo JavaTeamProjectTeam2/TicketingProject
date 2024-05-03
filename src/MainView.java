@@ -53,7 +53,7 @@ public class MainView {
                     }
                     break;
                 case "2":
-                    System.out.println("공연 예매를 시작합니다");
+//                    System.out.println("공연 예매를 시작합니다");
                     PerformView.getTicket();
                     break;
                 case "3":

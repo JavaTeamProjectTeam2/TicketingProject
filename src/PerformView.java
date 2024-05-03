@@ -17,11 +17,11 @@ public class PerformView {
 //        makePerformFile();
 
         System.out.println("----------------------------------------");
-        System.out.println("       공연 조회 및 예매");
+        System.out.println("            공연 조회 및 예매");
         System.out.println("---------------------------------------- *");
-        System.out.println("1️⃣ 이 주의 공연/전시 목록");
-        System.out.println("2️⃣ 카테고리 별 공연/전시 목록");
-        System.out.println("0️⃣ 뒤로가기");
+        System.out.println("\t1️⃣ 이 주의 공연/전시 목록");
+        System.out.println("\t2️⃣ 카테고리 별 공연/전시 목록");
+        System.out.println("\t0️⃣ 뒤로가기");
         System.out.println("----------------------------------------");
 
         String option = input(">> ");
@@ -31,59 +31,62 @@ public class PerformView {
                 showTheseDaysEvent();
                 break;
             case "2":
-                System.out.println("카테고리별로 추천");
+//                System.out.println("카테고리별로 추천");
                 showOptions();
                 break;
             case "0":
                 System.out.println("뒤로가기");
                 break;
             default:
-                System.out.println("잘못 입력했습니다");
+                System.out.println("잘못 입력하였습니다.");
                 break;
         }
     }
 
     private static void showTheseDaysEvent() {
 //        PerformRepository.theseDaysEvent();
-        List<String> recentTitles = PerformRepository.theseDaysEvent();
-        System.out.println("----------------------------------------");
-        System.out.println("📢 예매하고 싶으신 공연/전시의 번호를 입력해주세요");
-//        System.out.print(">> ");
-        String option =input(">> ");
 
-        String selectedTitle = "";
-        switch (option) {
-            case "1":
-                selectedTitle = recentTitles.get(0);
-                break;
-            case "2":
-                selectedTitle = recentTitles.get(1);
-                break;
-            case "3":
-                selectedTitle = recentTitles.get(2);
-                break;
-            default:
-                System.out.println("error");
-                break;
+        String selectedTitle = null;
+        shownum: while (true) {
+            List<String> recentTitles = PerformRepository.theseDaysEvent();
+            System.out.println("----------------------------------------");
+            System.out.println("📢 예매하고 싶으신 공연/전시의 번호를 입력해주세요.");
+//        System.out.print(">> ");
+            String option =input(">> ");
+
+            selectedTitle = "";
+            switch (option) {
+                case "1":
+                    selectedTitle = recentTitles.get(0);
+                    break shownum;
+                case "2":
+                    selectedTitle = recentTitles.get(1);
+                    break shownum;
+                case "3":
+                    selectedTitle = recentTitles.get(2);
+                    break shownum;
+                default:
+                    System.out.println("🚨 옵션의 번호를 입력하세요 🚨");
+            }
         }
 
         Perform selectedPerform = PerformRepository.getSelectedTitle(selectedTitle);
         // 예매 시작
         booking(selectedPerform);
         waitForEnter();
-        MainView.start();
+//        MainView.start();
     }
 
     private static void showOptions() {
         System.out.println("----------------------------------------");
-        System.out.println("     카테고리 별 추천 파트");
+        System.out.println("         카테고리 별 추천 파트");
         System.out.println("---------------------------------------- *");
-        System.out.println("📢 뮤지컬, 콘서트, 전시회, 가족컨텐츠 중 선택하세요");
-        System.out.println("1️⃣ " + CONCERT.getContentName() );
-        System.out.println("2️⃣ " + MUSICAL.getContentName());
-        System.out.println("3️⃣ " + EXHIBIT.getContentName());
-        System.out.println("4️⃣ " + FAMILY.getContentName());
-        System.out.println("0️⃣ 뒤로가기");
+        System.out.println("📢 예매하고 싶으신 카테고리 번호를 입력해주세요.");
+        System.out.println("\t1️⃣ " + CONCERT.getContentName() );
+        System.out.println("\t2️⃣ " + MUSICAL.getContentName());
+        System.out.println("\t3️⃣ " + EXHIBIT.getContentName());
+        System.out.println("\t4️⃣ " + FAMILY.getContentName());
+        System.out.println("\t0️⃣ 뒤로가기");
         System.out.print(">>> ");
 
         int option = sc.nextInt();
@@ -117,7 +120,7 @@ public class PerformView {
             System.out.println("# " + count +". "+ title);
         }
         System.out.println("-----------------------------------------");
-        System.out.println("📢 예매하고싶은 공연/전시의 번호를 입력해주세요");
+        System.out.println("📢 예매하고싶은 공연/전시의 번호를 입력해주세요.");
         System.out.print(">> ");
 //        int option = Integer.parseInt(sc.nextLine());
 //        String sOption = (input(">> "));
