@@ -17,7 +17,7 @@ public class PerformView {
 //        makePerformFile();
 
         System.out.println("----------------------------------------");
-        System.out.println("            공연 조회 및 예매");
+        System.out.println("         🎤 공연 조회 및 예매 🎨");
         System.out.println("---------------------------------------- *");
         System.out.println("\t1️⃣ 이 주의 공연/전시 목록");
         System.out.println("\t2️⃣ 카테고리 별 공연/전시 목록");

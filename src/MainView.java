@@ -14,19 +14,19 @@ import static src.SimpleInput.sc;
 public class MainView {
     public static final String ROOT_PATH = "/Users/jeongin/Desktop/javaTicketing";
     public static void start() {
-        System.out.println("공연 관람을 위한 티켓팅입니다~~~");
+//        System.out.println("공연 관람을 위한 티켓팅입니다~~~");
 
         while (true){
             System.out.println("----------------------------------------");
-            System.out.println("           🎫  티켓팅  🎫");
+            System.out.println("          🎫  티켓팅 자바조  🎫");
             System.out.println("---------------------------------------- *");
             if(MemberRepository.getLoginMember() != null) {
-                System.out.println("1️⃣ 마이페이지");
+                System.out.println("\t1️⃣ 마이페이지");
             } else {
-                System.out.println("1️⃣ 회원 정보");
+                System.out.println("\t1️⃣ 회원 정보");
             }
-            System.out.println("2️⃣ 공연 조회 및 예매");
-            System.out.println("3️⃣ 프로그램 종료");
+            System.out.println("\t2️⃣ 공연 조회 및 예매");
+            System.out.println("\t3️⃣ 프로그램 종료");
 //            System.out.print(">> ");
 //            int option = Integer.parseInt(sc.nextLine());
 //            int option = 0; // option 변수 초기화
