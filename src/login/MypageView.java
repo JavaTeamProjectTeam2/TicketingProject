@@ -45,7 +45,7 @@ public class MypageView {
 
 
             while (true) {
-                System.out.println("\n 1️⃣ 비밀번호 수정 | 2️⃣ 주소 수정 | 3️⃣ 예매내역 취소 | 4️⃣ 로그아웃 | 0️⃣ 뒤로가기");
+                System.out.println("\n 1️⃣ 비밀번호 수정 | 2️⃣ 주소 수정 | 3️⃣ 예매내역 | 4️⃣ 로그아웃 | 0️⃣ 뒤로가기");
                 String menuOpt = input(">> ");
                 switch (menuOpt) {
                     case "1":
@@ -108,7 +108,7 @@ public class MypageView {
 
             newAddress = input("\n * 새 주소를 입력하세요. >>");
             if (!mr.addressCheck(newAddress)) {
-                System.out.println("주소를 잘 못 입력하셨습니다.\nex)서울특별시 마포구 공덕동");
+                System.out.println("주소를 잘못 입력하셨습니다.\nex)서울특별시 마포구 공덕동");
             } else {
                 logMember.setAddress(newAddress);
                 MemberRepository.saveFile();
@@ -119,13 +119,13 @@ public class MypageView {
 
     }
 
-    public void showTicketList(List<Ticket> tList) {
+    public List<Ticket> showTicketList(List<Ticket> tList) {
         System.out.println("----------------------------------------");
-        System.out.printf("      %s님의 예매 내역\n", logMember.getName());
+        System.out.printf("        🎫 %s님의 예매 내역\n", logMember.getName());
         System.out.println("---------------------------------------- *");
 
         if (tList.isEmpty()) {
-            System.out.println("\t  예매내역이 없습니다.");
+            System.out.println("\t -- 예매내역이 없습니다. --");
         } else {
 
             List<Ticket> sortedList = tList.stream()
@@ -138,28 +138,29 @@ public class MypageView {
                         t.getTitle(), t.getDate(), t.getSeat(), t.getPrice() );
             }
             System.out.println("\n----------------------------------------");
+            return sortedList;
         }
-
+        return null;
     }
 
     public void cancelTicket() {
         List<Ticket> myTicketList = logMember.getTicketList();
 
-        showTicketList(myTicketList);
+        List<Ticket> sortedList = showTicketList(myTicketList);
 
-        if (!myTicketList.isEmpty()) {
+        if (!sortedList.isEmpty()) {
             int tNum;
             while (true) {
                 tNum = Integer.parseInt(input("\n취소할 티켓 번호 (0: 뒤로가기) >> "));
 
-                if (!(tNum > 0 && tNum <= myTicketList.size())) {
+                if (!(tNum > 0 && tNum <= sortedList.size())) {
                     if (tNum == 0) showMemberInfo();
                     System.out.println("📢 티켓 번호만 입력하세요.");
                 } else {
                     break;
                 }
             }
-            Ticket removedTicket = mr.removeTicket(logMember, tNum);
+            Ticket removedTicket = mr.removeTicket(logMember, tNum - 1);
             System.out.printf("\n [%s] 티켓을 취소했습니다.\n", ellipsisString(removedTicket.getTitle()));
             System.out.println();
         } else {

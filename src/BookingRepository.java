@@ -77,9 +77,11 @@ public class BookingRepository {
         Map<String, Integer> totalPrice = getPerformPrice(perform, member, party, section);
         boolean goThrough = payTicket(totalPrice, member.getName());
         if(goThrough){
-            ticket = new Ticket(perform.getTitle(), selectedShowTime.toString() , section, totalPrice.get("totalPrice"));
+            ticket = new Ticket(perform.getTitle(), convertFormatDate(selectedShowTime) , section, totalPrice.get("totalPrice"));
             System.out.printf("🎟️ %s님 <%s> %d매 예매되었습니다.\n",member.getName(), perform.getTitle(), totalPrice.get("ticketCount"));
             System.out.println("🎟 예매내역은 마이페이지에서 조회 가능합니다.");
+            MemberRepository.addTicket(member, ticket);
+            member.setPoint(totalPrice.get("totalPrice"));
         }else{
             System.out.printf("❌ %s님 결제 미진행으로 예매 실패했습니다.",member.getName());
             ticket = null;
