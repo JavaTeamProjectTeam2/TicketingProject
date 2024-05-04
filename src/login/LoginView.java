@@ -11,7 +11,7 @@ public class LoginView {
     private LoginManager loginManager = new LoginManager();
 
     public Member getLogMember() {
-        return mr.getLoginMember();
+        return MemberRepository.getLoginMember();
     }
 
 
@@ -35,20 +35,21 @@ public class LoginView {
             String email;
             while (true) {
                 if(loginCount == 0) {
-                    System.out.println("📢 이메일 전부 입력해주세요. (ex. xxx@xxx.com)");
+                    System.out.println("📢 이메일 주소를 입력해주세요. (ex.example@gmail.com)");
                 }
                 email = input("이메일 >> ");
                 if(!mr.emailCheck(email)) {
-                    System.out.println("📢 이메일 형식이 아닙니다. 다시 입력해주세요. (ex. xxx@xxx.com)\n");
+                    System.out.println("📢 이메일 형식에 맞게 다시 입력해주세요. (ex.example@gmail.com)\n");
                 } else {
+                    Member checkMember = mr.findMember(email);
                     // 이메일 형식은 일치한 상태
-                    if(mr.findMember(email) == null) {
+                    if(checkMember == null) {
                         System.out.println("존재하지 않는 회원입니다.");
                         continue;
                     }
                     // 로그인 불가 상태면 남은 시간 출력
-                    if(!loginManager.isLoginEnabled(mr.findMember(email))) {
-                        loginManager.leftTime(mr.findMember(email));
+                    if(!loginManager.isLoginEnabled(checkMember)) {
+                        loginManager.leftTime(checkMember);
                         MainView.start();
                     } else {
                         break;
@@ -82,7 +83,7 @@ public class LoginView {
 
                 }
                 if(loginCount == 3) {
-                    System.out.println("\n📢 로그인 시도 횟수를 초과했습니다.");
+                    System.out.println("\n📢 비밀번호를 3회 이상 잘못 입력하셨습니다.");
                     loginManager.disableLogin(mr.findMember(email));
                     break login;
                 }
@@ -93,7 +94,7 @@ public class LoginView {
 
     public void showFindIdView() {
         System.out.println("----------------------------------------");
-        System.out.println("        📧 가입한 이메일 찾기");
+        System.out.println("            📧 이메일 찾기");
         System.out.println("---------------------------------------- *");
 
         while (true) {
@@ -193,10 +194,10 @@ public class LoginView {
                         else if(inputOpt.equals("2")) {
                             continue code;
                         } else if(inputOpt.equals("0")) {
-                            System.out.println("📢 메인메뉴로 이동합니다.");
+                            System.out.println("📢 시작화면으로 이동합니다.");
                             MainView.start();
                         } else {
-                            System.out.println("\n📢 메뉴 숫자만 입력해주세요. (1, 2, 0 중 하나)");
+                            System.out.println("\n📢 메뉴 번호만 입력해주세요.");
                         }
                     }
                 }

@@ -22,7 +22,7 @@ public class MemberView {
             System.out.println("\n----------------------------------------");
             System.out.println("\t1️⃣ 로그인");
             System.out.println("\t2️⃣ 회원 가입");
-            System.out.println("\t3️️⃣ 아이디 찾기");
+            System.out.println("\t3️️⃣ 이메일 찾기");
             System.out.println("\t4️⃣ 비번 찾기");
             System.out.println("\t9️⃣ 프로그램 종료");
             System.out.println("\t0️⃣ 뒤로 가기");
@@ -53,7 +53,7 @@ public class MemberView {
                 case "0":
                     start();
                 default:
-                    System.out.println("📢 메뉴에 있는 숫자만 입력해주세요.");
+                    System.out.println("📢 메뉴 번호만 입력해주세요.");
             }
         }
 
@@ -115,7 +115,7 @@ public class MemberView {
             while(true) {
                 phone = input("# 휴대폰(ex. 01012349876): ");
                 if(!repository.phoneCheck(phone)) {
-                    System.out.println("휴대폰 번호가 유효하지 않습니다.\nex) 01012349876, '-' 제외한 숫자만 입력");
+                    System.out.println("휴대폰 번호가 유효하지 않습니다.\nex) 01012345678, '-' 제외한 숫자만 입력");
                 } else if(repository.containsPhone(phone)) {
                     System.out.println("중복되는 휴대폰 번호입니다. 다시 입력 바랍니다.");
                 } else break;

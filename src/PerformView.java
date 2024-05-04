@@ -80,7 +80,7 @@ public class PerformView {
 
     private static void showOptions() {
         System.out.println("----------------------------------------");
-        System.out.println("         카테고리 별 추천 파트");
+        System.out.println("        🔹 카테고리 별 추천 파트 🔹");
         System.out.println("---------------------------------------- *");
         System.out.println("📢 예매하고 싶으신 카테고리 번호를 입력해주세요.");
         System.out.println("\t1️⃣ " + CONCERT.getContentName() );
