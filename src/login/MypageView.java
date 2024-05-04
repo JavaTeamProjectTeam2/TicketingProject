@@ -36,14 +36,14 @@ public class MypageView {
             System.out.printf("  * 이름: %s\n", this.logMember.getName());
             System.out.printf("  * 이메일: %s\n", this.logMember.getEmail());
             System.out.printf("  * 나이: %d\n", this.logMember.getAge());
-            System.out.printf("  * 전화번호: %s\n", this.logMember.getPhone());
+            System.out.printf("  * 휴대폰: %s\n", this.logMember.getPhone());
             System.out.printf("  * 주소: %s\n", this.logMember.getAddress());
             System.out.printf("  * 포인트: %d\n", this.logMember.getPoint());
             System.out.printf("  * 예매내역: %d건\n", this.logMember.getTicketList().size());
 
 
             myMenu: while (true) {
-                System.out.println("\n 1️⃣ 비밀번호 수정 | 2️⃣ 주소 수정 | 3️⃣ 예매내역 | 4️⃣ 로그아웃 | 0️⃣ 뒤로가기");
+                System.out.println("\n 1️⃣ 비밀번호 변경 | 2️⃣ 주소 변경 | 3️⃣ 예매내역 | 4️⃣ 로그아웃 | 0️⃣ 뒤로가기");
                 String menuOpt = input(">> ");
                 switch (menuOpt) {
                     case "1":
@@ -90,7 +90,7 @@ public class MypageView {
             while (true) {
                 newPw = input(" * 새 비밀번호 입력 >> ");
                 if(!mr.passwordCheck(newPw)) {
-                    System.out.println("📢 비밀번호는 4글자 이상, 특수문자 . ! 사용 가능합니다.");
+                    System.out.println("📢 비밀번호는 4글자 이상 영문, 숫자, . ! 사용 가능합니다.");
                 } else break;
             }
             logMember.setPw(newPw);
@@ -130,10 +130,12 @@ public class MypageView {
                     .sorted(Comparator.comparing((Ticket t) -> t.getDate()).reversed())
                     .collect(Collectors.toList());
 
+            System.out.println("No.     공연명   \t|           공연일시          |    좌석   |   가격    |");
+//            System.out.println("------------------------------------------------------------------------");
             for (int i = 0; i < sortedList.size(); i++) {
                 Ticket t = sortedList.get(i);
-                System.out.printf(" %d. %s\t| %s\t| %s\t| %s\n", i + 1,
-                        t.getTitle(), t.getDate(), t.getSeat(), t.getPrice() );
+                System.out.printf(" %d. %-13s\t| %s | %8s | %8s원|\n", i + 1,
+                        ellipsisString(t.getTitle()), t.getDate(), checkSeat(t.getSeat()), t.getPrice());
             }
             System.out.println("\n----------------------------------------");
             logMember.setTicketList(sortedList);
@@ -148,7 +150,7 @@ public class MypageView {
         if (!(myTicketList.isEmpty() || myTicketList == null)) {
             int tNum;
             while (true) {
-                tNum = Integer.parseInt(input("\n취소할 티켓 번호 (0: 뒤로가기) >> "));
+                tNum = Integer.parseInt(input("취소할 티켓 번호 (0: 뒤로가기) >> "));
 
                 if (!(tNum > 0 && tNum <= myTicketList.size())) {
                     if (tNum == 0) showMemberInfo();
@@ -158,7 +160,7 @@ public class MypageView {
                 }
             }
             Ticket removedTicket = mr.removeTicket(logMember, tNum - 1);
-            System.out.printf("\n [%s] 티켓을 취소했습니다.\n", ellipsisString(removedTicket.getTitle()));
+            System.out.printf("\n📢 [%s] 티켓을 취소했습니다.\n", ellipsisString(removedTicket.getTitle()));
             System.out.println();
         } else {
             stopInput();
@@ -174,13 +176,41 @@ public class MypageView {
 
     // 공연명 말줄임표
     public String ellipsisString(String text) {
+        int maxLength = 13;
+//        if (text.length() >= maxLength) {
+//            text = text.substring(0, maxLength) + "...";
+//        }
+//        return text;
 
-        if(text.length() > 10) {
-            text = text.substring(0, 9) + "...";
+        StringBuilder result = new StringBuilder();
+        int currentLength = 0;
+
+        for (char c : text.toCharArray()) {
+            int charLength = Character.charCount(c) == 1 ? 1 : 2; // 영문인 경우 1, 한글인 경우 2
+            if (currentLength + charLength <= maxLength) {
+                result.append(c);
+                currentLength += charLength;
+            } else {
+                break;
+            }
         }
-        return text;
-    }
 
+        if (currentLength >= maxLength) {
+            // 말줄임 마침표 추가
+            result.setLength(maxLength - 1);
+            result.append("...");
+        }
+
+        return result.toString();
+
+    }
+    // 좌석 체크
+    public String checkSeat(String seat) {
+        if(seat == null) {
+            seat = "-";
+        }
+        return seat;
+    }
 
 
 }

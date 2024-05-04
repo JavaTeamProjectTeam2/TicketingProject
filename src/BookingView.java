@@ -164,7 +164,7 @@ public class BookingView {
                 e.printStackTrace();
             }
             System.out.println("----------------------------------------");
-            System.out.println(" 🎵 공연 회차를 선택해주세요 🎵");
+            System.out.println("      🎵 공연 회차를 선택해주세요 🎵");
             System.out.println("----------------------------------------");
             int count = 1;
 
