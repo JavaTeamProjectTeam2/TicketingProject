@@ -32,7 +32,7 @@ public class BookingRepository {
             System.out.println("🚨나이제한으로 예매 불가능합니다 👮");
             System.out.println("🏠 초기화면으로 이동합니다 🏡");
             if (!thread.isAlive()) {
-                thread = new MyThread(); // 새로운 스레드 객체 생성
+                thread = new MyThread("초기 화면"); // 새로운 스레드 객체 생성
                 thread.start(); // 스레드 시작
             }
             try {
@@ -51,7 +51,7 @@ public class BookingRepository {
         int contentAge= perform.getAge();
         //고른 공연이 14세 이상이고, 사용자 일행에 미취학아동이 있을경우 제한
         if(contentAge >= FOURTEEN.getAge() && party.get(SEVEN.getAgeOption()) > 0){
-            System.out.println("<"+perform.getTitle()+">"+"은/는 미취학아동이 관람할 수 없습니다.");
+            System.out.println("<"+perform.getTitle()+">"+"은/는 미취학아동이 일행에 포함되어 관람할 수 없습니다.");
             System.out.println("다른 공연/전시를 선택해주세요!!");
             return false;
         }
@@ -65,9 +65,9 @@ public class BookingRepository {
     // 이거 가져다 쓰면 돼요!!
     private static Ticket updateTicket(Ticket ticket){
         if(ticket == null){
-            System.out.println("예매 실패, 예매 내역 없음");
+//            System.out.println("예매 실패, 예매 내역 없음");
         }else{
-            System.out.println(ticket.toString());
+//            System.out.println(ticket.toString());
         }
         return ticket;
     }
@@ -92,109 +92,183 @@ public class BookingRepository {
     }
 
     private static boolean payTicket(Map<String, Integer> totalPrice, String name) {
-        System.out.println("🧾 "+name+"님의 총 결제 금액은: ₩"+ totalPrice.get("totalPrice") + " 입니다");
-        System.out.println("💰 결제 수단을 선택해주세요");
-        System.out.println("----------------------------------------");
-        System.out.println("1️⃣ 카드\n2️⃣ 무통장입금\n3️⃣ 현장결제");
-        System.out.println("====================================");
-        System.out.print(">> ");
-        int choice =Integer.parseInt(sc.nextLine());
-        switch (choice){
-            case 1:
-                System.out.println("💳 카드결제");
-                System.out.print("💳 카드번호를 입력해주세요: ");
-                String cardNo = sc.nextLine();
-                System.out.print("💳 CVC (카드 뒷면 숫자 3자리): ");
-                String cvc = sc.nextLine();
-                if(cardNo.length() > 12 && cvc.length() == 3){
-                    if (!thread.isAlive()) {
-                        thread = new MyThread(); // 새로운 스레드 객체 생성
-                        thread.start(); // 스레드 시작
-                    }
-                    try {
-                        thread.join();
-                    } catch (InterruptedException e) {
-                        System.out.println("👮 카드 정보 입력 오류 🚨");
-                        System.out.println("👮 처음 화면으로 이동합니다. ");
-                        System.out.println(" ");
-                        MainView.start();
-                    }
-                    System.out.println("👍 결제 완료되었습니다.");
-                    return true;
-                }else{
-                    try{
-                        if (!(cardNo.length()>12 || cvc.length()==3)){
-
-                            System.out.println("🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓");
-                            System.out.println("🚨 잘못된 카드번호입니다.");
-                            System.out.println("👮 카드 정보 입력 오류 🚨");
-                            System.out.println("👮 처음 화면으로 이동합니다. ");
-                            System.out.println(" ");
-                            return false;
+        //thread
+        boolean flag = false;
+        while (true) {
+            if (!thread.isAlive()) {
+                thread = new MyThread("결제 금액 산출 중"); // 새로운 스레드 객체 생성
+                thread.start(); // 스레드 시작
+            }
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("🧾 " + name + "님의 총 결제 금액은: ₩" + totalPrice.get("totalPrice") + " 입니다");
+            System.out.println("💰 결제 수단을 선택해주세요");
+            System.out.println("------------------------------------");
+            System.out.println("\t1️⃣ 카드\n\t2️⃣ 무통장입금\n\t3️⃣ 현장결제  \n\t️0️⃣ 뒤로가기");
+            System.out.println("====================================");
+//            System.out.print(">> ");
+//            int choice = Integer.parseInt(sc.nextLine());
+            String choice= input(">> ");
+            switch (choice) {
+                case "1":
+                    System.out.println("💳 카드결제");
+                    int count = 3;
+                    while (count > 0) {
+                        System.out.printf("👮 결제시도 남은 횟수: %d\n",count);
+                        count --;
+                        String cardNo = input("💳 카드번호를 입력해주세요(13자리): ");
+//                        String cardNo = sc.nextLine();
+                        if (cardNo.length() < 13 || !isNumber(cardNo)) {
+                            System.out.println("🚨 카드번호 입력 오류 (13자리 입력) 🚨");
+//                            break;
+                        } else {
+                            System.out.print("💳 CVC (카드 뒷면 숫자 3자리): ");
+                            String cvc = sc.nextLine();
+                            if (cvc.length() < 3 || !isNumber(cvc)) {
+                                System.out.println("👮‍ CVC 입력오류 (숫자 3자리)");
+                                continue;
+                            }
+                            if (cardNo.length() == 13 && cvc.length() == 3 && isNumber(cardNo) && isNumber(cvc)) {
+                                if (!thread.isAlive()) {
+                                    thread = new MyThread("카드 정보 조회중"); // 새로운 스레드 객체 생성
+                                    thread.start(); // 스레드 시작
+                                }
+                                try {
+                                    thread.join();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                System.out.println("\n👍 결제 완료되었습니다.");
+                                flag = true;
+                                return flag;
+//                                break;
+                            } else {
+                                if (!thread.isAlive()) {
+                                    thread = new MyThread("카드 정보 조회중"); // 새로운 스레드 객체 생성
+                                    thread.start(); // 스레드 시작
+                                }
+                                try {
+                                    thread.join();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+//
+                            }
                         }
-                    }catch (Exception e){
-                        e.printStackTrace();
+                                System.out.println("\n🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓");
+                                System.out.println("🚨 잘못된 카드번호입니다 🚨");
+                                System.out.println("👮 처음 화면으로 이동합니다 👮");
+                                System.out.println("🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓\n");
+                                MainView.start();
                     }
-                    MainView.start();
-                    return false;
-                }
 
-            case 2:
-                System.out.println("🏧 무통장입금");
-                System.out.printf("🏧 1002888000000 (예금주: (주)컴퍼니)로 ₩%d 입금해주세요.\n", totalPrice.get("totalPrice"));
-                System.out.printf("☑️ 입금완료시 '%s' 구매자 이름과 '%d' 입금 금액을 적어주세요.\n", name, totalPrice.get("totalPrice"));
-                System.out.print("🏧 1002888000000 (예금주: (주)컴퍼니) \n");
-                System.out.print("🧑 송금인: ");
-                String accountNo = sc.nextLine();
-                System.out.print("💸 입금한 금액: ");
-                int price = Integer.parseInt(sc.nextLine());
+                case "2":
+                    System.out.println("🏧 무통장입금");
+                    System.out.printf("🏧 1002888000000 (예금주: (주)컴퍼니)로 ₩%d 입금해주세요.\n", totalPrice.get("totalPrice"));
+                    System.out.printf("☑️ 입금완료시 '%s' 구매자 이름과 '%d' 입금 금액을 적어주세요.\n", name, totalPrice.get("totalPrice"));
+                    System.out.println("## 송금인과 구매자 이름은 동일해야 합니다");
+                    System.out.println("-------------------------------------------------------");
+//                    boolean flag = false;
+    //                System.out.print("🏧 1002888000000 (예금주: (주)컴퍼니) \n");
+                    int count2 = 3;
+                    while (count2 > 0) {
+                        System.out.printf("👮 결제시도 남은 횟수: %d\n",count2);
+                        count2--;
+                        String accountNo = input("🧑 송금인: ");
+                        if(accountNo.equals(name)){
+                            String input = input("💸 입금한 금액: ");
+                            try{
+                                int price = Integer.parseInt(input);
+                                if(price == totalPrice.get("totalPrice") && !isNumber(accountNo)) {
+                                    if (!thread.isAlive()) {
+                                        thread = new MyThread("입금 내역 확인 중"); // 새로운 스레드 객체 생성
+                                        thread.start(); // 스레드 시작
+                                    }
+                                    try {
+                                        thread.join();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    System.out.println("👍 결제 완료되었습니다.");
+//                                    payTicket(totalPrice, name);
+                                    flag = true;
+                                    return flag;
+                                }else {
+                                    System.out.println("🚨 입금 금액이 티켓 값과 일치하지 않습니다.");
+                                }
+                            }catch (Exception e){
+                                System.out.println("🚨 입금한 금액을 숫자로 입력하세요.");
+                            }
+                        }else{
+                                System.out.println("\n🚨 송금인은 구매자와 동일해아합니다.");
+                        }
 
-                if(accountNo.equals(name) && price == totalPrice.get("totalPrice")){
-                    if (!thread.isAlive()) {
-                        thread = new MyThread(); // 새로운 스레드 객체 생성
-                        thread.start(); // 스레드 시작
                     }
-                    try {
-                        thread.join();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("👍 결제 완료되었습니다.");
-                    return true;
-                }else{
-                    System.out.println("🚨 입금이 확인되지 않습니다.");
-                    return false;
-                }
-//                break;
+                        System.out.println("\n🚨 입금이 확인되지 않습니다.");
+                        System.out.println("🏠 초기화면으로 돌아갑니다.\n");
+                        MainView.start();
 
-            case 3:
-                System.out.println("🎪 현장결제");
-                System.out.printf("🎪 ₩%d을 현장에서 결제해주세요.\n", totalPrice.get("totalPrice"));
-                System.out.println("☑️ 공연 시작 1시간 전까지 결제되지 않을 시 예매가 취소될 수 있습니다.");
-                System.out.println("✅ 동의한다면 '동의'라고 작성해주세요.");
-                System.out.print(">> ");
-                String agree = sc.nextLine();
-                if(agree.equals("동의") || agree.equalsIgnoreCase("agree")){
-                    if (!thread.isAlive()) {
-                        thread = new MyThread(); // 새로운 스레드 객체 생성
-                        thread.start(); // 스레드 시작
-                    }
-                    try {
-                        thread.join();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("👍 동의 확인 완료되었습니다.");
-                    return true;
-                }else{
-                    System.out.println("🚨 동의하지 않아 예매가 취소됩니다.");
-                    return false;
-                }
-//                break;
 
-            default:
-                return false;
-//                break;
+                case "3":
+                    System.out.println("🎪 현장결제");
+                    System.out.printf("🎪 ₩%d을 현장에서 결제해주세요.\n", totalPrice.get("totalPrice"));
+                    System.out.println("☑️ 공연 시작 1시간 전까지 결제되지 않을 시 예매가 취소될 수 있습니다.");
+                    System.out.println("✅ 동의한다면 '동의'라고 작성해주세요.");
+                    String agree = input(">> ");
+                    if(agree.equals("동의") || agree.equalsIgnoreCase("agree")){
+                        if (!thread.isAlive()) {
+                            thread = new MyThread(""); // 새로운 스레드 객체 생성
+                            thread.start(); // 스레드 시작
+                        }
+                        try {
+                            thread.join();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("👍 동의 확인 완료되었습니다.");
+                        flag = true;
+                        return flag;
+//                        break;
+//                        return true;
+                    }else{
+                        System.out.println("🚨 동의하지 않아 예매가 취소됩니다.");
+                        flag = false;
+                        return flag;
+//                        break;
+//                        return false;
+                    }
+    //                break;
+                case "0":
+                    PerformView.getTicket();
+//                    return false;
+                    break;
+                default:
+                    System.out.println("🚨 옵션의 번호를 입력하세요 🚨");
+//                    return false;
+                    flag = false;
+                    return flag;
+//                    break;
+            }
+//            return flag;
+        }
+    }
+
+    public static boolean isNumber(String s) {
+        try {
+            // Try parsing the String as an integer
+            Integer.parseInt(s);
+            return true; // If successful, return true
+        } catch (NumberFormatException e1) {
+            try {
+                // Try parsing the String as a decimal
+                Double.parseDouble(s);
+                return true; // If successful, return true
+            } catch (NumberFormatException e2) {
+                return false; // If neither parse is successful, return false
+            }
         }
     }
 
@@ -206,7 +280,7 @@ public class BookingRepository {
         System.out.println("## 한 좌석만 선택 가능합니다.");
         System.out.println("## 입력 형식: 2, 3");
         if (!thread.isAlive()) {
-            thread = new MyThread(); // 새로운 스레드 객체 생성
+            thread = new MyThread(""); // 새로운 스레드 객체 생성
             thread.start(); // 스레드 시작
         }
         try {
@@ -220,7 +294,7 @@ public class BookingRepository {
         System.out.println("대기: "+queue+"번째...");
 
         if (!thread.isAlive()) {
-            thread = new MyThread(); // 새로운 스레드 객체 생성
+            thread = new MyThread(""); // 새로운 스레드 객체 생성
             thread.start(); // 스레드 시작
         }
         try {
@@ -231,6 +305,7 @@ public class BookingRepository {
         //좌석 선택
         //랜덤하게 자리 보여주기
         //7x7 matrix
+        long localTime1 = System.currentTimeMillis();
         System.out.println("<========================== 🎶 콘서트 예매를 시작합니다 🎸 ==============================>");
         System.out.println("====================================================================================");
         System.out.println("---------------------------------- 🏟️무대 🏟️----------------------------------------");
@@ -261,7 +336,7 @@ public class BookingRepository {
         System.out.print(">> ");
         String input = sc.nextLine();
         if (!thread.isAlive()) {
-            thread = new MyThread(); // 새로운 스레드 객체 생성
+            thread = new MyThread("예매 확인"); // 새로운 스레드 객체 생성
             thread.start(); // 스레드 시작
         }
         try {
@@ -269,11 +344,10 @@ public class BookingRepository {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        long localTime1 = System.currentTimeMillis();
 
         // 사용자 입력 처리
-        int selectedRow = Integer.parseInt(input.split(",")[0]); // 입력에서 행 추출
-        int selectedCol = Integer.parseInt(input.split(",")[1]); // 입력에서 열 추출
+        int selectedRow = Integer.parseInt(input.split(",")[0].trim()); // 입력에서 행 추출
+        int selectedCol = Integer.parseInt(input.split(",")[1].trim()); // 입력에서 열 추출
 
         // 시간 받기
         long localTime2 = System.currentTimeMillis();
@@ -347,10 +421,10 @@ public class BookingRepository {
                 totalPrice = ticketCount*99000;
             }
         }
-        System.out.println("totalPrice: "+totalPrice);
+//        System.out.println("totalPrice: "+totalPrice);
         ticketInfo.put("totalPrice", totalPrice);
         ticketInfo.put("ticketCount", ticketCount);
-        System.out.println(ticketInfo);
+//        System.out.println(ticketInfo);
         return ticketInfo;
     }
 

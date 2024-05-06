@@ -151,14 +151,19 @@ public class MypageView {
         if (!sortedList.isEmpty()) {
             int tNum;
             while (true) {
-                tNum = Integer.parseInt(input("\n취소할 티켓 번호 (0: 뒤로가기) >> "));
-
-                if (!(tNum > 0 && tNum <= sortedList.size())) {
-                    if (tNum == 0) showMemberInfo();
+                String option  = input("\n취소할 티켓 번호 (0: 뒤로가기) >> ");
+                try{
+                    tNum = Integer.parseInt(option);
+                    if (!(tNum > 0 && tNum <= sortedList.size())) {
+                        if (tNum == 0) showMemberInfo();
+                        System.out.println("📢 티켓 번호만 입력하세요.");
+                    } else {
+                        break;
+                    }
+                }catch (Exception e){
                     System.out.println("📢 티켓 번호만 입력하세요.");
-                } else {
-                    break;
                 }
+//                tNum = Integer.parseInt(input("\n취소할 티켓 번호 (0: 뒤로가기) >> "));
             }
             Ticket removedTicket = mr.removeTicket(logMember, tNum - 1);
             System.out.printf("\n [%s] 티켓을 취소했습니다.\n", ellipsisString(removedTicket.getTitle()));

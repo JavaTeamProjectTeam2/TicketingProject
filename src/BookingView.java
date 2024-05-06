@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.spi.AbstractResourceBundleProvider;
 
 import static src.AgeRating.*;
 import static src.SimpleInput.input;
@@ -16,7 +17,7 @@ import static src.SimpleInput.sc;
 //import static src.bookingRepository;
 
 public class BookingView {
-    static MyThread thread = new MyThread(); // 스레드 객체 생성
+    static MyThread thread = new MyThread(""); // 스레드 객체 생성
 
     public static void booking(Perform performContent) {
         UserJoinRepository ur = new UserJoinRepository();
@@ -31,7 +32,7 @@ public class BookingView {
         //logMember 받아와서 실행
 
         //로그인 안되어있다면
-        System.out.println("📢 예매를 위해 로그인이 필요합니다");
+        System.out.println("📢 예매를 위해 로그인이 필요합니다(엔터를 눌러주세요)");
         System.out.println("📢 비회원예매를 원하신다면 '비회원'을 입력해주세요");
 
         String input = input(">> ");
@@ -39,18 +40,18 @@ public class BookingView {
         if (input.equals("비회원") || input.equalsIgnoreCase("nonMember")) {
             nonMemberBooking(performContent);
         } else {
-                LoginView lv = new LoginView();
-                lv.showLogIn();
+            LoginView lv = new LoginView();
+            lv.showLogIn();
 
-                MemberRepository mr = MemberRepository.getInstance();
-                // Check if login is successful
-                Member logMember = MemberRepository.getLoginMember();
-                if ((logMember) != null) {
-                    memberBooking(logMember, performContent);
-                } else {
-                    // Handle unsuccessful login
-                    nonMemberBooking(performContent);
-                }
+            MemberRepository mr = MemberRepository.getInstance();
+            // Check if login is successful
+            Member logMember = MemberRepository.getLoginMember();
+            if ((logMember) != null) {
+                memberBooking(logMember, performContent);
+            } else {
+                // Handle unsuccessful login
+                nonMemberBooking(performContent);
+            }
 
         }
 
@@ -60,7 +61,7 @@ public class BookingView {
         boolean flag = false;
         while (true) {
             if (!thread.isAlive()) {
-                thread = new MyThread(); // 새로운 스레드 객체 생성
+                thread = new MyThread("비회원 예약 준비"); // 새로운 스레드 객체 생성
                 thread.start(); // 스레드 시작
             }
             try {
@@ -141,7 +142,7 @@ public class BookingView {
 
     private static void memberBooking(Member member, Perform perform) {
         if (!thread.isAlive()) {
-            thread = new MyThread(); // 새로운 스레드 객체 생성
+            thread = new MyThread("회원 예약 로딩"); // 새로운 스레드 객체 생성
             thread.start(); // 스레드 시작
         }
         try {
@@ -150,12 +151,12 @@ public class BookingView {
             e.printStackTrace();
         }
         System.out.printf("📢 안녕하세요 %s님, 예매하고자 하는 공연이 <%s> 맞습니까?\n", member.getName(), perform.getTitle());
-        System.out.println("예 / 아니오");
+        System.out.println("    예 / 아니오");
         String input = input(">> ");
 
-        if (input.equals("예") || input.equalsIgnoreCase("Y") || input.equals("yes")) {
+        if (input.equals("예") || input.equalsIgnoreCase("Y") || input.equals("yes") || input.isEmpty()) {
             if (!thread.isAlive()) {
-                thread = new MyThread(); // 새로운 스레드 객체 생성
+                thread = new MyThread("공연 회차 로딩중"); // 새로운 스레드 객체 생성
                 thread.start(); // 스레드 시작
             }
             try {
@@ -163,47 +164,52 @@ public class BookingView {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("----------------------------------------");
-            System.out.println(" 🎵 공연 회차를 선택해주세요 🎵");
-            System.out.println("----------------------------------------");
-            int count = 1;
+            LocalDateTime selectedShowTime = null;
+            int option = -1;
+            while (true) {
+                System.out.println("----------------------------------------");
+                System.out.println("      🎵 공연 회차를 선택해주세요 🎵");
+                System.out.println("----------------------------------------");
+                int count = 1;
 
-            for (LocalDateTime localDateTime : perform.getDate().getShowTime()) {
-                final LocalDateTime time = localDateTime; // 최종 변수로 만들기
-                String timeString = convertFormatDate(time); // "yyyy년 MM월 dd일 (E) HH:mm"
-                System.out.printf("# %d. %s\n", count++, timeString);
+                for (LocalDateTime localDateTime : perform.getDate().getShowTime()) {
+                    final LocalDateTime time = localDateTime; // 최종 변수로 만들기
+                    String timeString = convertFormatDate(time); // "yyyy년 MM월 dd일 (E) HH:mm"
+                    System.out.printf("# %d. %s\n", count++, timeString);
+                }
+                System.out.println("0️⃣ 뒤로가기");
+                System.out.println("----------------------------------------");
+//                System.out.print(">> ");
+//                int option = Integer.parseInt(sc.nextLine());
+                String input2 = input(">> ");
+                if (input2.equals("0")) {
+                    PerformView.showOptions();
+                    break;
+                }
+                if (option > perform.getDate().getShowTime().size() || !BookingRepository.isNumber(input2)) {
+                    System.out.println("🚨 옵션을 입력해주세요 🚨");
+                }else{
+                    option = Integer.parseInt(input2);
+                    try {
+                        selectedShowTime = perform.getDate().getShowTime().get(option - 1);
+                        System.out.println(convertFormatDate(selectedShowTime) + " 해당일 " + perform.getCategory().getContentName() + "을/를 예매하겠습니다.");
+                        break;
+                    }catch (Exception e){
+                        System.out.println("🚨 옵션을 입력해주세요 🚨 ");
+                    }
+//                LocalDateTime selectedShowTime = perform.getDate().getShowTime().get(option - 1);
+//                break;
+                }
             }
-            System.out.println("----------------------------------------");
-            System.out.print(">> ");
-            int option = Integer.parseInt(sc.nextLine());
-            LocalDateTime selectedShowTime = perform.getDate().getShowTime().get(option - 1);
-            System.out.println(convertFormatDate(selectedShowTime) + " 해당일 " + perform.getCategory().getContentName() + "을/를 예매하겠습니다.");
-
             Map<String, Integer> party = getParty();
 //            int totalPrice = BookingRepository.getPerformPrice();
+
             String section = "";
             if (!(perform.getCategory().equals(Category.MUSICAL))) {
                 section = null;
             } else {
-
-                System.out.println("==================================");
-                System.out.println(" 🎵 좌석 등급을 선택해주세요 🎵");
-                System.out.println("----------------------------------");
-
-                int cnt = 1;
-                for (Section value : Section.values()) {
-                    System.out.printf("# %d. %s\n", cnt, value.toString());
-                    cnt++;
-                }
-                System.out.println("----------------------------------------");
-                System.out.print(">> ");
-
-                int option2 = Integer.parseInt(sc.nextLine());
-                section = Section.values()[option2-1].toString();
-
-//                System.out.println(section);
                 if (!thread.isAlive()) {
-                    thread = new MyThread(); // 새로운 스레드 객체 생성
+                    thread = new MyThread("좌석 등급 로딩 중"); // 새로운 스레드 객체 생성
                     thread.start(); // 스레드 시작
                 }
                 try {
@@ -211,6 +217,33 @@ public class BookingView {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                while(true) {
+                    System.out.println("=======================================");
+                    System.out.println("     🎵 좌석 등급을 선택해주세요 🎵");
+                    System.out.println("----------------------------------------");
+
+                    int cnt = 1;
+                    for (Section value : Section.values()) {
+                        System.out.printf("# \t%d. %s\n", cnt, value.toString());
+                        cnt++;
+                    }
+                    System.out.println("\t0️⃣ 뒤로가기");
+                    System.out.println("----------------------------------------");
+
+                    String input2 = input(">> ");
+                    if (input2.equals("0")) {
+                        PerformView.showOptions();
+                        break;
+                    }
+                    try {
+                        int option2 = Integer.parseInt(input2);
+                        section = Section.values()[option2 - 1].toString();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("🚨 옵션을 입력해주세요 🚨");
+                    }
+                }
+//                System.out.println(section);
             }
 
             BookingRepository.allSelectedBooking(perform, member, party, section, selectedShowTime);
@@ -220,7 +253,7 @@ public class BookingView {
     private static Map<String, Integer> getParty() {
         Map<String, Integer> party = new HashMap<>();
         if (!thread.isAlive()) {
-            thread = new MyThread(); // 새로운 스레드 객체 생성
+            thread = new MyThread("관람 인원 로딩 중"); // 새로운 스레드 객체 생성
             thread.start(); // 스레드 시작
         }
         try {
@@ -228,14 +261,32 @@ public class BookingView {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("====== 관람 인원을 선택해주세요 ======");
-        System.out.printf("🧑 %s (만 14세 이상): ", FOURTEEN.getAgeOption());
-        Integer adult = Integer.parseInt(sc.nextLine());
-        party.put(FOURTEEN.getAgeOption(), adult);
-        System.out.printf("👶 %s (만 7세 이하): ", SEVEN.getAgeOption());
-        Integer child = Integer.parseInt(sc.nextLine());
-        party.put(SEVEN.getAgeOption(), child);
 
+        while (true) {
+            System.out.println("====== 관람 인원을 선택해주세요 ======");
+            System.out.printf("🧑 %s (만 14세 이상): ", FOURTEEN.getAgeOption());
+            try {
+                Integer adult = Integer.parseInt(sc.nextLine());
+                party.put(FOURTEEN.getAgeOption(), adult);
+                System.out.printf("👶 %s (만 7세 이하): ", SEVEN.getAgeOption());
+                try {
+                    Integer child = Integer.parseInt(sc.nextLine());
+                    if (adult == 0 && child == 0) {
+                        System.out.println("----------------------------------------");
+                        System.out.println("🚨 관람 인원 없음으로 초기화면으로 돌아갑니다 🚨");
+                        MainView.start();
+                        break;
+                    }else{
+                        party.put(SEVEN.getAgeOption(), child);
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("🚨 관람 인원을 숫자로 입력하세요 🚨");
+                }
+            }catch (Exception e){
+                System.out.println("🚨 관람 인원을 숫자로 입력하세요 🚨");
+            }
+        }
         return party;
     }
 

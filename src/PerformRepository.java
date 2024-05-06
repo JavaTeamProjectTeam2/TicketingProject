@@ -132,7 +132,7 @@ public class PerformRepository {
         LocalDate nowDate = LocalDate.now();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 (E)", Locale.KOREAN); // 요일 포함
         String formattedNowDate = nowDate.format(dateFormatter);
-        System.out.println("오늘 날짜는 " + formattedNowDate + "입니다." + "\n이 주의 공연/전시 목록입니다.");
+        System.out.println("오늘 날짜는 " + formattedNowDate + "입니다." + "\n금주의 공연/전시 목록입니다.");
 
         // 일주일 후의 날짜 계산
         LocalDate oneWeekLater = nowDate.plusWeeks(1);
