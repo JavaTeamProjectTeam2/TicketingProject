@@ -129,11 +129,17 @@ public class PerformRepository {
     // 최근 하는 행사 보여줌
     public static List<String> theseDaysEvent() {
         // 오늘 날짜 가져오기
+//        LocalDate nowDate = LocalDate.now();
+//        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 (E)", Locale.KOREAN); // 요일 포함
+//        String formattedNowDate = nowDate.format(dateFormatter);
+//        System.out.println("오늘 날짜는 " + formattedNowDate + "입니다." + "\n금주의 공연/전시 목록입니다.");
         LocalDate nowDate = LocalDate.now();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 (E)", Locale.KOREAN); // 요일 포함
         String formattedNowDate = nowDate.format(dateFormatter);
-        System.out.println("오늘 날짜는 " + formattedNowDate + "입니다." + "\n금주의 공연/전시 목록입니다.");
-
+        System.out.println("----------------------------------------");
+        System.out.println("        📜이번주의 공연/전시 목록");
+        System.out.println("     오늘 날짜: " + formattedNowDate);
+        System.out.println("---------------------------------------- *");
         // 일주일 후의 날짜 계산
         LocalDate oneWeekLater = nowDate.plusWeeks(1);
 

@@ -20,7 +20,7 @@ public class PerformView {
         System.out.println("----------------------------------------");
         System.out.println("         🎤 공연 조회 및 예매 🎨");
         System.out.println("---------------------------------------- *");
-        System.out.println("\t1️⃣ 금주의 공연/전시 목록");
+        System.out.println("\t1️⃣ 이번주의 공연/전시 목록");
         System.out.println("\t2️⃣ 카테고리 별 공연/전시 목록");
         System.out.println("\t0️⃣ 뒤로가기");
         System.out.println("----------------------------------------");
@@ -99,9 +99,9 @@ public class PerformView {
     public static void showOptions() {
         while (true) {
             System.out.println("----------------------------------------");
-            System.out.println("     카테고리 별 추천 파트");
+            System.out.println("       📃카테고리 별 공연/전시 목록");
             System.out.println("---------------------------------------- *");
-            System.out.println("📢 뮤지컬, 콘서트, 전시회, 가족컨텐츠 중 선택하세요");
+            System.out.println("📢 예매하고 싶으신 카테고리 번호를 입력해주세요.");
             System.out.println("\t1️⃣ " + CONCERT.getContentName());
             System.out.println("\t2️⃣ " + MUSICAL.getContentName());
             System.out.println("\t3️⃣ " + EXHIBIT.getContentName());
@@ -142,9 +142,9 @@ public class PerformView {
     private static String showContentByCategory(List<String> titleByCategory) {
         String selectedTitle;
         while (true) {
-            System.out.println("----------------------------------------");
-            System.out.printf("     카테고리 별 추천           \n");
-            System.out.println("---------------------------------------- *");
+//            System.out.println("----------------------------------------");
+//            System.out.printf("     카테고리 별 추천           \n");
+//            System.out.println("---------------------------------------- *");
             int count = 0;
             for (String title : titleByCategory) {
                 count++;

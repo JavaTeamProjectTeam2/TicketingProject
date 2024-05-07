@@ -34,9 +34,12 @@ public class BookingView {
         //로그인 안되어있다면
         System.out.println("📢 예매를 위해 로그인이 필요합니다(엔터를 눌러주세요)");
         System.out.println("📢 비회원예매를 원하신다면 '비회원'을 입력해주세요");
-
+        System.out.println("0️⃣ 뒤로가기");
         String input = input(">> ");
 
+        if(input.equals("0")){
+            PerformView.getTicket();
+        }
         if (input.equals("비회원") || input.equalsIgnoreCase("nonMember")) {
             nonMemberBooking(performContent);
         } else {

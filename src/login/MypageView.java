@@ -1,9 +1,12 @@
 package src.login;
 
+import src.MyThread;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static src.MyThread.*;
 import static src.MainView.start;
 import static src.SimpleInput.*;
 
@@ -143,6 +146,7 @@ public class MypageView {
     }
 
     public void cancelTicket() {
+        MyThread thread = new MyThread("취소 중");
         List<Ticket> myTicketList = logMember.getTicketList();
 
         showTicketList(myTicketList);
@@ -165,6 +169,16 @@ public class MypageView {
 //                tNum = Integer.parseInt(input("\n취소할 티켓 번호 (0: 뒤로가기) >> "));
             }
             Ticket removedTicket = mr.removeTicket(logMember, tNum - 1);
+            //thread
+            if (!thread.isAlive()) {
+                thread = new MyThread("예약 취소 중"); // 새로운 스레드 객체 생성
+                thread.start(); // 스레드 시작
+            }
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.printf("\n📢 [%s] 티켓을 취소했습니다.\n", ellipsisString(removedTicket.getTitle()));
             System.out.println();
         } else {
