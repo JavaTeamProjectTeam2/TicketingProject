@@ -320,7 +320,7 @@ public class BookingRepository {
         int col2 = (int) (Math.random() * 14) + 6; // col2는 11부터 24까지
 
 
-        System.out.println(row1 + ", " + col1 + "/// " + row2 + ", " + col2);
+//        System.out.println(row1 + ", " + col1 + "/// " + row2 + ", " + col2);
         for (int i = 1; i < 10 ; i++) {
             System.out.print(i); // 현재 행 출력
             for (int j = 1; j < 20; j++) {
@@ -334,7 +334,7 @@ public class BookingRepository {
         }
 
 
-        System.out.println("## 입력 형식: 2, 3");
+//        System.out.println("## 입력 형식: 2, 3");
         System.out.print(">> ");
         String input = sc.nextLine();
         if (!thread.isAlive()) {
