@@ -169,7 +169,7 @@ public class BookingRepository {
 
                 case "2":
                     System.out.println("🏧 무통장입금");
-                    System.out.printf("🏧 1002888000000 (예금주: (주)컴퍼니)로 ₩%d 입금해주세요.\n", totalPrice.get("totalPrice"));
+                    System.out.printf("🏧 1002888000000 (예금주: (주)티켓팅자바조)로 ₩%d 입금해주세요.\n", totalPrice.get("totalPrice"));
                     System.out.printf("☑️ 입금완료시 '%s' 구매자 이름과 '%d' 입금 금액을 적어주세요.\n", name, totalPrice.get("totalPrice"));
                     System.out.println("## 송금인과 구매자 이름은 동일해야 합니다");
                     System.out.println("-------------------------------------------------------");
