@@ -130,7 +130,7 @@ public class MypageView {
                     .sorted(Comparator.comparing((Ticket t) -> t.getDate()).reversed())
                     .collect(Collectors.toList());
 
-            System.out.println("No.     공연명   \t|           공연일시          |    좌석   |   가격    |");
+//            System.out.println("No.     공연명   \t|           공연일시          |    좌석   |   가격    |");
 //            System.out.println("------------------------------------------------------------------------");
             for (int i = 0; i < sortedList.size(); i++) {
                 Ticket t = sortedList.get(i);
@@ -153,7 +153,7 @@ public class MypageView {
                 String option  = input("\n취소할 티켓 번호 (0: 뒤로가기) >> ");
                 try{
                     tNum = Integer.parseInt(option);
-                    if (!(tNum > 0 && tNum <= sortedList.size())) {
+                    if (!(tNum > 0 && tNum <= myTicketList.size())) {
                         if (tNum == 0) showMemberInfo();
                         System.out.println("📢 티켓 번호만 입력하세요.");
                     } else {
