@@ -18,7 +18,7 @@ public class PerformView {
 //        makePerformFile();
         while (true){
         System.out.println("----------------------------------------");
-        System.out.println("       공연 조회 및 예매");
+        System.out.println("         🎤 공연 조회 및 예매 🎨");
         System.out.println("---------------------------------------- *");
         System.out.println("\t1️⃣ 금주의 공연/전시 목록");
         System.out.println("\t2️⃣ 카테고리 별 공연/전시 목록");
@@ -44,6 +44,7 @@ public class PerformView {
             }
         }
     }
+
 
     private static void showTheseDaysEvent() {
 //        PerformRepository.theseDaysEvent();

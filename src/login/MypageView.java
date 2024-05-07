@@ -1,10 +1,8 @@
 package src.login;
 
-import src.MainView;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static src.MainView.start;
 import static src.SimpleInput.*;
@@ -38,25 +36,25 @@ public class MypageView {
             System.out.printf("  * 이름: %s\n", this.logMember.getName());
             System.out.printf("  * 이메일: %s\n", this.logMember.getEmail());
             System.out.printf("  * 나이: %d\n", this.logMember.getAge());
-            System.out.printf("  * 전화번호: %s\n", this.logMember.getPhone());
+            System.out.printf("  * 휴대폰: %s\n", this.logMember.getPhone());
             System.out.printf("  * 주소: %s\n", this.logMember.getAddress());
             System.out.printf("  * 포인트: %d\n", this.logMember.getPoint());
             System.out.printf("  * 예매내역: %d건\n", this.logMember.getTicketList().size());
 
 
-            while (true) {
-                System.out.println("\n 1️⃣ 비밀번호 수정 | 2️⃣ 주소 수정 | 3️⃣ 예매내역 | 4️⃣ 로그아웃 | 0️⃣ 뒤로가기");
+            myMenu: while (true) {
+                System.out.println("\n 1️⃣ 비밀번호 변경 | 2️⃣ 주소 변경 | 3️⃣ 예매내역 | 4️⃣ 로그아웃 | 0️⃣ 뒤로가기");
                 String menuOpt = input(">> ");
                 switch (menuOpt) {
                     case "1":
                         updatePw();
-                        break;
+                        break myMenu;
                     case "2":
                         updateAddress();
-                        break;
+                        break myMenu;
                     case "3":
                         cancelTicket();
-                        break;
+                        break myMenu;
                     case "4":
                         logOut();
                         break;
@@ -77,10 +75,10 @@ public class MypageView {
             int count = 0;
             while (true) {
                 System.out.println();
-                String oldPw = input("\n * 기존 비밀번호 입력 >> ");
+                String oldPw = input(" * 기존 비밀번호 입력 >> ");
                 if(!logMember.getPw().equals(oldPw)) {
                     count++;
-                    System.out.printf("\n📢 비밀번호가 일치하지 않습니다. (%d회 오류)\n", count);
+                    System.out.printf("📢 비밀번호가 일치하지 않습니다. (%d회 오류)\n", count);
                     if(count == 3) {
                         System.out.println("📢 비밀번호를 3회 이상 틀리셨습니다. 다음에 시도해주세요.");
                         loginManager.disableLogin(logMember);
@@ -90,9 +88,9 @@ public class MypageView {
             }
             String newPw;
             while (true) {
-                newPw = input("\n * 새 비밀번호 입력 >> ");
+                newPw = input(" * 새 비밀번호 입력 >> ");
                 if(!mr.passwordCheck(newPw)) {
-                    System.out.println("📢 비밀번호는 특수문자 . ! 사용 가능합니다.");
+                    System.out.println("📢 비밀번호는 4글자 이상 영문, 숫자, . ! 사용 가능합니다.");
                 } else break;
             }
             logMember.setPw(newPw);
@@ -106,7 +104,7 @@ public class MypageView {
         String newAddress;
         while (true) {
 
-            newAddress = input("\n * 새 주소를 입력하세요. >>");
+            newAddress = input(" * 새 주소를 입력하세요. >> ");
             if (!mr.addressCheck(newAddress)) {
                 System.out.println("주소를 잘못 입력하셨습니다.\nex)서울특별시 마포구 공덕동");
             } else {
@@ -119,36 +117,37 @@ public class MypageView {
 
     }
 
-    public List<Ticket> showTicketList(List<Ticket> tList) {
+    public void showTicketList(List<Ticket> tList) {
         System.out.println("----------------------------------------");
         System.out.printf("        🎫 %s님의 예매 내역\n", logMember.getName());
         System.out.println("---------------------------------------- *");
 
         if (tList.isEmpty()) {
-            System.out.println("\t -- 예매내역이 없습니다. --");
+            System.out.println("       -- 예매내역이 없습니다. --");
         } else {
 
             List<Ticket> sortedList = tList.stream()
                     .sorted(Comparator.comparing((Ticket t) -> t.getDate()).reversed())
                     .collect(Collectors.toList());
 
+            System.out.println("No.     공연명   \t|           공연일시          |    좌석   |   가격    |");
+//            System.out.println("------------------------------------------------------------------------");
             for (int i = 0; i < sortedList.size(); i++) {
                 Ticket t = sortedList.get(i);
-                System.out.printf(" %d. %s\t| %s\t| %s\t| %s\n", i + 1,
-                        t.getTitle(), t.getDate(), t.getSeat(), t.getPrice() );
+                System.out.printf(" %d. %-13s\t| %s | %8s | %8s원|\n", i + 1,
+                        ellipsisString(t.getTitle()), t.getDate(), checkSeat(t.getSeat()), t.getPrice());
             }
             System.out.println("\n----------------------------------------");
-            return sortedList;
+            logMember.setTicketList(sortedList);
         }
-        return null;
     }
 
     public void cancelTicket() {
         List<Ticket> myTicketList = logMember.getTicketList();
 
-        List<Ticket> sortedList = showTicketList(myTicketList);
+        showTicketList(myTicketList);
 
-        if (!sortedList.isEmpty()) {
+        if (!(myTicketList.isEmpty() || myTicketList == null)) {
             int tNum;
             while (true) {
                 String option  = input("\n취소할 티켓 번호 (0: 뒤로가기) >> ");
@@ -166,7 +165,7 @@ public class MypageView {
 //                tNum = Integer.parseInt(input("\n취소할 티켓 번호 (0: 뒤로가기) >> "));
             }
             Ticket removedTicket = mr.removeTicket(logMember, tNum - 1);
-            System.out.printf("\n [%s] 티켓을 취소했습니다.\n", ellipsisString(removedTicket.getTitle()));
+            System.out.printf("\n📢 [%s] 티켓을 취소했습니다.\n", ellipsisString(removedTicket.getTitle()));
             System.out.println();
         } else {
             stopInput();
@@ -174,7 +173,7 @@ public class MypageView {
     }
 
     public void logOut() {
-        System.out.printf("\n📢 %s님이 로그아웃 하셨습니다.\n", logMember.getName());
+        System.out.printf("📢 %s님이 로그아웃 하셨습니다.\n\n", logMember.getName());
         setLogMember(null);
         MemberRepository.setLoginMember(null);
         start();
@@ -182,13 +181,41 @@ public class MypageView {
 
     // 공연명 말줄임표
     public String ellipsisString(String text) {
+        int maxLength = 13;
+//        if (text.length() >= maxLength) {
+//            text = text.substring(0, maxLength) + "...";
+//        }
+//        return text;
 
-        if(text.length() > 10) {
-            text = text.substring(0, 9) + "...";
+        StringBuilder result = new StringBuilder();
+        int currentLength = 0;
+
+        for (char c : text.toCharArray()) {
+            int charLength = Character.charCount(c) == 1 ? 1 : 2; // 영문인 경우 1, 한글인 경우 2
+            if (currentLength + charLength <= maxLength) {
+                result.append(c);
+                currentLength += charLength;
+            } else {
+                break;
+            }
         }
-        return text;
-    }
 
+        if (currentLength >= maxLength) {
+            // 말줄임 마침표 추가
+            result.setLength(maxLength - 1);
+            result.append("...");
+        }
+
+        return result.toString();
+
+    }
+    // 좌석 체크
+    public String checkSeat(String seat) {
+        if(seat == null) {
+            seat = "-";
+        }
+        return seat;
+    }
 
 
 }

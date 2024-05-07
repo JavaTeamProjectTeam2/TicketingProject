@@ -23,7 +23,7 @@ public class MainView {
             if(MemberRepository.getLoginMember() != null) {
                 System.out.println("\t1️⃣ 마이페이지");
             } else {
-                System.out.println("\t1️⃣ 회원 정보");
+                System.out.println("\t1️⃣ 로그인 및 회원가입");
             }
             System.out.println("\t2️⃣ 공연 조회 및 예매");
             System.out.println("\t3️⃣ 프로그램 종료");
@@ -43,6 +43,7 @@ public class MainView {
 //            }
 
 
+
             switch (option){
                 case "1":
                     if(MemberRepository.getLoginMember() != null) {
@@ -53,14 +54,14 @@ public class MainView {
                     }
                     break;
                 case "2":
-                    System.out.println("공연 예매를 시작합니다");
+//                    System.out.println("공연 예매를 시작합니다");
                     PerformView.getTicket();
                     break;
                 case "3":
                     System.out.println("프로그램을 종료합니다");
                     System.exit(0);
                 default:
-                    System.out.println("🚨 옵션의 번호를 입력하세요 🚨");
+                    System.out.println("\n🚨 옵션의 번호를 입력하세요 🚨");
                     break;
             }
         }

@@ -276,7 +276,7 @@ public class BookingRepository {
     private static void concertBooking(Perform perform, Member member, Map<String, Integer> party, LocalDateTime selectedShowTime) {
         Ticket ticket;
         System.out.println("\n========================================================");
-        System.out.println("## 예매 가능한 좌석을 입력하세요 (▫️흰색 좌석만 예매 가능합니다) ##");
+        System.out.println("## 예매 가능한 좌석을 입력하세요 (▫️ 빈 좌석만 예매 가능합니다) ##");
         System.out.println("## 한 좌석만 선택 가능합니다.");
         System.out.println("## 입력 형식: 2, 3");
         if (!thread.isAlive()) {
@@ -318,7 +318,7 @@ public class BookingRepository {
         int col2 = (int) (Math.random() * 14) + 6; // col2는 11부터 24까지
 
 
-        System.out.println(row1 + ", " + col1 + "/// " + row2 + ", " + col2);
+        System.out.println(row1 + ", " + col1 + " /// " + row2 + ", " + col2);
         for (int i = 1; i < 10 ; i++) {
             System.out.print(i); // 현재 행 출력
             for (int j = 1; j < 20; j++) {
@@ -357,7 +357,7 @@ public class BookingRepository {
             System.out.println("🎉🎉 축하합니다 🎉🎉");
             System.out.println("좌석이 성공적으로 선택되었습니다.");
             System.out.println("결제창으로 이동합니다.");
-            System.out.println("-------------------------------");
+            System.out.println("----------------------------------------");
             Map<String, Integer> totalPrice = getPerformPrice(perform, member, party, null);
 //            ticket = new Ticket(perform.getTitle(), selectedShowTime.toString() , "( "+selectedRow+ ", " + selectedCol+" )", totalPrice.get("totalPrice")) ;
 //            System.out.println(ticket);

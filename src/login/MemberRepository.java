@@ -1,13 +1,14 @@
 package src.login;
 
+import javax.swing.text.html.Option;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static src.SimpleInput.input;
-import static src.SimpleInput.stopInput;
+import static src.SimpleInput.*;
 
 public class MemberRepository {
 
@@ -56,7 +57,6 @@ public class MemberRepository {
     }
     enum PATH {
         MEMBER(System.getProperty("user.dir") + "/file/member.dat");
-//        TICKET(System.getProperty("user.dir") + "/file/ticket.dat");
 
         private String desc;
 
@@ -116,31 +116,20 @@ public class MemberRepository {
         }
     }
 
-    /**
-     * 이메일로 해당 멤버 객체 가져오기
-     * @param email
-     * @return email을 가진 Member 객체
-     */
     public Member findMember(String email) {
 
-        List<Member> loggedMember = members.stream()
+        Optional<Member> loggedMember = members.stream()
                 .filter(m -> m.getEmail().equals(email))
-                .collect(Collectors.toList());
-        if(loggedMember.isEmpty()) {
-            return null;
-        }
-        return loggedMember.get(0);
+                .findFirst();
+        return loggedMember.orElse(null);
     }
 
     public Member findMemberByPhone(String inputPhone) {
 
-        List<Member> loggedMember = members.stream()
+        Optional<Member> loggedMember = members.stream()
                 .filter(m -> m.getPhone().equals(inputPhone))
-                .collect(Collectors.toList());
-        if(loggedMember.isEmpty()) {
-            return null;
-        }
-        return loggedMember.get(0);
+                .findFirst();
+        return loggedMember.orElse(null);
     }
 
 
@@ -191,7 +180,8 @@ public class MemberRepository {
 
     //비번확인
     public boolean passwordCheck(String pw) {
-        String message = "^[a-zA-Z0-9.!]*$";
+//        String message = "^[a-zA-Z0-9.!]*$";
+        String message = "^[a-zA-Z0-9.!]{4,}$";
         if(pw.matches(message)) {
             return true;
         }
