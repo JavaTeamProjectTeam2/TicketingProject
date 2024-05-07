@@ -186,7 +186,7 @@ public class BookingView {
 //                int option = Integer.parseInt(sc.nextLine());
                 String input2 = input(">> ");
                 if (input2.equals("0")) {
-                    PerformView.showOptions();
+                    PerformView.getTicket();
                     break;
                 }
                 if (option > perform.getDate().getShowTime().size() || !BookingRepository.isNumber(input2)) {
