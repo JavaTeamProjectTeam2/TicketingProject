@@ -71,9 +71,11 @@ public class PerformView {
                     selectedTitle = recentTitles.get(2);
                     flag = true;
                     break;
-
+                case "4":
+                    selectedTitle = recentTitles.get(3);
+                    flag = true;
+                    break;
                 case "0":
-                    System.out.println(" 뒤로~~~ ");
                     flag = false;
                     PerformView.getTicket();
                     break;
@@ -81,7 +83,6 @@ public class PerformView {
                 default:
                     flag = false;
                     System.out.println("🚨 옵션의 번호를 입력하세요 🚨");
-                    System.out.println(" ");
                     System.out.println(" ");
 //                    break;
             }

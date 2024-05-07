@@ -123,12 +123,13 @@ public class BookingRepository {
 //                        String cardNo = sc.nextLine();
                         if (cardNo.length() < 13 || !isNumber(cardNo)) {
                             System.out.println("🚨 카드번호 입력 오류 (13자리 입력) 🚨");
-//                            break;
+//                            count--;
+                            continue;
                         } else {
-                            System.out.print("💳 CVC (카드 뒷면 숫자 3자리): ");
-                            String cvc = sc.nextLine();
+                            String cvc = input("💳 CVC (카드 뒷면 숫자 3자리): ");
                             if (cvc.length() < 3 || !isNumber(cvc)) {
                                 System.out.println("👮‍ CVC 입력오류 (숫자 3자리)");
+//                                count --;
                                 continue;
                             }
                             if (cardNo.length() == 13 && cvc.length() == 3 && isNumber(cardNo) && isNumber(cvc)) {
@@ -158,12 +159,13 @@ public class BookingRepository {
 //
                             }
                         }
-                                System.out.println("\n🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓");
-                                System.out.println("🚨 잘못된 카드번호입니다 🚨");
-                                System.out.println("👮 처음 화면으로 이동합니다 👮");
-                                System.out.println("🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓\n");
-                                MainView.start();
                     }
+                    System.out.println("\n🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓");
+                    System.out.println("🚨 잘못된 카드번호입니다 🚨");
+                    System.out.println("👮 처음 화면으로 이동합니다 👮");
+                    System.out.println("🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓🚓\n");
+                    MainView.start();
+//                            return flag;
 
                 case "2":
                     System.out.println("🏧 무통장입금");
@@ -172,7 +174,7 @@ public class BookingRepository {
                     System.out.println("## 송금인과 구매자 이름은 동일해야 합니다");
                     System.out.println("-------------------------------------------------------");
 //                    boolean flag = false;
-    //                System.out.print("🏧 1002888000000 (예금주: (주)컴퍼니) \n");
+                    //                System.out.print("🏧 1002888000000 (예금주: (주)컴퍼니) \n");
                     int count2 = 3;
                     while (count2 > 0) {
                         System.out.printf("👮 결제시도 남은 횟수: %d\n",count2);
@@ -203,13 +205,13 @@ public class BookingRepository {
                                 System.out.println("🚨 입금한 금액을 숫자로 입력하세요.");
                             }
                         }else{
-                                System.out.println("\n🚨 송금인은 구매자와 동일해아합니다.");
+                            System.out.println("\n🚨 송금인은 구매자와 동일해아합니다.");
                         }
 
                     }
-                        System.out.println("\n🚨 입금이 확인되지 않습니다.");
-                        System.out.println("🏠 초기화면으로 돌아갑니다.\n");
-                        MainView.start();
+                    System.out.println("\n🚨 입금이 확인되지 않습니다.");
+                    System.out.println("🏠 초기화면으로 돌아갑니다.\n");
+                    MainView.start();
 
 
                 case "3":
@@ -240,7 +242,7 @@ public class BookingRepository {
 //                        break;
 //                        return false;
                     }
-    //                break;
+                    //                break;
                 case "0":
                     PerformView.getTicket();
 //                    return false;
@@ -276,7 +278,7 @@ public class BookingRepository {
     private static void concertBooking(Perform perform, Member member, Map<String, Integer> party, LocalDateTime selectedShowTime) {
         Ticket ticket;
         System.out.println("\n========================================================");
-        System.out.println("## 예매 가능한 좌석을 입력하세요 (▫️ 빈 좌석만 예매 가능합니다) ##");
+        System.out.println("## 예매 가능한 좌석을 입력하세요 (▫️흰색 좌석만 예매 가능합니다) ##");
         System.out.println("## 한 좌석만 선택 가능합니다.");
         System.out.println("## 입력 형식: 2, 3");
         if (!thread.isAlive()) {
@@ -318,7 +320,7 @@ public class BookingRepository {
         int col2 = (int) (Math.random() * 14) + 6; // col2는 11부터 24까지
 
 
-        System.out.println(row1 + ", " + col1 + " /// " + row2 + ", " + col2);
+        System.out.println(row1 + ", " + col1 + "/// " + row2 + ", " + col2);
         for (int i = 1; i < 10 ; i++) {
             System.out.print(i); // 현재 행 출력
             for (int j = 1; j < 20; j++) {
@@ -357,7 +359,7 @@ public class BookingRepository {
             System.out.println("🎉🎉 축하합니다 🎉🎉");
             System.out.println("좌석이 성공적으로 선택되었습니다.");
             System.out.println("결제창으로 이동합니다.");
-            System.out.println("----------------------------------------");
+            System.out.println("-------------------------------");
             Map<String, Integer> totalPrice = getPerformPrice(perform, member, party, null);
 //            ticket = new Ticket(perform.getTitle(), selectedShowTime.toString() , "( "+selectedRow+ ", " + selectedCol+" )", totalPrice.get("totalPrice")) ;
 //            System.out.println(ticket);
@@ -385,8 +387,8 @@ public class BookingRepository {
             updateTicket(ticket);
         }
 
-            waitForEnter();
-            MainView.start();
+        waitForEnter();
+        MainView.start();
     }
 
     private static boolean isValidSeat(int row, int col, int selectedRow, int selectedCol) {

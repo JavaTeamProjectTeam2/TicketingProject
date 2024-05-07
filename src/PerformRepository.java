@@ -151,9 +151,10 @@ public class PerformRepository {
 
             // 해당 날짜의 이벤트 제목 출력
             List<String> collected = performMap.entrySet().stream()
-                    .filter(entry -> entry.getValue().getDate().getShowTime().stream() //ㅋ
+                    .filter(entry -> entry.getValue().getDate().getShowTime().stream() //
                     .anyMatch(showDateTime -> showDateTime.toLocalDate().equals(date)))
                     .map(stringPerformEntry -> stringPerformEntry.getKey())
+                    .limit(1)
                     .collect(Collectors.toList());
 
             // 이벤트가 있는 경우에만 출력
