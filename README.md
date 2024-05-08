@@ -27,8 +27,7 @@
 
 > **지효** <br>
 > https://github.com/zyozal <br>
-> 예매 목록 <br>
-> 공연/전시 목록 조회 <br>
+> 이번주 공연/전시 조회 <br>
 
 ## ⌨️ 기술 스택
 🔧**BACK** <br>
